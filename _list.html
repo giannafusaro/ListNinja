@@ -1,0 +1,75 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="_list.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <div class="panel panel-primary">
+       <div class="panel-heading title">
+          <span class="edit-title">
+          <input type="text" class="form-control list-title" placeholder="List Title">
+          </span>
+          <div class="display-title">
+             <h1> list title </h1>
+          </div>
+       </div>
+       <div class="panel-body">
+          <ul class="list-group">
+             <li class="list-group-item">
+                <div class="display-item">
+                   <span class="badge price">$5.33</span>
+                   <span class="glyphicon glyphicon-pushpin"></span>
+                   <div class="list-item-title">
+                      List Item #1
+                   </div>
+                </div>
+                <div class="edit-item">
+                  <form class="form-inline" role="form">
+                    <div class="form-group">
+                      <input type="text" class="form-control input-item">
+                    </div>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <span class="input-group-addon">$</span>
+                        <input type="text" class="form-control input-price">
+                      </div>
+                    </div>
+                    <button class="btn btn-primary submit" type="button">
+                      <span class="glyphicon glyphicon-edit"></span>
+                      Edit Item
+                    </button>
+                  </form>
+                </div>
+                   <!-- /input-group -->
+             </li>
+          </ul>
+       </div>
+       <!-- /panel-body -->
+       <div class="panel-footer">
+          <div class="well">
+            <form class="form-inline" role="form">
+              <div class="form-group">
+                <input type="text" class="form-control input-item">
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">$</span>
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+              <button class="btn btn-primary submit" type="button">
+                <span class="glyphicon glyphicon-plus"></span>
+                Add Item
+              </button>
+            </form>
+
+             <!-- /input-group -->
+          </div>
+          <!-- /well well-lg -->
+       </div>
+       <!-- /panel-footer -->
+    </div>
+  </body>
+</html>

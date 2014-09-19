@@ -1,0 +1,68 @@
+div.panel.panel-primary {
+  border-width: 1px;
+  border-color: #ddd;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input.form-control.input-item {
+  border-radius: 3px;
+  width: 100%;
+}
+
+div.display-title {
+
+}
+
+span.edit-title {
+  display: none;
+}
+
+div.display-item {
+
+}
+
+div.edit-item {
+  display: none;
+}
+
+div.panel-footer {
+  background-color: #fff;
+}
+
+span.badge.price {
+  float: right;
+  font-size: 20px;
+  font-family: lato;
+}
+
+div.list-item-title {
+  display: inline-block;
+}
+
+div.well {
+  background-color: #F7F2F4;
+}
+
+div.list-item-title {
+  font-family: lato;
+  font-size: 20px;
+}
+
+div.display-title {
+  font-family: lato;
+}
+
+div.panel-heading.title {
+  background-color: #BD0023;
+}
+
+.btn.btn-primary.submit {
+  background-color: #242424;
+}
+
+.glyphicon.glyphicon-pushpin {
+  text-shadow: .25px .25px .25px #000;
+  color: #BD0023;
+}
