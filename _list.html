@@ -32,7 +32,7 @@
                         </div>
                      </div>
                      <div class="inline-form edit-item">
-                        <form class="form-inline" role="form">
+                        <form id="edit-item" class="form-inline" role="form">
                            <div class="form-group">
                               <input type="text" name="item[name]" class="form-control item-name">
                            </div>
@@ -42,7 +42,7 @@
                                  <input type="text" name="item[price]" class="form-control item-price">
                               </div>
                            </div>
-                           <button class="btn btn-primary submit-item-edit" type="submit">
+                           <button class="btn btn-primary submit-edit-item" type="submit">
                            <span class="glyphicon glyphicon-edit"></span>
                            Edit Item
                            </button>
@@ -52,13 +52,11 @@
                   </li>
                </div>
             </ul>
-            <h4>
-             <div id="flash-message" class="alert alert-error bg-danger flash alert">
-                <a href="#" data-dismiss="alert" class="close"> x</a>
-             </div>
-           </h4>
             <ul class="list-group">
                <li class="list-group-item add-item">
+                 <div id="flash-message" class="alert alert-error bg-danger flash alert">
+                    <a href="#" data-dismiss="alert" class="close"> x</a>
+                 </div>
                   <form id="add-item" class="form-inline" role="form">
                      <div class="form-group">
                         <input id="add-item-name" type="text"  name="item[name]"  class="form-control item-name">

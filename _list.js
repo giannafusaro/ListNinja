@@ -1,8 +1,9 @@
 $(document).ready(function() {
 
   //edit item in list
-  $(document).on('click',".inline-form.edit-item button",function(){
-    var container = $(this).closest('li')
+  $(document).on('submit',"form#edit-item",function(){
+    event.preventDefault();
+    var container = $(this).closest('li');
     var itemTitle = container.find("input.item-name").val();
     var itemPrice = container.find("input.item-price").val();
 
@@ -92,6 +93,8 @@ $(document).ready(function() {
     $("#flash-message").fadeOut("fast", function(){
     });
   });
+
+  //helper functions
 
   //display flash message
   function flashMessage(message, num) {
