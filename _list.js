@@ -26,6 +26,21 @@ $(document).ready(function() {
     });
   });
 
+  $(document).on('click',"div.display-title",function(){
+    var listTitle = $(this).text().trim();
+    $("input.list-title").val(listTitle);
+    $(this).hide();
+    $(this).prev().show();
+  });
+
+  $(document).on('click',"button.submit-save-title",function(){
+    console.log("clicked");
+    var newListTitle = $("input.list-title").val().trim();
+    $("h1").text(newListTitle);
+    $("span.edit-title").hide();
+    $("div.display-title").show();
+  });
+
   $(document).on('click',"button.btn.btn-primary.submit-item-add",function(){
     $(this).find("").show();
   });
