@@ -8,18 +8,19 @@ $(document).ready(function() {
     var container = $(this).closest('.inline-form');
     var spans = container.find('span[name]');
 
-    // Switch out span text with input values
     spans.each(function(){
       var value = $(this).text();
       var name = $(this).attr('name');
+      var input = container.find('input[name=' + name +']');
 
       // remove the dollar sign
       if(name=="price") {
         value = value.replace('$','');
       }
 
-      var input = container.find('input[name=' + name +']');
-      input.val(value);
+      if(value!=input.attr('placeholder')) {
+        input.val(value);
+      }
     });
 
     $(this).fadeOut('fast', function(){
@@ -64,7 +65,6 @@ $(document).ready(function() {
   ///////////////////////////////////////////////////////////
 
   $(document).on('submit',"form#add-item",function(event){
-    console.log("on submit add item");
     event.preventDefault();
     var form = $(this)
 
