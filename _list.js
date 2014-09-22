@@ -1,134 +1,136 @@
 $(document).ready(function() {
 
-  //edit item in list
-  $(document).on('submit',"form#edit-item",function(){
-    event.preventDefault();
-    var container = $(this).closest('li');
-    var itemTitle = container.find("input.item-name").val();
-    var itemPrice = container.find("input.item-price").val();
+  ///////////////////////////////////////////////////////////
+  // Click on List Display (Inline Form)
+  ///////////////////////////////////////////////////////////
 
-    container.find("div.item-title").text(itemTitle);
-    container.find("span.badge.price").text("$" + itemPrice);
+  $(document).on('click', ".inline-form-display", function(){
+    var container = $(this).closest('.inline-form');
+    var spans = container.find('span[name]');
 
-    container.find('.edit-item').fadeOut("fast", function(){
-      container.find('.display-item').fadeIn("fast");
-    });
-  });
+    // Switch out span text with input values
+    spans.each(function(){
+      var value = $(this).text();
+      var name = $(this).attr('name');
 
-  //show edit item form
-  $(document).on('click',".inline-form.display-item",function(){
-    var container = $(this).closest('li');
-    var itemTitle = container.find("div.item-title").text().trim();
-    var itemPrice = container.find("span.badge.price").text().replace("$", "");
-
-    container.find("input.item-name").val(itemTitle);
-    container.find("input.item-price").val(itemPrice);
-
-    $(this).fadeOut("fast", function() {
-      container.find(".edit-item").fadeIn("fast");
-    });
-  });
-
-  //show edit title form
-  $(document).on('click',"div.display-title",function(){
-    var listTitle = $(this).text().trim();
-    $("input.list-title").val(listTitle);
-    $(this).hide();
-    $(this).prev().show();
-  });
-
-  //save title
-  $(document).on('click',"button.submit-save-title",function(){
-    console.log("clicked");
-    var newListTitle = $("input.list-title").val().trim();
-    $("h1").text(newListTitle);
-    $("span.edit-title").hide();
-    $("div.display-title").show();
-  });
-
-  //add item
-  $(document).on('submit',"form#add-item",function(event){
-    //clear error borders for fresh submit
-    $("#add-item-name").css("border-color", "#ccc");
-    $("#add-item-price").css("border-color", "#ccc");
-
-    //validate user input to make sure fields are not empty and price is valid
-    event.preventDefault();
-    var itemName = $(this).parent().find("input.item-name").val();
-    var itemPrice = $(this).parent().find("input.item-price").val();
-
-    //validate item name and price
-    if(!validatePrice(itemPrice)&&!itemName) {
-      flashMessage("Please enter an item name and valid price", 0);
-    }
-    //validate price
-    else if(!validatePrice(itemPrice)) {
-      flashMessage("Please enter a valid price", 1);
-    }
-    //validate name is not empty
-    else if(!itemName)
-      {
-        flashMessage("Please enter an item name", 2);
+      // remove the dollar sign
+      if(name=="price") {
+        value = value.replace('$','');
       }
 
-    //if user input is valid, use template item and append to existing list
-    else {
-      $("#list-item-template").find("div.item-title").text(itemName);
-      $("#list-item-template").find("span.price").text("$" + itemPrice);
+      var input = container.find('input[name=' + name +']');
+      input.val(value);
+    });
 
-      var listItemTemplate = $("#list-item-template").html();
+    $(this).fadeOut('fast', function(){
+      container.find('.inline-form-edit').fadeIn('fast');
+    });
+  });
 
-      $("#list-item-template").parent().append(listItemTemplate);
+  ///////////////////////////////////////////////////////////
+  // Submit Inline Form
+  ///////////////////////////////////////////////////////////
 
-      $(this).parent().find("input.item-name").val("");
-      $(this).parent().find("input.item-price").val("");
+  $(document).on('submit', 'form.inline-switch', function(event) {
+    event.preventDefault();
+    var container = $(this).closest('.inline-form');
+    var inputs = container.find('input[type=text]');
+
+    if(validateFields(inputs)) {
+      // Switch out input values with span text
+      inputs.each(function(){
+        value = $(this).val();
+        name=$(this).prop('name');
+
+        // Add the dollar sign
+        if(name=="price" && (value.indexOf('$') == -1)) {
+          value = '$'+value;
+        }
+
+        container.find('span[name=' + name +']').text(value);
+      });
+
+      // Fade to display
+      container.find('.inline-form-edit').fadeOut('fast', function() {
+        container.find('.inline-form-display').fadeIn('fast');
+      });
+    } else {
+      flashMessage(container, 'One or more required fields were left blank');
+    }
+  });
+
+  ///////////////////////////////////////////////////////////
+  // Add Item
+  ///////////////////////////////////////////////////////////
+
+  $(document).on('submit',"form#add-item",function(event){
+    console.log("on submit add item");
+    event.preventDefault();
+    var form = $(this)
+
+    // validate user input to make sure fields are not empty and price is valid
+    if(validateFields(form.find('input'))) {
+      var name = form.find('input.item-name');
+      var price = form.find('input.item-price');
+
+      $('ul#list-items').append($("#list-item-template").html());
+
+      var item = $('ul#list-items li:last')
+      item.find("span.item-name").text(name.val());
+      item.find("span.price").text("$" + price.val());
+
+      name.val('');
+      price.val('');
 
       //place focus on right most form field
       $("#add-item-name").focus();
+    } else {
+      flashMessage(form, 'One or more required fields were left blank');
     }
   });
 
-  //close flash messages
-  $(document).on('click', "a.close", function(){
-    $("#flash-message").fadeOut("fast", function(){
-    });
-  });
+  ///////////////////////////////////////////////////////////
+  // Utility
+  ///////////////////////////////////////////////////////////
 
-  //helper functions
+  // Display flash message
+  function flashMessage(element, text) {
+    var container = $(element).closest('.inline-form');
+    container.prepend($('#flash-alert-template').html())
 
-  //display flash message
-  function flashMessage(message, num) {
-    $("#flash-message").text(message);
-    $("#flash-message").append('<a href="#" data-dismiss="alert" class="close"> x</a>');
+    var message = container.find('.flash.alert')
+    message.find('span').text(text);
 
-    if(num =="2") {
-      $("#add-item-name").css("border-color", "#b94a48");
-    }
-    else if(num=="1") {
-      $("#add-item-price").css("border-color", "#b94a48");
-    }
-    else if(num=="0") {
-      console.log("hit 0")
-      $("#add-item-name").css("border-color", "#b94a48");
-      $("#add-item-price").css("border-color", "#b94a48");
-    }
-    $("#flash-message").fadeIn("fast", function(){
+    // close message after 5 seconds
+    message.fadeIn("fast", function(){
       setTimeout(function() {
-        return $('a.close').click();
+        return message.find('.close').click();
       }, 5000);
     });
   }
 
-  //validate price
-  function validatePrice(input) {
-    var input = input.toString();
-    var m = input.match(/^(\d+)?([.]?\d{0,2})?$/);
-    if(m == null||input==false) {
-      return false;
-    }
-    else {
-      return true;
-    }
+  // close flash messages
+  $(document).on('click', "a.close", function(){
+    $(this).closest(".flash.alert").fadeOut("fast", function(){
+      $(this).remove();
+    });
+  });
+
+  // Check if the given fields are valid
+  function validateFields(fields) {
+    var validity = [];
+
+    // Iterate over fields and validate them
+    fields.each(function(){
+      input = $(this)
+      if(input.val()=="" || input.val()==undefined) {
+        validity.push(false);
+      } else {
+        validity.push(true);
+      }
+    });
+
+    return $.inArray(false, validity)==-1 ? true : false;
   }
 
 });

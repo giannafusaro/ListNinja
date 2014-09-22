@@ -7,56 +7,29 @@
       <script src="_list.js"></script>
    </head>
    <body>
+
       <div class="panel panel-primary">
-         <div class="panel-heading title">
-            <span class="edit-title">
-            <input type="text" class="form-control list-title" placeholder="List Title">
-            <button class="btn btn-primary submit-save-title" type="button">
-            <span class="glyphicon glyphicon-floppy-disk"></span>
-            Save Title
-            </button>
-            </span>
-            <div class="display-title">
-               <h1> list title </h1>
+         <div class="panel-heading inline-form list-title">
+           <div class="inline-form-edit">
+             <form id="edit-title" class="form-inline list-name inline-switch" role="form">
+                <input name="title" type="text" class="form-control list-title" placeholder="List Title" />
+                <button class="btn btn-primary submit-save-title" type="submit">
+                  <span class="glyphicon glyphicon-floppy-disk"></span>
+                  Save Title
+                </button>
+             </form>
+           </div>
+            <div class="inline-form-display">
+              <h1>
+                <span name="title">list title</span>
+              </h1>
             </div>
          </div>
+
          <div class="panel-body">
-            <ul class="list-group">
-               <div class="list-item-template" id="list-item-template">
-                  <li class="list-group-item">
-                     <div class="inline-form display-item">
-                        <span class="badge price">$5.33</span>
-                        <span class="glyphicon glyphicon-pushpin"></span>
-                        <div class="item-title">
-                           List Item #1
-                        </div>
-                     </div>
-                     <div class="inline-form edit-item">
-                        <form id="edit-item" class="form-inline" role="form">
-                           <div class="form-group">
-                              <input type="text" name="item[name]" class="form-control item-name">
-                           </div>
-                           <div class="form-group">
-                              <div class="input-group">
-                                 <span class="input-group-addon">$</span>
-                                 <input type="text" name="item[price]" class="form-control item-price">
-                              </div>
-                           </div>
-                           <button class="btn btn-primary submit-edit-item" type="submit">
-                           <span class="glyphicon glyphicon-edit"></span>
-                           Edit Item
-                           </button>
-                        </form>
-                     </div>
-                     <!-- /input-group -->
-                  </li>
-               </div>
-            </ul>
-            <ul class="list-group">
-               <li class="list-group-item add-item">
-                 <div id="flash-message" class="alert alert-error bg-danger flash alert">
-                    <a href="#" data-dismiss="alert" class="close"> x</a>
-                 </div>
+            <ul id="list-items" class="list-group"></ul>
+            <ul id="add-items" class="list-group">
+               <li class="list-group-item add-item inline-form">
                   <form id="add-item" class="form-inline" role="form">
                      <div class="form-group">
                         <input id="add-item-name" type="text"  name="item[name]"  class="form-control item-name">
@@ -68,14 +41,47 @@
                         </div>
                      </div>
                      <button class="btn btn-primary submit-add-item" type="submit">
-                     <span class="glyphicon glyphicon-plus"></span>
-                     Add Item
+                       <span class="glyphicon glyphicon-plus"></span> Add Item
                      </button>
                   </form>
                </li>
             </ul>
          </div>
          <!-- /panel-body -->
+      </div>
+
+      <div id="flash-alert-template">
+        <div class="alert alert-error bg-danger flash alert">
+           <span></span><a href="#" data-dismiss="alert" class="close"> x</a>
+        </div>
+      </div>
+
+      <div id="list-item-template">
+         <li class="list-group-item inline-form">
+            <div class="inline-form-display display-item">
+               <span name="price" class="badge price"></span>
+               <i class="glyphicon glyphicon-pushpin"></i>
+               <span name="name" class="item-name"></span>
+            </div>
+            <div class="inline-form-edit edit-item">
+               <form id="edit-item" class="form-inline inline-switch" role="form">
+                  <div class="form-group">
+                     <input type="text" name="name" class="form-control item-name">
+                  </div>
+                  <div class="form-group">
+                     <div class="input-group">
+                        <span class="input-group-addon">$</span>
+                        <input type="text" name="price" class="form-control item-price">
+                     </div>
+                  </div>
+                  <button class="btn btn-primary submit-edit-item" type="submit">
+                  <span class="glyphicon glyphicon-edit"></span>
+                  Edit Item
+                  </button>
+               </form>
+            </div>
+            <!-- /input-group -->
+         </li>
       </div>
    </body>
 </html>
