@@ -1,0 +1,25 @@
+.limit {
+  width: 100%;
+}
+.profile-snap {
+  display: table;
+  width: 285px;
+  display: inline-block;
+  font-size: 12px;
+}
+.profile-pic {
+  height: 90px;
+  width: 90px;
+  margin-right: 10px;
+}
+.profile-snap:hover {
+  cursor: pointer;
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+.profile-snap div {
+  float: left;
+  display: block;
+  position: relative;
+}
