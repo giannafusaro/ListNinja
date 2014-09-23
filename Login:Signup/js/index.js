@@ -4,7 +4,7 @@ $("#loginBtn").click(function() {
   var loginPassword = $("#loginPassword").val();
   
   if (loginEmail == "example@listninja.net" && loginPassword == "1234") {
-    alert("Login Success");
+    window.location.replace("list/_list.html");
   } 
   else {
     $(".alert").show();
