@@ -1,8 +1,8 @@
 <%-- 
     Document   : index
-    Created on : Sep 23, 2014, 8:22:47 PM
+    Created on : Sep 24, 2014, 2:48:00 AM
     Author     : giannafusaro
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
- <%@ include file="/views/index.html" %>
+<%@include file="/views/index.html" %>
