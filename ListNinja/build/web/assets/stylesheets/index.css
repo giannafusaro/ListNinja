@@ -1,0 +1,47 @@
+body, html {
+  padding-top: 30px;
+}
+
+#logo {
+  width: 585px;
+  height: auto;
+  margin-top: 5px;
+}
+
+.alert {
+  display: none;
+}
+
+.navbar-form * {
+  margin-left: 2px;
+}
+
+.jumbotron {
+  height: 420px;
+  top: -12px;
+  position: relative;
+  padding-top: 0px;
+  background-image: linear-gradient( to top right, #BD0023, rgb(102, 17, 17) );
+}
+
+.jumbotron h1 {
+  font-family: lato;
+  color: #fff;
+}
+
+div.login-container {
+  padding: 1px 0px 23px 29px;
+  border-radius: 5px;
+  background-color: rgba(41, 21, 21, 0.42);
+  margin-top: 70px;
+}
+
+#fb-button {
+  color: #CEA3A3;
+}
+
+@media (max-width: 768px) {
+  div.login-container {
+    margin-top: 20px;
+  }
+}

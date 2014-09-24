@@ -6,3 +6,8 @@ ListNinja/dist
 ListNinja/nbdist
 ListNinja/nbactions.xml
 ListNinja/nb-configuration.xml
+
+/ListNinja-backup/build/
+/ListNinja-backup/nbproject/private/
+/ListNinjaApp/build/
+/ListNinjaApp/nbproject/private/
