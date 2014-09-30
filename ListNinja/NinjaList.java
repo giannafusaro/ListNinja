@@ -16,7 +16,7 @@ public class NinjaList {
     
     //NinjaList Variables
     String NLName;
-    //Map<Integer, > decryptMap = new HashMap<>();
+    //Map<String,ListItem > list = new HashMap<String,ListItem>();
     
     /**Constructs a NinjaList
      * 
@@ -27,6 +27,18 @@ public class NinjaList {
    {   
 	  NLName = listName;
    }
+   /**Rename list
+     * 
+    */
+   public void setName(String listNewName){
+       NLName = listNewName;
+   }
+   /**Get list name
+     * 
+    */
+   public String getName(){
+       return NLName;
+    }
     
  
     
