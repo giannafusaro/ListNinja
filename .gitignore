@@ -1,3 +1,8 @@
 .DS_Store
-
-.DS_Store
+ListNinja/nbproject/private
+ListNinja/build
+ListNinja/nbbuild
+ListNinja/dist
+ListNinja/nbdist
+ListNinja/nbactions.xml
+ListNinja/nb-configuration.xml
