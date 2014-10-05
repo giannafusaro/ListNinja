@@ -14,7 +14,25 @@ $(document).ready(function() {
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
-      window.location.replace("http://localhost:8080/ListNinja/dashboard.jsp");
+      FB.api('/me', function(response) {
+      console.log('Successful login for: ' + response.name);
+      console.log(response);
+      $.ajax({
+              type : "POST",
+              url : "/ListNinja/user/create",
+              data: {email: response.email, id: response.id, name:response.name},
+              success : function(data) {
+                  console.log("success: ", data);
+                  $.ajax()
+              },
+              error: function (xhr, ajaxOptions, thrownError){
+                alert(xhr.status);
+                alert(thrownError);
+            }  
+          });
+      });
+      
+        
     } /*else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
       document.getElementById('status').innerHTML = 'Please log ' +
@@ -80,10 +98,6 @@ $(document).ready(function() {
   function testAPI() {
     console.log('testAPI');
     console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-      console.log('Successful login for: ' + response.name);
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
-    });
+    
   }
 });
