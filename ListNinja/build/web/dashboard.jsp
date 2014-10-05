@@ -6,4 +6,10 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ page import="application.*" %>
+<%@include file="/views/header.html" %>
 <%@include file="views/list.html" %>
+
+
+
+<jsp:include page="/user/create" flush="true" />
