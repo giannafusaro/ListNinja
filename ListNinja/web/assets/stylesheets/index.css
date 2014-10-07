@@ -2,9 +2,9 @@ body, html {
   padding-top: 30px;
 }
 
-.logo {
-  width: 40px;
-  height: 40px;
+#logo {
+  width: 585px;
+  height: auto;
   margin-top: 5px;
 }
 
@@ -25,7 +25,7 @@ body, html {
 }
 
 .jumbotron h1 {
-  font-family: crafty girls;
+  font-family: lato;
   color: #fff;
 }
 
@@ -33,9 +33,15 @@ div.login-container {
   padding: 1px 0px 23px 29px;
   border-radius: 5px;
   background-color: rgba(41, 21, 21, 0.42);
-  margin-top: 20px;
+  margin-top: 70px;
 }
 
 #fb-button {
   color: #CEA3A3;
+}
+
+@media (max-width: 768px) {
+  div.login-container {
+    margin-top: 20px;
+  }
 }
