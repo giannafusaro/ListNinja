@@ -1,9 +1,8 @@
-package application;
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+package application;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,12 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  *
  * @author giannafusaro
  */
-@WebServlet("/user/create")
+@WebServlet(name = "CreateUser", urlPatterns = {"/CreateUser"})
 public class CreateUser extends HttpServlet {
 
   /**
@@ -37,22 +35,18 @@ public class CreateUser extends HttpServlet {
     PrintWriter out = response.getWriter();
     try {
       /* TODO output your page here. You may use following sample code. */
-      //check database to see if user exists
-      //if user does not already exist, create new User and store in database. redirect to dashboard
-      
       out.println("<html>");
       out.println("<head>");
-      out.println("<title>Servlet user</title>");      
+      out.println("<title>Servlet CreateUser</title>");      
       out.println("</head>");
       out.println("<body>");
-      out.println("response: " + response);
-      out.println("request: "+ request);
-      out.println("request(name): " + request.getParameter("name"));
-      out.println("<h1>Servlet user at " + request.getContextPath() + " attributeNames: " + request.getAttributeNames() + "</h1>");
+      out.println("<h1>Servlet CreateUser at " + "attribute " + request.getParameter("name") + " ContextPath" + request.getContextPath() + "</h1>");
       out.println("</body>");
       out.println("</html>");
+      
     } finally {      
-      return;
+   
+      out.close();
     }
   }
 
@@ -84,7 +78,9 @@ public class CreateUser extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
+    
     processRequest(request, response);
+     
   }
 
   /**
