@@ -1,9 +1,4 @@
-— Set Ninja DB
-
-DROP TABLE User;
-DROP TABLE List;
-DROP TABLE Item;
-DROP TABLE Lists_Users;
+— Setup Ninja DB
 
 CREATE TABLE User(
 userid NUMBER(11) NOT NULL,
