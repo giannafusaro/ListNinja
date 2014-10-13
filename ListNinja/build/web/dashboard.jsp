@@ -12,4 +12,4 @@
 
 
 
-<jsp:include page="/user/create" flush="true" />
+<jsp:include page="/CreateUser" flush="true" />
