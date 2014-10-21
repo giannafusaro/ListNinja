@@ -1,30 +1,33 @@
-— Setup Ninja DB
+-- Setup Ninja DB
 
-CREATE TABLE User(
-userid NUMBER(11) NOT NULL,
-fbid VARCHAR(255),
-lastlogin DATE,
-created DATE,
-CONSTRAINT User_PRIMARY_KEY PRIMARY KEY (id))
+CREATE TABLE users(
+userid		SERIAL	PRIMARY KEY NOT NULL,
+fbid		VARCHAR(255),
+fname		VARCHAR(255),
+lname		VARCHAR(255),
+lastlogin	DATE,
+created		DATE
+);
 
-CREATE TABLE List(
-listid NUMBER(11) NOT NULL,
-userid NUMBER(11) NOT NULL FOREIGN KEY,
-name VARCHAR(255),
-created DATE,
-updated DATE,
-CONSTRAINT User_PRIMARY_KEY PRIMARY KEY (listid))
+CREATE TABLE lists(
+listid		INT PRIMARY KEY NOT NULL,
+userid		INT REFERENCES users(userid),
+name		VARCHAR(255),
+created		DATE,
+updated		DATE
+);
 
-CREATE TABLE item(
-itemid NUMBER(11) NOT NULL,
-listid NUMBER(11) NOT NULL FOREIGN KEY,
-name VARCHAR(255),
-created DATE,
-updated DATE,
-CONSTRAINT User_PRIMARY_KEY PRIMARY KEY (itemid))
+CREATE TABLE items(
+itemid		INT PRIMARY KEY NOT NULL,
+listid		INT REFERENCES lists(listid),
+name		VARCHAR(255),
+created		DATE,
+updated		DATE
+);
 
-CREATE TABLE List_Users(
-userid NUMBER(11) NOT NULL FOREIGN KEY,
-listid NUMBER(11) NOT NULL FOREIGN KEY)
+CREATE TABLE list_users(
+userid INT REFERENCES users(userid) NOT NULL,
+listid INT REFERENCES lists(listid) NOT NULL
+);
 
 commit;
