@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package application;
+package Application;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -35,14 +35,13 @@ public class CreateUser extends HttpServlet {
     PrintWriter out = response.getWriter();
     try {
       /* TODO output your page here. You may use following sample code. */
-      out.println("<html>");
-      out.println("<head>");
-      out.println("<title>Servlet CreateUser</title>");      
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<h1>Servlet CreateUser at " + "attribute " + request.getParameter("name") + " ContextPath" + request.getContextPath() + "</h1>");
-      out.println("</body>");
-      out.println("</html>");
+      ServerAccess sa = new ServerAccess();
+      
+      String parameterName = "fname";
+      String fname = request.getParameter("fname");
+      String lname = request.getParameter("lname");
+      
+      sa.createUser(fname, lname);
       
     } finally {      
    
