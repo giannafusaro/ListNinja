@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.simple.JSONArray;
 
 /**
  *
@@ -37,14 +38,10 @@ public class getUsersTest extends HttpServlet {
         try {
             /* TODO output your page here. You may use following sample code. */
             ServerAccess sa = new ServerAccess();
-            ArrayList lname = sa.getField("lname");
-            ArrayList fname = sa.getField("fname");
+            JSONArray lname = sa.getField("lname");
             
-            while (!lname.isEmpty()) {
-                out.println(fname.remove(0) + " ");
-                out.println(lname.remove(0));
-                out.println("</br>");
-            }
+            out.println(lname.toJSONString());
+
         } finally {
             out.close();
         }

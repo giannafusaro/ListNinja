@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.json.simple.JSONArray;
 
 
 
@@ -38,8 +39,8 @@ public class ServerAccess {
      * Runs a SELECT * FROM users on specified fieldName
      * @return ArrayList for the field specified 
      */
-    public ArrayList getField(String fieldName) {
-        ArrayList array = new ArrayList();
+    public JSONArray getField(String fieldName) {
+        JSONArray array = new JSONArray();
         try {
             try {
                 Class.forName("org.postgresql.Driver");
