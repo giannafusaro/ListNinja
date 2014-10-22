@@ -23,14 +23,32 @@
             <input class="submitButton" type="button" value="Submit">
         </form>
         <div id="test"></div>
+        <div id="test1"></div>
     </body>
    
         <script type="text/javascript">
+            var json;
             window.setInterval(function() {
-                    $("#test").load( "/getUsersTest");
+                    $.ajax({
+                        type: "GET",
+                        url: "/getUsersTest",
+                        dataType: "JSON",
+                        success : function(data) {
+                                json = data;
+                                $("#test").text("");
+                                
+                                for (var i = 0; i < json.length; i++) {
+                                    var usr = json[i];
+                                    $("#test").append(usr.id + ") " +usr.fname + " "+ usr.lname + "</br>");
+                                }
+                            }
+                      });
+                      
                 }, 
                 1000
             );
+    
+            
     
             $(".submitButton").click(function() {
                 var url = $("#createUserTest").serialize();
