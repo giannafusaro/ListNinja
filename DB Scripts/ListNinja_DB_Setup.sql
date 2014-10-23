@@ -10,7 +10,7 @@ created		DATE
 );
 
 CREATE TABLE lists(
-listid		INT PRIMARY KEY NOT NULL,
+listid		SERIAL PRIMARY KEY NOT NULL,
 userid		INT REFERENCES users(userid),
 name		VARCHAR(255),
 created		DATE,
@@ -18,7 +18,7 @@ updated		DATE
 );
 
 CREATE TABLE items(
-itemid		INT PRIMARY KEY NOT NULL,
+itemid		SERIAL PRIMARY KEY NOT NULL,
 listid		INT REFERENCES lists(listid),
 name		VARCHAR(255),
 created		DATE,

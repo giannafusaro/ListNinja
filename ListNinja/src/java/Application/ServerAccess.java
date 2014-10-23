@@ -11,8 +11,6 @@ import java.util.logging.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-
-
 public class ServerAccess {
     String host = "ec2-54-197-239-171.compute-1.amazonaws.com";
     String port = "5432";
