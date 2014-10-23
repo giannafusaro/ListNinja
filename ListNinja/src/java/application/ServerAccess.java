@@ -6,10 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.simple.JSONArray;
@@ -27,7 +23,6 @@ public class ServerAccess {
 
     String url = "jdbc:postgresql://"+ host + ":" + port +"/"+ db + "?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory";
 
-    ArrayList<Connection> conns = new ArrayList();
     Statement stmt = null;
     ResultSet rs = null;
     
@@ -37,16 +32,7 @@ public class ServerAccess {
      * @throws SQLException if connection cannot be made
      */
     private Connection getConnection() throws SQLException {
-        Connection c = null;
-        if (connections < 3) {
-            c = DriverManager.getConnection(url, user, pw);
-            connections++;
-        } else {
-            while (c == null) {
-                c = conns.remove(0);
-            }
-        }
-        return c;
+            return DriverManager.getConnection(url, user, pw);
     }
 
     /**
@@ -64,7 +50,7 @@ public class ServerAccess {
             Connection c = getConnection();
             stmt = c.createStatement();
             rs = stmt.executeQuery("SELECT * FROM users");
-            //conns.add(c);
+            
             c.close();
             
             while(rs.next()) {
@@ -94,7 +80,8 @@ public class ServerAccess {
             Connection c = getConnection();
             stmt = c.createStatement();
             stmt.executeUpdate("INSERT INTO users(fname, lname) VALUES ('"+fname+"', '"+lname+"')");
-            conns.add(c);
+
+            c.close();
             
         } catch (SQLException ex) {
             Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);

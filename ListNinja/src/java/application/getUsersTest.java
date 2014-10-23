@@ -40,6 +40,7 @@ public class getUsersTest extends HttpServlet {
             ServerAccess sa = new ServerAccess();
             JSONArray users = sa.getUsers();
             
+            
             out.println(users);
 
         } finally {
