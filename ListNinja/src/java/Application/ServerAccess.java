@@ -30,7 +30,12 @@ public class ServerAccess {
      * @throws SQLException if connection cannot be made
      */
     private Connection getConnection() throws SQLException {
-            return DriverManager.getConnection(url, user, pw);
+        try {
+                Class.forName("org.postgresql.Driver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        return DriverManager.getConnection(url, user, pw);
     }
 
     /**
@@ -40,11 +45,6 @@ public class ServerAccess {
     public JSONArray getUsers() {
         JSONArray users = new JSONArray();
         try {
-            try {
-                Class.forName("org.postgresql.Driver");
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
-            }
             Connection c = getConnection();
             stmt = c.createStatement();
             rs = stmt.executeQuery("SELECT * FROM users");
@@ -70,11 +70,6 @@ public class ServerAccess {
     
     public void createUser(String fname, String lname) {
         try {
-            try {
-                Class.forName("org.postgresql.Driver");
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
-            }
             Connection c = getConnection();
             stmt = c.createStatement();
             stmt.executeUpdate("INSERT INTO users(fname, lname) VALUES ('"+fname+"', '"+lname+"')");
@@ -84,5 +79,45 @@ public class ServerAccess {
         } catch (SQLException ex) {
             Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public JSONArray getLists(int userid) {
+        JSONArray lists = new JSONArray();
+        try {
+
+            Connection c = getConnection();
+            stmt = c.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM lists WHERE userid = " + userid);
+            c.close();
+            
+            while (rs.next()) {
+                JSONObject list = new JSONObject();
+                list.put("createdby", rs.getInt("userid"));
+                list.put("listid", rs.getInt("listid"));
+                list.put("name", rs.getString("name"));
+                lists.add(list);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lists;
+    }
+    
+    public void createNewList(int userid, String name) {
+        try {
+            Connection c = getConnection();
+            stmt = c.createStatement();
+            
+            String query = "INSERT INTO lists(userid, name) VALUES (" + userid + ", '" + name + "')";
+            
+            stmt.executeUpdate(query);
+            
+            c.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 }

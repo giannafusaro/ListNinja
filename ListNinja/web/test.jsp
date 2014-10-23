@@ -22,8 +22,18 @@
             Last name: <input class="textField" type="text" name="lname"><br>
             <input class="submitButton" type="button" value="Submit">
         </form>
-        <div id="test"></div>
-        <div id="test1"></div>
+        
+        <h3>Users</h3>
+        <div id="users"></div>
+        <hr>
+        <form id="createList">
+            Name: <input class="textField" type="text" name="name"><br>
+            User ID: <input class="textField" type="text" name="userid"><br>
+            <input class="submitButtonList" type="button" value="Submit">
+        </form>
+        <h3>Lists</h3>
+        Get lists by userid: <input id="userforlist" type="text" value="1"><br>
+        <div id="lists" style="float:left"></div>
     </body>
    
         <script type="text/javascript">
@@ -35,11 +45,26 @@
                         dataType: "JSON",
                         success : function(data) {
                                 json = data;
-                                $("#test").text("");
+                                $("#users").text("");
                                 
                                 for (var i = 0; i < json.length; i++) {
                                     var usr = json[i];
-                                    $("#test").append(usr.id + ") " +usr.fname + " "+ usr.lname + "</br>");
+                                    $("#users").append(usr.id + ") " +usr.fname + " "+ usr.lname + "</br>");
+                                }
+                            }
+                      });
+                      
+                      $.ajax({
+                        type: "GET",
+                        url: "/getLists?userid=" + $("#userforlist").val(),
+                        dataType: "JSON",
+                        success : function(data) {
+                                lists = data;
+                                $("#lists").text("");
+                                
+                                for (var i = 0; i < lists.length; i++) {
+                                    var list = lists[i];
+                                    $("#lists").append(list.listid + ") " + list.name + "</br>");
                                 }
                             }
                       });
@@ -56,6 +81,14 @@
                     $(this).val("");
                 });
                 $.ajax("CreateUser?"+url);
+            });
+            
+            $(".submitButtonList").click(function() {
+                var url = $("#createList").serialize();
+                $(".textField").each(function() {
+                    $(this).val("");
+                });
+                $.ajax("CreateList?"+url);
             });
         </script>
 </html>
