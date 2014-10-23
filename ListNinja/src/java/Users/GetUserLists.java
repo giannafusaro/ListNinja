@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Application;
+package Users;
 
+import DAL.ServerAccess;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,13 +13,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.simple.JSONArray;
 
 /**
  *
  * @author sheff
  */
-@WebServlet(name = "CreateList", urlPatterns = {"/CreateList"})
-public class CreateList extends HttpServlet {
+@WebServlet(name = "GetUserLists", urlPatterns = {"/GetUserLists"})
+public class GetUserLists extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,15 +37,12 @@ public class CreateList extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             
-            String name = request.getParameter("name");
+            ServerAccess sa = new ServerAccess();
             String userid = request.getParameter("userid");
             
+            JSONArray lists = sa.getLists(Integer.parseInt(userid));
             
-            
-            
-            ServerAccess sa = new ServerAccess();
-            sa.createNewList(Integer.parseInt(userid), name);
-            
+            out.println(lists);
         } finally {
             out.close();
         }

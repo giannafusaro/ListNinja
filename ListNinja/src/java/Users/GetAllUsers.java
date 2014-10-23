@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Application;
+package Users;
 
+import DAL.ServerAccess;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -18,8 +19,8 @@ import org.json.simple.JSONArray;
  *
  * @author sheff
  */
-@WebServlet(name = "getLists", urlPatterns = {"/getLists"})
-public class getLists extends HttpServlet {
+@WebServlet(name = "GetAllUsers", urlPatterns = {"/GetAllUsers"})
+public class GetAllUsers extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,13 +36,13 @@ public class getLists extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            
+            /* TODO output your page here. You may use following sample code. */
             ServerAccess sa = new ServerAccess();
-            String userid = request.getParameter("userid");
+            JSONArray users = sa.getUsers();
             
-            JSONArray lists = sa.getLists(Integer.parseInt(userid));
             
-            out.println(lists);
+            out.println(users);
+
         } finally {
             out.close();
         }

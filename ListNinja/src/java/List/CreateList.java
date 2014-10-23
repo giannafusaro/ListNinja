@@ -12,15 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 /**
  *
  * @author sheff
  */
-@WebServlet(name = "getUsersTest", urlPatterns = {"/getUsersTest"})
-public class getUsersTest extends HttpServlet {
+@WebServlet(name = "CreateList", urlPatterns = {"/CreateList"})
+public class CreateList extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,13 +34,13 @@ public class getUsersTest extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            /* TODO output your page here. You may use following sample code. */
+            
+            String name = request.getParameter("name");
+            String userid = request.getParameter("userid");
+            
             ServerAccess sa = new ServerAccess();
-            JSONArray users = sa.getUsers();
+            sa.createNewList(Integer.parseInt(userid), name);
             
-            
-            out.println(users);
-
         } finally {
             out.close();
         }
