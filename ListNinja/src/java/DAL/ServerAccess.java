@@ -21,8 +21,8 @@ public class ServerAccess {
 
     String url = "jdbc:postgresql://"+ host + ":" + port +"/"+ db + "?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory";
 
-    Statement stmt = null;
-    ResultSet rs = null;
+    RemoveFromDB rem = new RemoveFromDB();
+    InsertIntoDB insert = new InsertIntoDB();
     
     /**
      * Gets Connection to sql database being used for ListNinja
@@ -41,7 +41,7 @@ public class ServerAccess {
     /**
      * Runs a SELECT * FROM users on specified fieldName
      * @return ArrayList for the field specified 
-     */
+     *
     public JSONArray getAllUsers() {
         JSONArray users = new JSONArray();
         try {
@@ -66,8 +66,9 @@ public class ServerAccess {
             Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
         }
         return users;
-    }
+    }*/
     
+    /*
     public boolean createUser(String fname, String lname) {
         try {
             Connection c = getConnection();
@@ -81,14 +82,16 @@ public class ServerAccess {
             Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-    }
+    }*/
     
     /**
      * Accepts a listid of a specific list and returns a JSON Array
      * of all the users that are associated with the specified list.
+     * @param listid
+     * @param name
      * @param listID
      * @return JSONArray of users associated with listID
-     */
+     *
     public JSONArray getUsersForList(int listID) {
         JSONArray users = new JSONArray();
         String query = "SELECT * FROM users WHERE listid = listid";
@@ -115,8 +118,9 @@ public class ServerAccess {
             Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
         }
         return users;
-    }
+    }*/
     
+    /*
     public JSONArray getListItems(int listid) {
         JSONArray items = new JSONArray();
         String query = "SELECT * FROM items WHERE listid = " + listid;
@@ -141,34 +145,18 @@ public class ServerAccess {
             Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
         }
         return items;
-    }
+    }*/
     
-    public boolean createNewItem(int listid, String name, Date created) {
-        String query = "INSERT INTO items(listid, name, create, updated) VALUES ("
-                + listid +
-                ", '"
-                + name +
-                "', "
-                + created +
-                ", "
-                + created +
-                ")";
-                
+    public boolean createNewItem(int listid, String name) {
         try {
-            Connection c = getConnection();
-            stmt = c.createStatement();
-            
-            int datachanged = stmt.executeUpdate(query);
-            c.close();
-            
-            return datachanged == 1;
-            
+            return insert.insertNewItem(listid, name, getConnection());
         } catch (SQLException ex) {
             Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
     
+    /*
     public JSONArray getUserLists(int userid) {
         JSONArray lists = new JSONArray();
         try {
@@ -211,11 +199,16 @@ public class ServerAccess {
             
         }
         return false;
-    }
+    }*/
     
     
     //-------REMOVE COMMANDS-------//
-    public boolean removeItem(int itemid) {
+    public boolean removeItem(int itemid) {     
+        try {
+            return rem.removeItem(itemid, getConnection());
+        } catch (SQLException ex) {
+            Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return false;
     }
     
@@ -224,6 +217,6 @@ public class ServerAccess {
     }
     
     public boolean removeUserFromList(int userid, int listid) {
-        
+        return false;
     }
 }
