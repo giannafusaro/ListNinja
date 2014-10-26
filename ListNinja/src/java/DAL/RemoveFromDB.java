@@ -8,7 +8,6 @@ package DAL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,6 +28,41 @@ public class RemoveFromDB {
             c.close();
            
             return result == 1;
+        } catch (SQLException ex) {
+            Logger.getLogger(RemoveFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    public boolean removeList(int listid, Connection c) {
+        
+        try {
+            String query =
+                    "DELETE FROM list_users WHERE listid=?";
+            PreparedStatement ps = c.prepareStatement(query);
+            ps.setInt(1, listid);
+            int result = ps.executeUpdate();
+            c.close();
+            return result == 1;
+        } catch (SQLException ex) {
+            Logger.getLogger(RemoveFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    public boolean removeUserFromList(int userid, int listid, Connection c) {
+        try {
+            String query =
+                    "DELETE FROM list_users WHERE listid=? AND userid=?";
+            PreparedStatement ps = c.prepareStatement(query);
+            ps.setInt(1, listid);
+            ps.setInt(2, userid);
+            
+            int result = ps.executeUpdate();
+            
+            c.close();
+            return result == 1;
+            
         } catch (SQLException ex) {
             Logger.getLogger(RemoveFromDB.class.getName()).log(Level.SEVERE, null, ex);
         }

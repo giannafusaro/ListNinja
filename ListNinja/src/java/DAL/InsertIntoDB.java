@@ -80,4 +80,24 @@ public class InsertIntoDB {
         }
         return false;
     }
+    
+    public boolean addUserToList(int listid, int userid, Connection c) {
+        
+        try {
+            String query =
+                    "INSERT INTO list_users (userid, listid, creator) VALUES (?,?,?)";
+            PreparedStatement ps = c.prepareStatement(query);
+            ps.setInt(1, userid);
+            ps.setInt(2, listid);
+            ps.setBoolean(3, false);
+            
+            int result = ps.executeUpdate();
+            c.close();
+            
+            return result == 1;
+        } catch (SQLException ex) {
+            Logger.getLogger(InsertIntoDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 }

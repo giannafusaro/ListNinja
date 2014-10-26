@@ -6,9 +6,9 @@
 package DAL;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,11 +25,11 @@ public class UpdateTheDB {
             
             Calendar cal = Calendar.getInstance();
             java.util.Date utildate = cal.getTime();
-            Date sqldate = new Date(utildate.getTime());
+            Timestamp ts = new Timestamp(utildate.getTime());
             
             PreparedStatement ps = c.prepareStatement("UPDATE items SET name=?,updated=? WHERE itemid=?");
             ps.setString(1, name);
-            ps.setDate(2, sqldate);
+            ps.setTimestamp(2, ts);
             ps.setInt(3, itemid);
             
             int result = ps.executeUpdate();
@@ -40,6 +40,32 @@ public class UpdateTheDB {
             Logger.getLogger(UpdateTheDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        return false;
+    }
+    
+    public boolean updateListName(int listid, String name, Connection c) {
+        
+        try {
+            
+            Calendar cal = Calendar.getInstance();
+            java.util.Date utildate = cal.getTime();
+            Timestamp ts = new Timestamp(utildate.getTime());
+            
+            String query =
+                    "UPDATE lists SET name=?,updated=? WHERE listid=?";
+            PreparedStatement ps = c.prepareStatement(query);
+            ps.setString(1, name);
+            ps.setTimestamp(2, ts);
+            ps.setInt(3, listid);
+            
+            int result = ps.executeUpdate();
+            c.close();
+            
+            return result == 1;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateTheDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return false;
     }
 }
