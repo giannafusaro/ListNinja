@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package DAL;
 
 import java.sql.Connection;
@@ -20,7 +16,7 @@ import org.json.simple.JSONObject;
  */
 public class GetFromDB {
     
-    public JSONArray getItemsFromList(int listid, Connection c) {
+    public JSONArray getListItems(int listid, Connection c) {
         JSONArray items = new JSONArray();
         
         try {
@@ -37,8 +33,8 @@ public class GetFromDB {
                 item.put("itemid", rs.getInt("itemid"));
                 item.put("listid", rs.getInt("listid"));
                 item.put("name", rs.getString("name"));
-                item.put("created", rs.getDate("created"));
-                item.put("updated", rs.getDate("updated"));
+                item.put("created", rs.getTimestamp("created"));
+                item.put("updated", rs.getTimestamp("updated"));
                 
                 items.add(item);
             }
@@ -49,4 +45,118 @@ public class GetFromDB {
         
         return items;
     }
+    
+    public JSONObject getUser(int userid, Connection c) {
+        JSONObject user = new JSONObject();
+        try {
+
+            String query = "SELECT * FROM users WHERE userid=?";
+            PreparedStatement ps = c.prepareStatement(query);
+            ps.setInt(1, userid);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                user.put("userid", rs.getInt("userid"));
+                user.put("fbid", rs.getInt("fbid"));
+                user.put("fname", rs.getString("fname"));
+                user.put("lname", rs.getString("lname"));
+                user.put("lastlogin", rs.getTimestamp("lastlogin"));
+                user.put("created", rs.getTimestamp("created"));
+            }
+            
+            c.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return user;
+    }
+    
+    public JSONArray getListsForUser(int userid, Connection c) {
+        JSONArray lists = new JSONArray();
+        try {
+            
+            String query = "SELECT lists.listid, name, created, updated, creator FROM lists JOIN list_users ON lists.listid = list_users.listid WHERE list_users.userid = ?";
+            PreparedStatement ps = c.prepareStatement(query);
+            ps.setInt(1, userid);
+            ResultSet rs = ps.executeQuery();
+            
+            c.close();
+            
+            while (rs.next()) {
+                JSONObject list = new JSONObject();
+                
+                list.put("listid", rs.getInt("listid"));
+                list.put("name", rs.getString("name"));
+                list.put("created", rs.getTimestamp("created"));
+                list.put("updated", rs.getTimestamp("updated"));
+                
+                lists.add(list);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lists;
+    }
+    
+    public JSONArray getUsersForList(int listid, Connection c) {
+        JSONArray users = new JSONArray();
+
+        try {
+            String query = "SELECT DISTINCT users.userid, fname, lname, lastlogin, created FROM users JOIN list_users ON users.userid = list_users.userid WHERE list_users.userid = ?";
+            PreparedStatement ps = c.prepareStatement(query);
+            ps.setInt(1, listid);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            c.close();
+            
+            while (rs.next()) {
+                JSONObject user = new JSONObject();
+                
+                user.put("userid", rs.getInt("userid"));
+                //user.put("fbid", rs.getInt("fbid"));
+                user.put("fname", rs.getString("fname"));
+                user.put("lname", rs.getString("lname"));
+                user.put("lastlogin", rs.getTimestamp("lastlogin"));
+                user.put("created", rs.getTimestamp("created"));
+                
+                users.add(user);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return users;
+    }
+    
+    public JSONArray getAllUsers(Connection c) {
+        JSONArray users = new JSONArray();
+        try {
+
+            String query = "SELECT * FROM users";
+            PreparedStatement ps = c.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                JSONObject user = new JSONObject();
+                
+                user.put("userid", rs.getInt("userid"));
+                user.put("fbid", rs.getInt("fbid"));
+                user.put("fname", rs.getString("fname"));
+                user.put("lname", rs.getString("lname"));
+                user.put("lastlogin", rs.getTimestamp("lastlogin"));
+                user.put("created", rs.getTimestamp("created"));
+                
+                users.add(user);
+            }
+            c.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return users;
+    }
+    
+    
 }

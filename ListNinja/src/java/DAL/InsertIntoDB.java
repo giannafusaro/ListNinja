@@ -8,8 +8,10 @@ package DAL;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,24 +23,58 @@ import java.util.logging.Logger;
 public class InsertIntoDB {
     
     //-----INSERTS NEW ITEM INTO DB-----//
-    public boolean insertNewItem(int listid, String name, Connection c) {
+    public boolean createNewItem(int listid, String name, Connection c) {
         try {
             Statement stmt = c.createStatement();
             
             Calendar cal = Calendar.getInstance();
             java.util.Date utilDate = cal.getTime();
-            Date date = new Date(utilDate.getTime());
+            Timestamp ts = new Timestamp(utilDate.getTime());
             
             PreparedStatement ps = c.prepareStatement("INSERT INTO items(listid, name, created, updated) VALUES (?, ?, ?, ?)");
             ps.setInt(1, listid);
             ps.setString(2, name);
-            ps.setDate(3, date);
-            ps.setDate(4, date);
+            ps.setTimestamp(3, ts);
+            ps.setTimestamp(4, ts);
             
             int result = ps.executeUpdate();
             c.close();
             return result == 1;
             
+        } catch (SQLException ex) {
+            Logger.getLogger(InsertIntoDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    public boolean createNewList(int userid, String name, Connection c) {
+        
+        try {
+            Calendar cal = Calendar.getInstance();
+            java.util.Date utilDate = cal.getTime();
+            Timestamp ts = new Timestamp(utilDate.getTime());
+            
+            PreparedStatement ps = c.prepareStatement("INSERT INTO lists(name, created, updated) VALUES (?,?,?) RETURNING listid");
+            ps.setString(1, name);
+            ps.setTimestamp(2, ts);
+            ps.setTimestamp(3, ts);
+            ResultSet rs = ps.executeQuery();
+            
+            
+            rs.next();
+            int listid = rs.getInt("listid");
+            
+            String query = "INSERT INTO list_users (userid, listid, creator) VALUES (?,?,?)";
+            PreparedStatement ps1 = c.prepareStatement(query);
+            ps1.setInt(1, userid);
+            ps1.setInt(2, listid);
+            ps1.setBoolean(3, true);
+            
+            int result = ps1.executeUpdate();
+            
+            c.close();
+            
+            return result == 1;
         } catch (SQLException ex) {
             Logger.getLogger(InsertIntoDB.class.getName()).log(Level.SEVERE, null, ex);
         }

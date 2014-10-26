@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 import DAL.ServerAccess;
+import org.json.simple.JSONArray;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -47,5 +48,30 @@ public class ServerAccessTests {
             boolean bool = sa.createNewItem(1, "Test"+i);
             assertEquals(true, bool);
         }
+    }
+    
+    @Test
+    public void testGetItemsFromDB() {
+        ServerAccess sa = new ServerAccess();
+        JSONArray items = sa.getListItems(1);
+        System.out.println(items.toJSONString());
+    }
+    
+    @Test
+    public void testUpdateNameForItem() {
+        ServerAccess sa = new ServerAccess();
+        sa.updateItemName(146, "HELLOWORLD");
+    }
+    
+    @Test
+    public void testDeleteItemFromDB() {
+        ServerAccess sa = new ServerAccess();
+        //sa.removeItem(135);
+    }
+    
+    @Test
+    public void testGetAllUsers() {
+        ServerAccess sa = new ServerAccess();
+        System.out.println(sa.getAllUsers());
     }
 }

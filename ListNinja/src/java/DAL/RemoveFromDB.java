@@ -6,6 +6,7 @@
 package DAL;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -19,8 +20,12 @@ public class RemoveFromDB {
     
     public boolean removeItem(int itemid, Connection c) {
         try {
-            Statement stmt = c.createStatement();
-            int result = stmt.executeUpdate("DELETE FROM items WHERE itemid=" + itemid);
+            
+            PreparedStatement ps = c.prepareStatement("DELETE FROM items WHERE itemid = ?");
+            ps.setInt(1, itemid);
+            
+            int result = ps.executeUpdate();
+            
             c.close();
            
             return result == 1;
