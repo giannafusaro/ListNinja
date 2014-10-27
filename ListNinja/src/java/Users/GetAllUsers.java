@@ -38,7 +38,7 @@ public class GetAllUsers extends HttpServlet {
         try {
             /* TODO output your page here. You may use following sample code. */
             ServerAccess sa = new ServerAccess();
-            JSONArray users = sa.getUsers();
+            JSONArray users = sa.getAllUsers();
             
             
             out.println(users);

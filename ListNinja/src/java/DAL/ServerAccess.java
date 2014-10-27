@@ -1,11 +1,8 @@
 package DAL;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.simple.JSONArray;
@@ -40,26 +37,6 @@ public class ServerAccess {
         return DriverManager.getConnection(url, user, pw);
     }
 
-
-    
-    public boolean createNewItem(int listid, String name) {
-        try {
-            return insert.createNewItem(listid, name, getConnection());
-        } catch (SQLException ex) {
-            Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
-    
-    public boolean createNewList(int userid, String name) {
-        try {
-            return insert.createNewList(userid, name, getConnection());
-        } catch (SQLException ex) {
-            Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
-    
     //--------GET COMMANDS-------//
     public JSONObject getUser(int userid) {
         try {
@@ -106,12 +83,28 @@ public class ServerAccess {
         return null;
     }
     
-    
-    
-    //-------UPDATE COMMANDS------//
-    public boolean updateItemName(int itemid, String name) {
+    //--------INSERT COMMANDS------//
+    public boolean createNewItem(int listid, String name) {
         try {
-            return update.updateItemName(itemid, name, getConnection());
+            return insert.createNewItem(listid, name, getConnection());
+        } catch (SQLException ex) {
+            Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    public boolean createNewList(int userid, String name) {
+        try {
+            return insert.createNewList(userid, name, getConnection());
+        } catch (SQLException ex) {
+            Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    public boolean addUserToList(int listid, int userid) {
+        try {
+            return insert.addUserToList(listid, userid, getConnection());
         } catch (SQLException ex) {
             Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -129,10 +122,40 @@ public class ServerAccess {
     }
     
     public boolean removeList(int listid) {
+        try {
+            return rem.removeList(listid, getConnection());
+        } catch (SQLException ex) {
+            Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return false;
     }
     
     public boolean removeUserFromList(int userid, int listid) {
+        try {
+            return rem.removeUserFromList(userid, listid, getConnection());
+        } catch (SQLException ex) {
+            Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return false;
     }
+    
+    //-------UPDATE COMMANDS------//
+    public boolean updateItemName(int itemid, String name) {
+        try {
+            return update.updateItemName(itemid, name, getConnection());
+        } catch (SQLException ex) {
+            Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    public boolean updateListName(int listid, String name) {
+        try {
+            return update.updateListName(listid, name, getConnection());
+        } catch (SQLException ex) {
+            Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
 }
