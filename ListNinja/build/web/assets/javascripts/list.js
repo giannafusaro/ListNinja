@@ -75,7 +75,7 @@ $(document).ready(function() {
 
       $('ul#list-items').append($("#list-item-template").html());
 
-      var item = $('ul#list-items li:last')
+      var item = $('ul#list-items li:last');
       item.find("span.item-name").text(name.val());
       item.find("span.price").text("$" + price.val());
 

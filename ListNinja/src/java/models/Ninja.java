@@ -1,26 +1,42 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package models;
-
 import java.beans.*;
 import java.io.Serializable;
+import java.sql.*;
 import application.CreateUser;
-
 /**
  *
- * @author Buser
+ * @author giannafusaro
  */
-public class NinjaBean implements Serializable {
+public class Ninja implements Serializable {
     
     //NinjaItem Variables
     private String email;
     private String fName;
     private String lName;
+    private int facebook_id;
+    private String last_login;
     
     
+    public Ninja (int fb_id, String first_name, String last_name, String l_login, String email_add ) throws SQLException {
+      fb_id = facebook_id;
+      first_name = fName;
+      last_name = lName;
+      l_login = last_login;
+      email_add = email;
+     
+     Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/ListNinja");
+     String query = "INSERT ";
+    }
+    
+//    
+//    private boolean exists(int fb_id) {
+//      
+//    }
+//    
     /**Sets set email
      * 
     */
@@ -64,7 +80,7 @@ public class NinjaBean implements Serializable {
     
     private PropertyChangeSupport propertySupport;
     
-    public NinjaBean() {
+    public Ninja() {
         propertySupport = new PropertyChangeSupport(this);
     }
     
@@ -85,5 +101,7 @@ public class NinjaBean implements Serializable {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         propertySupport.removePropertyChangeListener(listener);
     }
-    
+  
+  
+  
 }

@@ -2,7 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package application;
+
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,10 +14,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+import models.Ninja;
+
+
 /**
  *
  * @author giannafusaro
  */
+
 @WebServlet(name = "CreateUser", urlPatterns = {"/CreateUser"})
 public class CreateUser extends HttpServlet {
 

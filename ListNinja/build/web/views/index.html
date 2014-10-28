@@ -9,15 +9,90 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
       <meta charset="UTF-8"/>
       <title>List Ninja Login and signup - CodePen</title>
-      <meta name="robots" content="noindex"/>
-      <link rel='stylesheet prefetch' href='https://s3-us-west-2.amazonaws.com/s.cdpn.io/64754/bootstrap.min.css'/>
-      <link rel="stylesheet" href="assets/stylesheets/index.css" media="screen" type="text/css" />
-      <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'/>
+    
    </head>
    <body>
-      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-      <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/64754/bootstrap.js'></script>
-      <script src="assets/javascripts/index.js"></script>
+<script type="text/javascript">
+  
+  
+
+  function statusChangeCallback(response) {
+    console.log('called statusChangeCallback');
+    console.log("status: ", response.status);
+    console.log('response: ', response);
+    //console.log("access token", response.authResponse.accessToken);
+    $.cookie('fb_access_token', response.authResponse.accessToken, { expires: 7, path: '/' });
+    
+    if (response.status === 'connected') {
+      console.log("connected!");
+      FB.api('/me', function(response) {
+        console.log('Successful login! Response: ', response);
+        var fb_id = response.id;
+        console.log("fb_id: ", fb_id);
+        
+//        var cookie_string = "fb_id= "+ fb_id + "; path=/ListNinja/dashboard.jsp";
+//        console.log(cookie_string);
+//        document.cookie=cookie_string;
+        $.cookie('fb_id', fb_id, { expires: 7, path: '/' });
+        console.log($.cookie('fb_id') );
+        console.log($.cookie('fb_access_token'));
+        
+       
+          window.location = "/ListNinja/dashboard.jsp"
+//        $.ajax({
+//          type : "POST",
+//          url : "/ListNinja/CreateUser",
+//          data: {email: response.email, id: response.id, name:response.name},
+//          success : function(data) {
+//            console.log("success: ", data);
+//            /* make the API call */
+//           
+//            //$.ajax()
+//          },
+//          error: function (xhr, ajaxOptions, thrownError) {
+//            alert(xhr.status);
+//            alert(thrownError);
+//          }  
+//        });
+      }); 
+    } else if (response.status === 'not_authorized') {
+      console.log('User is logged into Facebook, but not your app.');
+    } else {
+      console.log('User is not logged into Facebook, so we\'re not sure if they are logged into this app or not.');
+    }
+  }
+
+  function checkLoginState() {
+    console.log('called checkLoginState');
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+
+  window.fbAsyncInit = function() {
+    console.log('fbAsyncInit');
+    FB.init({
+      appId      : '1487237978203661',
+      cookie     : true,  // enable cookies to allow the server to access the session
+      xfbml      : true,
+      version    : 'v2.1'
+    });
+    checkLoginState();
+  };
+
+  (function(d, s, id){
+    console.log('random function called');
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }
+    (document, 'script', 'facebook-jssdk')
+  );
+
+//document.onload(checkLoginState());
+</script>
       <div class="jumbotron">
         <div class="container">
           <div class="row">
@@ -29,9 +104,10 @@
                 <div class="col-sm-4">
                   <div class="login-container">
                     <h1>Login with Facebook</h1>
-                    <div id="fb-button" class="fb-login-button btn" data-max-rows="1" data-size="xlarge" data-show-faces="true" onlogin="dashboard_page()" data-auto-logout-link="true"></div>
+                    <div class="fb-login-button btn" data-max-rows="1" data-scope="user_friends,email" data-size="xlarge" onlogin="checkLoginState();" data-show-faces="true" data-auto-logout-link="true"></div>
                   </div>
                 </div>
+<!--               <div id="spot-im-root"></div><script>!function(t,e,o){function p(){var t=e.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"==e.location.protocol?"https":"http")+":"+o,e.body.appendChild(t)}t.spotId="3f81f396f78a5534f9b905daf33b87fc",t.spotName="",t.allowDesktop=!0,t.allowMobile=!1,t.containerId="spot-im-root",p()}(window.SPOTIM={},document,"//www.spot.im/embed/scripts/launcher.js");</script>-->
              </div>
           </div>
         </div>

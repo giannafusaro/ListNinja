@@ -1,0 +1,13 @@
+/* 
+    Document   : _list
+    Created on : Oct 22, 2014, 7:27:25 PM
+    Author     : giannafusaro
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body { 
+  display: block;
+  overflow: scroll;
+}
+

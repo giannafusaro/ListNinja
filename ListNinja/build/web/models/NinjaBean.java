@@ -7,6 +7,7 @@ package models;
 
 import java.beans.*;
 import java.io.Serializable;
+import application.CreateUser;
 
 /**
  *
