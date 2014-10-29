@@ -5,42 +5,50 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="application.*" %>
-<%@include file="/views/header.html" %>
-
 
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Dashboard Page</title>
+    <title>ListNinja | Dashboard</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="robots" content="noindex"/>    
-    <link rel="stylesheet" href="assets/stylesheets/global.css">
-    <link rel="stylesheet" href="assets/stylesheets/list.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'/>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script src="assets/javascripts/global.js"></script>
+    <script src="assets/javascripts/facebook.js"></script>
+    <script src="assets/javascripts/list.js"></script>
+    
+    <link rel="stylesheet" href="assets/stylesheets/list.css">
+    <link rel="stylesheet" href="assets/stylesheets/dashboard.css">
     <script src="assets/javascripts/dashboard.js"></script>
   </head>
   
   <body>
+    <%@include file="/views/_header.html" %>
+
     
     <div class="row no-margins">
       
       <!-- My Lists -->
       <div class="col-md-3">
         <div class="panel panel-default">
-          <div class="panel-heading"><h1 class="col-title">My Lists</h1></div>
+          <div class="panel-heading">
+            <h1 class="col-title">My Lists</h1>
+          </div>
           <div class="panel-body">
             Panel content
+            <!--
+              [JSP] list all the lists
+            -->
           </div>
         </div>
       </div>
       
       <!-- Current List -->
-      <div id="current-list" class="col-md-6">
+      <div id="current-list" data-list="<!-- [JSP] insert last modifed list id here -->" class="col-md-6">
         <%@include file="views/_list.html" %>
       </div>
 
@@ -58,7 +66,9 @@
               Add Collaborator
             </button>
 
-            <ul id="collaborator-list"></ul>
+            <ul id="collaborator-list">
+              <!-- [JSP] list collaborator facebook ids -->
+            </ul>
 
             <!-- Modal -->
             <div class="modal fade" id="add-collaborators" tabindex="-1" role="dialog" aria-labelledby="collaborator-label" aria-hidden="true">
@@ -98,8 +108,6 @@
       </li>
     </div>
     
-    
-
   </body>
 </html>
 
