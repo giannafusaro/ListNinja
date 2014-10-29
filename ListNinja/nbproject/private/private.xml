@@ -11,12 +11,19 @@
             <file>file:/Users/Avi/Documents/SJSU/Fall2014/CS160/ListNinja/ListNinja/src/java/Users/GetAllUsers.java</file>
         </group>
         <group>
-            <file>file:/Users/Buser/Desktop/ListNinja/ListNinja/src/java/Getters/GetUsersForList.java</file>
-            <file>file:/Users/Buser/Desktop/ListNinja/ListNinja/src/java/Getters/GetAllUsers.java</file>
-            <file>file:/Users/Buser/Desktop/ListNinja/ListNinja/src/java/Getters/GetListsForUser.java</file>
-            <file>file:/Users/Buser/Desktop/ListNinja/ListNinja/src/java/Getters/GetUser.java</file>
-            <file>file:/Users/Buser/Desktop/ListNinja/ListNinja/src/java/Getters/GetListItems.java</file>
-            <file>file:/Users/Buser/Desktop/ListNinja/ListNinja/src/java/DAL/GetFromDB.java</file>
+            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/test/ServerAccessTests.java</file>
+            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/DAL/GetFromDB.java</file>
+            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/web/test.jsp</file>
+            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/DAL/ServerAccess.java</file>
+            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/Users/GetAllUsers.java</file>
+            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/Getters/GetListItems.java</file>
+            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/List/CreateList.java</file>
+            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/DAL/RemoveFromDB.java</file>
+            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/DAL/InsertIntoDB.java</file>
+            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/test/INSERTTEST.java</file>
+            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/DAL/UpdateTheDB.java</file>
+            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/web/controllers/RemoteAccessLayer.js</file>
+            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/web/index.jsp</file>
         </group>
     </open-files>
 </project-private>
