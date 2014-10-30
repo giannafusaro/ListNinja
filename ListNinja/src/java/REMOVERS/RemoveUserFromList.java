@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Getters;
+package REMOVERS;
 
 import DAL.ServerAccess;
 import java.io.IOException;
@@ -13,14 +13,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.json.simple.JSONObject;
 
 /**
  *
  * @author Buser
  */
-@WebServlet(name = "GetUser", urlPatterns = {"/GetUser"})
-public class GetUser extends HttpServlet {
+@WebServlet(name = "RemoveUserFromList", urlPatterns = {"/RemoveUserFromList"})
+public class RemoveUserFromList extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,11 +35,12 @@ public class GetUser extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            String userid = request.getParameter("userid");
+            String ssId = request.getParameter("userid");
+            int sId = Integer.parseInt(ssId);
+            String slId = request.getParameter("listid");
+            int lid = Integer.parseInt(slId);
             ServerAccess sa = new ServerAccess();
-            int id = Integer.parseInt(userid);
-            JSONObject user = sa.getUser(id);
-            out.println(user);
+            out.println(sa.removeUserFromList(sId, lid));
         } finally {
             out.close();
         }

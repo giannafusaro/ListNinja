@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Getters;
+package UPDATERS;
 
 import DAL.ServerAccess;
 import java.io.IOException;
@@ -13,14 +13,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.json.simple.JSONObject;
 
 /**
  *
  * @author Buser
  */
-@WebServlet(name = "GetUser", urlPatterns = {"/GetUser"})
-public class GetUser extends HttpServlet {
+@WebServlet(name = "UpdateItemName", urlPatterns = {"/UpdateItemName"})
+public class UpdateItemName extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,11 +35,11 @@ public class GetUser extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            String userid = request.getParameter("userid");
+            String iName = request.getParameter("name");
+            String iId = request.getParameter("itemid");
+            int id = Integer.parseInt(iId);
             ServerAccess sa = new ServerAccess();
-            int id = Integer.parseInt(userid);
-            JSONObject user = sa.getUser(id);
-            out.println(user);
+            out.println(sa.updateItemName(id, iName));
         } finally {
             out.close();
         }

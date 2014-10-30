@@ -1,10 +1,9 @@
+package UPDATERS;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Getters;
-
 import DAL.ServerAccess;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,14 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.json.simple.JSONObject;
 
 /**
  *
  * @author Buser
  */
-@WebServlet(name = "GetUser", urlPatterns = {"/GetUser"})
-public class GetUser extends HttpServlet {
+@WebServlet(urlPatterns = {"/AddUserToList"})
+public class AddUserToList extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +35,11 @@ public class GetUser extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             String userid = request.getParameter("userid");
+            String listid = request.getParameter("listid");
+            int sid = Integer.parseInt(userid);
+            int lid = Integer.parseInt(listid);
             ServerAccess sa = new ServerAccess();
-            int id = Integer.parseInt(userid);
-            JSONObject user = sa.getUser(id);
-            out.println(user);
+            out.println(sa.addUserToList(lid, sid));
         } finally {
             out.close();
         }

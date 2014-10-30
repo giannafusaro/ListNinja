@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Getters;
+package CREATORS;
 
 import DAL.ServerAccess;
 import java.io.IOException;
@@ -13,14 +13,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.json.simple.JSONObject;
 
 /**
  *
  * @author Buser
  */
-@WebServlet(name = "GetUser", urlPatterns = {"/GetUser"})
-public class GetUser extends HttpServlet {
+@WebServlet(name = "CreateNewList", urlPatterns = {"/CreateNewList"})
+public class CreateNewList extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +36,11 @@ public class GetUser extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             String userid = request.getParameter("userid");
-            ServerAccess sa = new ServerAccess();
+            String itemname = request.getParameter("name");
             int id = Integer.parseInt(userid);
-            JSONObject user = sa.getUser(id);
-            out.println(user);
+            //Need Price
+            ServerAccess sa = new ServerAccess();
+            out.println(sa.createNewList(id, itemname));
         } finally {
             out.close();
         }
