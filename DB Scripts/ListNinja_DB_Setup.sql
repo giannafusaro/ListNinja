@@ -11,7 +11,7 @@ created		DATE
 
 CREATE TABLE lists(
 listid		SERIAL PRIMARY KEY NOT NULL,
-userid		INT REFERENCES users(userid),
+--userid		INT REFERENCES users(userid),
 name		VARCHAR(255),
 created		DATE,
 updated		DATE
@@ -22,6 +22,7 @@ itemid		SERIAL PRIMARY KEY NOT NULL,
 listid		INT REFERENCES lists(listid),
 name		VARCHAR(255),
 created		DATE,
+price		INT,
 updated		DATE
 );
 
