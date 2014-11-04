@@ -44,6 +44,6 @@ public class GettersTester {
     @Test
     public void GetListItemsTest(){
         GetListItems items = new GetListItems();
-        items.
+        
     }
 }

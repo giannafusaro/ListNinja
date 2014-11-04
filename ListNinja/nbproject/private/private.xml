@@ -2,17 +2,20 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/Users/Buser/Desktop/ListNinja/ListNinja/web/views/index.html</file>
+            <file>file:/Users/Buser/Desktop/ListNinja/ListNinja/web/controllers/RemoteAccessLayer.js</file>
+        </group>
         <group name="AviProjects">
             <file>file:/Users/Avi/Documents/SJSU/Fall2014/CS160/ListNinja/ListNinja/src/java/Users/GetUserLists.java</file>
+            <file>file:/Users/Avi/Documents/SJSU/Fall2014/CS160/ListNinja/ListNinja/src/java/CREATORS/CreateNewItem.java</file>
             <file>file:/Users/Avi/Documents/SJSU/Fall2014/CS160/ListNinja/ListNinja/src/java/Getters/GetListItems.java</file>
+            <file>file:/Users/Avi/Documents/SJSU/Fall2014/CS160/ListNinja/ListNinja/test/GettersTester.java</file>
+            <file>file:/Users/Avi/Documents/SJSU/Fall2014/CS160/ListNinja/ListNinja/src/java/REMOVERS/RemoveItem.java</file>
             <file>file:/Users/Avi/Documents/SJSU/Fall2014/CS160/ListNinja/ListNinja/src/java/DAL/InsertIntoDB.java</file>
             <file>file:/Users/Avi/Documents/SJSU/Fall2014/CS160/ListNinja/ListNinja/src/java/Getters/GetUser.java</file>
             <file>file:/Users/Avi/Documents/SJSU/Fall2014/CS160/ListNinja/ListNinja/src/java/DAL/ServerAccess.java</file>
             <file>file:/Users/Avi/Documents/SJSU/Fall2014/CS160/ListNinja/ListNinja/src/java/Users/GetAllUsers.java</file>
-        </group>
-        <group>
-            <file>file:/Users/Buser/Desktop/ListNinja/ListNinja/web/views/index.html</file>
-            <file>file:/Users/Buser/Desktop/ListNinja/ListNinja/web/controllers/RemoteAccessLayer.js</file>
         </group>
     </open-files>
 </project-private>

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Users;
+package CREATORS;
 
 import DAL.ServerAccess;
 import java.io.IOException;
@@ -13,14 +13,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.json.simple.JSONArray;
 
 /**
  *
- * @author sheff
+ * @author Buser
  */
-@WebServlet(name = "GetUserLists", urlPatterns = {"/GetUserLists"})
-public class GetUserLists extends HttpServlet {
+@WebServlet(name = "CreateNewUser", urlPatterns = {"/CreateNewUser"})
+public class CreateNewUser extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,13 +35,17 @@ public class GetUserLists extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            
-            ServerAccess sa = new ServerAccess();
-            String userid = request.getParameter("userid");
-            
-            //JSONArray lists = sa.getLists(Integer.parseInt(userid));
-            
-            //out.println(lists);
+            String firstName = request.getParameter("fname");
+            String lastName = request.getParameter("lname");
+            //Need Price
+            //ServerAccess sa = new ServerAccess();
+            // out.println(sa.createNewUser(firstName, lastName));
+            // Set response content type
+            response.setContentType("text/html");
+
+            // Actual logic goes here.
+            PrintWriter pw = response.getWriter();
+            pw.println("<h1>" + "create new user servlet used" + firstName + " " + lastName + "</h1>");
         } finally {
             out.close();
         }

@@ -1,11 +1,6 @@
-<%-- 
-    Document   : test.jsp
-    Created on : Oct 20, 2014, 10:18:40 PM
-    Author     : sheff
---%>
 
 <%@page import="java.util.ArrayList"%>
-<%@page language="java" import="Application.ServerAccess"%>
+<%@page language="java" import="DAL.ServerAccess"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,10 +12,10 @@
     </head>
     <body>
         </br>
-        <form id="createUserTest">
-            First name: <input class="textField" type="text" name="fname"><br>
+        <form id="createUserTest" action="/CreateNewUser" method="GET">
+            First name: <input class="textField" type="text" name="fname"><br> 
             Last name: <input class="textField" type="text" name="lname"><br>
-            <input class="submitButton" type="button" value="Submit">
+            <input class="submitButton" type="submit" value="Submit">
         </form>
         
         <h3>Users</h3>
@@ -29,7 +24,7 @@
         <form id="createList">
             Name: <input class="textField" type="text" name="name"><br>
             User ID: <input class="textField" type="text" name="userid"><br>
-            <input class="submitButtonList" type="button" value="Submit">
+            <input class="submitButtonList" type="submit" value="Submit">
         </form>
         <h3>Lists</h3>
         Get lists by userid: <input id="userforlist" type="text" value="1"><br>
