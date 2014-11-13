@@ -28,7 +28,8 @@ updated		DATE
 
 CREATE TABLE list_users(
 userid INT REFERENCES users(userid) NOT NULL,
-listid INT REFERENCES lists(listid) NOT NULL
+listid INT REFERENCES lists(listid) NOT NULL,
+creator BOOLEAN
 );
 
 commit;

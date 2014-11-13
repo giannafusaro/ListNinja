@@ -37,6 +37,9 @@ RemoteAccessLayer.prototype.getListsForUser = function(userid, callback) {
         dataType: "JSON",
         success : function(data) {
             callback(data);
+        },
+        error : function(msg) {
+            console.log(msg);
         }
     });
 };

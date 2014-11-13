@@ -5,9 +5,16 @@
  */
 
 var ListController = function() {
-    this.lists =[];
+    this.lists = new Lists();
 };
 
-ListController.prototype.addList = function(list) {
-    this.lists.push(list);
+ListController.prototype.populateLists = function() {
+    var ral = new RemoteAccessLayer();
+    ral.getListsForUser(1, function(data) {
+        var i = 0;
+        for (i = 0; i < data.length; i++) {
+            con.lists.addList(new List(data[i].listid, data[i].name, data[i].created, data[i].updated));
+        }
+    });
+    //new List(data.listid, data.fname, data.created, data.modified)
 };

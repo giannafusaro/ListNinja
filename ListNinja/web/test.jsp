@@ -22,11 +22,15 @@
     
     <script type="text/javascript">
         
-        var ral = new RemoteAccessLayer();
-        var users = [];
-        ral.getAllUsers(function(data) {
-            users = data;
-        });
+        var con = new ListController();
+        con.populateLists();
+        var myVar = setInterval(function(){
+            var lists  = con.lists.getLists();
+            $("#test").html("");
+            for (var j = 0; j < lists.length; j++) {
+                $("#test").append(lists[j].name);
+            }
+        }, 5000);
         
     </script>
 </html>

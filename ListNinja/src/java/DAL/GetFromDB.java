@@ -87,8 +87,8 @@ public class GetFromDB {
                 
                 list.put("listid", rs.getInt("listid"));
                 list.put("name", rs.getString("name"));
-                list.put("created", rs.getTimestamp("created"));
-                list.put("updated", rs.getTimestamp("updated"));
+                list.put("created", rs.getTimestamp("created").toString());
+                list.put("updated", rs.getTimestamp("updated").toString());
                 
                 lists.add(list);
             }
