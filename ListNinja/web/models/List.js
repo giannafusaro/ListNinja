@@ -9,12 +9,14 @@
 	*@param fName the users first name 
 	*@param name the lists  name
     */
- var List = function(listid,name)
- {
- 	this.listid = listid;
- 	this.created;
- 	this.updated;
-        this.nobullshit;
+ /*@param fName the users first name 
+ *@param name the lists  name
+ */
+var List = function (listid, name)
+{
+    this.listid = listid;
+    this.created;
+    this.updated;
     this.name = name;
     this.users = [];
     this.items = [];
