@@ -5,3 +5,19 @@
  */
 
 
+var Lists = function() {
+    this.lists = [];
+};
+
+Lists.prototype.addList = function(listid, name) {
+    var list = new List(listid, name);
+    this.lists[listid] = list;
+};
+
+Lists.prototype.addItem = function(itemid, listid, name) {
+    var item = new Item(itemid, listid, name);
+    if (this.lists[listid] !== undefined) {
+        this.lists[listid].addItem(item);
+    }
+};
+
