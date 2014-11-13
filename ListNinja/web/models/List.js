@@ -14,6 +14,7 @@
  	this.listid = listid;
  	this.created;
  	this.updated;
+        this.nobullshit;
     this.name = name;
     this.users = [];
     this.items = [];
