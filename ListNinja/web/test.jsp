@@ -10,6 +10,7 @@
         <script type="text/javascript" src="models/Ninja.js"></script>
         <script type="text/javascript" src="models/List.js"></script>
         <script type="text/javascript" src="models/Item.js"></script>
+        <script type="text/javascript" src="models/Lists.js"></script>
         <script type="text/javascript" src="controllers/ListController.js"></script>
     </head>
     <body></body>
