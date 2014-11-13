@@ -14,10 +14,12 @@ Lists.prototype.addList = function(listid, name) {
     this.lists[listid] = list;
 };
 
+Lists.prototype.getLists = function() {
+    return this.lists;
+};
+
 Lists.prototype.addItem = function(itemid, listid, name) {
     var item = new Item(itemid, listid, name);
-    if (this.lists[listid] !== undefined) {
-        this.lists[listid].addItem(item);
-    }
+    this.lists[listid].addItem(item);
 };
 

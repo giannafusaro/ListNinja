@@ -11,7 +11,22 @@
         <script type="text/javascript" src="models/List.js"></script>
         <script type="text/javascript" src="models/Item.js"></script>
         <script type="text/javascript" src="models/Lists.js"></script>
+        <script type="text/javascript" src="controllers/RemoteAccessLayer.js"></script>
         <script type="text/javascript" src="controllers/ListController.js"></script>
     </head>
-    <body></body>
+    <body>
+        <div id="test"></div>
+        
+        
+    </body>
+    
+    <script type="text/javascript">
+        
+        var ral = new RemoteAccessLayer();
+        var users = [];
+        ral.getAllUsers(function(data) {
+            users = data;
+        });
+        
+    </script>
 </html>

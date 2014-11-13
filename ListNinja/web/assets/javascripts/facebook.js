@@ -23,10 +23,10 @@ function checkLoginState() {
         id: response.authResponse.userID,
         accessToken: response.authResponse.accessToken
       }
-      redirectTo("/ListNinja/dashboard.jsp");
+      redirectTo("/dashboard.jsp");
     } else {
       console.log("not connected");
-      redirectTo("/ListNinja/");
+      redirectTo("/");
     }
   });  
 }
