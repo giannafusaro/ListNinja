@@ -14,6 +14,7 @@ var List = function (listid, name)
     this.listid = listid;
     this.created;
     this.updated;
+    this.bullshit;
     this.name = name;
     this.users = [];
     this.items = [];
