@@ -1,0 +1,76 @@
+/* 
+    Document   : global
+    Created on : Oct 22, 2014, 7:53:28 PM
+    Author     : giannafusaro
+    Description: Purpose of the stylesheet follows.
+*/
+
+div.templates {
+  display: none;
+}
+
+.row.no-margins {
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+div.container {
+  width:638px;
+  display:inline-block;
+  margin-left: -11px;
+  margin-right: 11px;
+}
+.col-md-4.container.side{ 
+  width:25%
+}
+
+img.collaborator-picture { 
+  border-radius: 3px;
+  margin-left: 5px;
+}
+
+span.collaborator-name {
+  margin-left: 20px;
+  font-family: lato;
+  font-size: 18px;
+}
+
+a.collaborator-delete {
+  float: right;
+  text-decoration: none;
+  color: #000;
+  margin: 23px 3px 0px 0px;
+}
+
+#modal-collaborator-list .collaborator-delete { display: none; }
+#modal-collaborator-list .collaborator-checkbox { display: inline-block; }
+
+#collaborator-list .collaborator-delete { display: inline-block; }
+#collaborator-list .collaborator-checkbox { display: none; }
+
+#collaborator-list, #modal-collaborator-list { padding: 0px; }
+
+h1.col-title {
+  margin-bottom: 15px;
+  font-family: lato;
+  text-align: center;
+}
+
+#add-collaborator {
+  margin-bottom: 15px;
+  background-color: #00556E;
+  color: #fff;
+  width: 100%;
+}
+
+
+li.collaborator {
+  list-style-type: none;
+  margin: 5px 0px 5px 0px;
+}
+
+ul.friends-list {
+  padding-left: 0px;
+}
