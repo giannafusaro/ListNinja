@@ -10,7 +10,7 @@
 	*@param price price of the item
 	*@param ninja the users email address
     */
- var Item = function(itemid,listid,name,price,created,updated)
+ var Item = function(itemid,listid,name,created,updated)
  {
  	this.itemid = itemid;
  	this.listid = listid;

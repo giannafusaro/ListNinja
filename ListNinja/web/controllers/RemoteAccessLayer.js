@@ -69,7 +69,7 @@ RemoteAccessLayer.prototype.getAllUsers = function(callback) {
 RemoteAccessLayer.prototype.createNewItem = function(listid, name, callback) {
     $.ajax({
         type: "GET",
-        url: "/CreateNewItem?=listid" + listid + "&name=" + name,
+        url: "/CreateNewItem?listid=" + listid + "&name=" + name,
         dataType: "JSON",
         success : function(data) {
             callback(data);

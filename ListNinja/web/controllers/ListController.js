@@ -4,17 +4,35 @@
  * and open the template in the editor.
  */
 
-var ListController = function() {
-    this.lists = new Lists();
+var ListController = function(model) {
+    this.lists = model;
+    populateLists();
+    setInterval(function(){
+        populateLists();
+        populateItems();
+    }, 3000);
 };
 
-ListController.prototype.populateLists = function() {
+var populateLists = function() {
     var ral = new RemoteAccessLayer();
     ral.getListsForUser(1, function(data) {
         var i = 0;
         for (i = 0; i < data.length; i++) {
-            con.lists.addList(new List(data[i].listid, data[i].name, data[i].created, data[i].updated));
+            if (listCon.lists.getListByID(data[i].listid) === null) {
+                listCon.lists.addList(new List(data[i].listid, data[i].name, data[i].created, data[i].updated));
+            }
+            
         }
     });
-    //new List(data.listid, data.fname, data.created, data.modified)
+};
+
+var populateItems = function() {
+    var ral = new RemoteAccessLayer();
+    ral.getListItems(1, function(items) {
+        var i = 0;
+        for (i = 0; i < items.length; i++) {
+            var list = listCon.lists.getListByID(1);
+            list.addItem(new Item(items[i].itemid,list.listid,items[i].name,items[i].created,items[i].updated));
+        }
+    });
 };

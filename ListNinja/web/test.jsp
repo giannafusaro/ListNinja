@@ -13,6 +13,7 @@
         <script type="text/javascript" src="models/Lists.js"></script>
         <script type="text/javascript" src="controllers/RemoteAccessLayer.js"></script>
         <script type="text/javascript" src="controllers/ListController.js"></script>
+        <script type="text/javascript" src="views/View.js"></script>
     </head>
     <body>
         <div id="test"></div>
@@ -22,15 +23,9 @@
     
     <script type="text/javascript">
         
-        var con = new ListController();
-        con.populateLists();
-        var myVar = setInterval(function(){
-            var lists  = con.lists.getLists();
-            $("#test").html("");
-            for (var j = 0; j < lists.length; j++) {
-                $("#test").append(lists[j].name);
-            }
-        }, 5000);
+        var view = new View();    
+        var model = new Lists(view);
+        var listCon = new ListController(model);
         
     </script>
 </html>
