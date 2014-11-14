@@ -14,7 +14,7 @@ RemoteAccessLayer.prototype.getListItems = function (listid, callback) {
         url: "/GetListItems?listid=" + listid,
         dataType: "JSON",
         success : function(data) {
-                callback(data);
+            callback(data);
         }
     });
 };
@@ -39,7 +39,7 @@ RemoteAccessLayer.prototype.getListsForUser = function(userid, callback) {
             callback(data);
         },
         error : function(msg) {
-            console.log(msg);
+            //console.log(msg);
         }
     });
 };

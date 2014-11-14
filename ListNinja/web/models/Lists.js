@@ -22,6 +22,18 @@ Lists.prototype.getListByID = function(listid) {
     return null;
 };
 
+Lists.prototype.getItemByID = function(itemid) {
+    for (var x in this.lists) {
+            var list = this.lists[x];
+            for (var y in list.items) {
+                if (list.items[y].itemid === itemid) {
+                    return list.items[y];
+                }
+            }
+    }
+    return null;
+};
+
 Lists.prototype.searchListsByName = function(string) {
     var lists = [];
     for (var x in this.lists) {
@@ -39,9 +51,9 @@ Lists.prototype.getLists = function() {
     return this.lists;
 };
 
-Lists.prototype.addItem = function(itemid, listid, name) {
-    var item = new Item(itemid, listid, name);
-    this.lists[listid].addItem(item);
+Lists.prototype.addItem = function(item) {
+    var list = this.getListByID(item.listid);
+    list.addItem(item);
     this.view.repaint();
 };
 

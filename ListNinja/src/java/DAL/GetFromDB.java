@@ -33,8 +33,8 @@ public class GetFromDB {
                 item.put("itemid", rs.getInt("itemid"));
                 item.put("listid", rs.getInt("listid"));
                 item.put("name", rs.getString("name"));
-                item.put("created", rs.getTimestamp("created"));
-                item.put("updated", rs.getTimestamp("updated"));
+                item.put("created", rs.getTimestamp("created").toString());
+                item.put("updated", rs.getTimestamp("updated").toString());
                 
                 items.add(item);
             }

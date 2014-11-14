@@ -15,7 +15,7 @@
  	this.itemid = itemid;
  	this.listid = listid;
     this.name = name;
-    this.price = price;
+    this.price;
     this.created = created;
     this.updated = updated;
     //this.users = [];

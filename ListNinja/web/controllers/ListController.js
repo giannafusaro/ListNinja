@@ -28,11 +28,14 @@ var populateLists = function() {
 
 var populateItems = function() {
     var ral = new RemoteAccessLayer();
-    ral.getListItems(1, function(items) {
+    ral.getListItems(1, function(data) {
+        var items = data;
         var i = 0;
         for (i = 0; i < items.length; i++) {
-            var list = listCon.lists.getListByID(1);
-            list.addItem(new Item(items[i].itemid,list.listid,items[i].name,items[i].created,items[i].updated));
+            var item = new Item(items[i].itemid, items[i].listid, items[i].name, items[i].created, items[i].updated);
+            if (listCon.lists.getItemByID(item.itemid) === null) {
+                listCon.lists.addItem(item);
+            }
         }
     });
 };
