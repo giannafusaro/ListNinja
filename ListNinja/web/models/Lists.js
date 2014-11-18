@@ -22,16 +22,8 @@ Lists.prototype.getListByID = function(listid) {
     return null;
 };
 
-Lists.prototype.getItemByID = function(itemid) {
-    for (var x in this.lists) {
-            var list = this.lists[x];
-            for (var y in list.items) {
-                if (list.items[y].itemid === itemid) {
-                    return list.items[y];
-                }
-            }
-    }
-    return null;
+Lists.prototype.getLists = function() {
+    return this.lists;
 };
 
 Lists.prototype.searchListsByName = function(string) {
@@ -47,8 +39,13 @@ Lists.prototype.searchListsByName = function(string) {
     return lists;
 };
 
-Lists.prototype.getLists = function() {
-    return this.lists;
+Lists.prototype.removeList = function(listid) {
+    var list = this.getListByID(listid);
+    var i = this.lists.indexOf(item);
+    if(i !== -1) {
+        this.items.splice(i, 1);
+    }
+    this.view.repaint();
 };
 
 Lists.prototype.addItem = function(item) {
@@ -57,3 +54,59 @@ Lists.prototype.addItem = function(item) {
     this.view.repaint();
 };
 
+Lists.prototype.getItemByID = function(itemid) {
+    for (var x in this.lists) {
+            var list = this.lists[x];
+            for (var y in list.items) {
+                if (list.items[y].itemid === itemid) {
+                    return list.items[y];
+                }
+            }
+    }
+    return null;
+};
+
+Lists.prototype.searchItemByName = function(listid, string) {
+    var items = [];
+    var list = this.getListByID(listid);
+    for (var x in list.items) {
+        var itemName = list.items[x].name;
+        itemName = itemName.toLowerCase();
+        string = string.toLowerCase();
+        if (itemName.indexOf(string) !== -1) {
+            items.push(list.items[x]);
+        }
+    }
+    return items;
+};
+
+Lists.prototype.removeItemFromList = function (listid, itemid) {
+    var list = this.getListByID(listid);
+    var item = this.getItemByID(itemid);
+    list.removeItem(item);
+    this.view.repaint();
+};
+
+Lists.prototype.addUserToList = function(listid, Ninja) {
+    var list = this.getListByID(listid);
+    list.addUser(Ninja);
+    this.view.repaint();
+};
+
+Lists.prototype.getUserByID = function(userid) {
+    for (var x in this.lists) {
+        var list = this.lists[x];
+        for (var y in list.users) {
+            if (list.users[y].userid === userid) {
+                return list.user[y];
+            }
+        }
+    }
+};
+
+Lists.prototype.removeUserFromList = function(listid, userid) {
+    var list = this.getListByID(listid);
+    var ninja = this.getUserByID(userid);
+    list.removeUser(ninja);
+    this.view.repaint();
+};

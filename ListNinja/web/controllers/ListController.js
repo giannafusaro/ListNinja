@@ -13,6 +13,60 @@ var ListController = function(model) {
     }, 3000);
 };
 
+ListController.prototype.createNewList = function(name) {
+    var ral = new RemoteAccessLayer();
+    ral.createNewList(1, name, function(data) {
+        this.populateLists();
+    });
+};
+
+ListController.prototype.updateListName = function(listid, name) {
+    var ral = new RemoteAccessLayer();
+    ral.updateListName(listid, name, function(data) {
+        listCon.removeList(listid);
+        this.populateLists();
+    });
+};
+
+ListController.prototype.removeList = function(listid) {
+    var ral = new RemoteAccessLayer();
+    ral.removeList(listid, function(data) {
+        listCon.removeList(listid);
+        this.populateLists();
+    });
+};
+
+ListController.prototype.createNewItem = function(name) {
+    var ral = new RemoteAccessLayer();
+    ral.createNewItem(name, function(data) {
+        this.populateItems();
+    });
+};
+
+ListController.prototype.updateItemName = function(listid, itemid, name) {
+    var ral = new RemoteAccessLayer();
+    ral.updateItemName(itemid, name, function(data) {
+        listCon.removeItemFromList(listid, itemid);
+        this.populateItems();
+    });
+};
+
+ListController.prototype.removeItem = function(listid, itemid) {
+    var ral = new RemoteAccessLayer();
+    ral.removeItem(itemid, function() {
+        listCon.removeItemFromList(listid, itemid);
+        this.populateItems();
+    });
+};
+
+ListController.prototype.addUserToList = function() {
+    
+};
+
+ListController.prototype.removeUserFromList = function() {
+    
+};
+
 var populateLists = function() {
     var ral = new RemoteAccessLayer();
     ral.getListsForUser(1, function(data) {
