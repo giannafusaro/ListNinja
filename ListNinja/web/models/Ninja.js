@@ -19,4 +19,3 @@ var Ninja = function(fbid, fName, lName, picurl, lastlogin, created)
     this.lastlogin = lastlogin;
     this.created = created;
 };
-

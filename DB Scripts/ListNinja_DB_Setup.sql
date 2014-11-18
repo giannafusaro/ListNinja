@@ -1,7 +1,9 @@
 -- Setup Ninja DB
 
 CREATE TABLE users(
-fbid		NUMERIC PRIMARY KEY NOT NULL,
+userid		SERIAL 	PRIMARY KEY NOT NULL,
+fbid		NUMERIC,
+email		VARCHAR(255),
 lastlogin	DATE,
 created		DATE
 );
@@ -23,7 +25,7 @@ updated		DATE
 );
 
 CREATE TABLE list_users(
-fbid INT REFERENCES users(fbid) NOT NULL,
+userid INT REFERENCES users(userid) NOT NULL,
 listid INT REFERENCES lists(listid) NOT NULL,
 creator BOOLEAN
 );
