@@ -13,6 +13,18 @@ Lists.prototype.addList = function(list) {
     this.view.repaint();
 };
 
+Lists.prototype.updateListName = function(listid, name) {
+    var list = this.getListByID(listid);
+    list.name = name;
+    this.view.repaint();
+};
+
+Lists.prototype.updateItemName = function(itemid, name) {
+    var item = this.getItemByID(itemid);
+    item.name = name;
+    this.view.repaint();
+};
+
 Lists.prototype.getListByID = function(listid) {
     for (var x in this.lists) {
         if (this.lists[x].listid === listid) {
@@ -41,9 +53,9 @@ Lists.prototype.searchListsByName = function(string) {
 
 Lists.prototype.removeList = function(listid) {
     var list = this.getListByID(listid);
-    var i = this.lists.indexOf(item);
+    var i = this.lists.indexOf(list);
     if(i !== -1) {
-        this.items.splice(i, 1);
+        this.lists.splice(i, 1);
     }
     this.view.repaint();
 };
@@ -80,16 +92,16 @@ Lists.prototype.searchItemByName = function(listid, string) {
     return items;
 };
 
-Lists.prototype.removeItemFromList = function (listid, itemid) {
-    var list = this.getListByID(listid);
+Lists.prototype.removeItem = function (itemid) {
     var item = this.getItemByID(itemid);
+    var list = this.getListByID(item.listid);
     list.removeItem(item);
     this.view.repaint();
 };
 
-Lists.prototype.addUserToList = function(listid, Ninja) {
+Lists.prototype.addUserToList = function(listid, ninja) {
     var list = this.getListByID(listid);
-    list.addUser(Ninja);
+    list.addUser(ninja);
     this.view.repaint();
 };
 

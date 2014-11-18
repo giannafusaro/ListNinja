@@ -40,7 +40,7 @@ public class CreateNewList extends HttpServlet {
             int id = Integer.parseInt(userid);
             //Need Price
             ServerAccess sa = new ServerAccess();
-            out.println(sa.createNewList(id, itemname));
+            out.println(sa.createNewList(1, itemname));
         } finally {
             out.close();
         }

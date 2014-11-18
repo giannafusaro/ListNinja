@@ -13,10 +13,10 @@ View.prototype.repaint = function() {
     $("#test").html("");
     var lists = model.getLists();
     for (var x in lists) {
-        $("#test").append("[" +lists[x].name);
+        $("#test").append("[" + lists[x].listid+ ": " +lists[x].name);
         var items = lists[x].items;
         for (var y in items) {
-            $("#test").append("-" + items[y].name);
+            $("#test").append("(" + items[y].itemid + ": " + items[y].name + ")");
         }
         $("#test").append("]");
     }

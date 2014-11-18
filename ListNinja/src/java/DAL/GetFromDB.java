@@ -55,6 +55,8 @@ public class GetFromDB {
             ps.setInt(1, userid);
             ResultSet rs = ps.executeQuery();
             
+            c.close();
+            
             while (rs.next()) {
                 user.put("userid", rs.getInt("userid"));
                 user.put("fbid", rs.getInt("fbid"));
@@ -64,7 +66,7 @@ public class GetFromDB {
                 user.put("created", rs.getTimestamp("created"));
             }
             
-            c.close();
+            
         } catch (SQLException ex) {
             Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -138,6 +140,8 @@ public class GetFromDB {
             PreparedStatement ps = c.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             
+            c.close();
+            
             while (rs.next()) {
                 JSONObject user = new JSONObject();
                 
@@ -150,7 +154,7 @@ public class GetFromDB {
                 
                 users.add(user);
             }
-            c.close();
+            
             
         } catch (SQLException ex) {
             Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
