@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.simple.JSONArray;
@@ -165,24 +167,36 @@ public class GetFromDB {
     public int getUserID (String fbid, String email, Connection c) {
         int userid = 0;
         try {
-            String query = "SELECT userid FROM users WHERE fbid = ?";
+            
+            Calendar cal = Calendar.getInstance();
+            java.util.Date utilDate = cal.getTime();
+            Timestamp ts = new Timestamp(utilDate.getTime());
+            
+            String query = "UPDATE users SET lastlogin=? WHERE fbid=? RETURNING userid";
             PreparedStatement ps = c.prepareStatement(query);
-            ps.setString(1, fbid);
+            ps.setTimestamp(1, ts);
+            ps.setString(2, fbid);
+            
+            
             ResultSet rs = ps.executeQuery();
             
-            rs.next();
-            userid = rs.getInt("userid");
-            
-            if (userid == 0) {
-                query = "INSERT INTO users(fbid, email) VALUES(?, ?) RETURNING userid";
+            if (rs.next()) {
+                userid = rs.getInt("userid");
+            } else {
+                
+                query = "INSERT INTO users(fbid, email, lastlogin, created) VALUES(?, ?, ?, ?) RETURNING userid";
+                ps = c.prepareStatement(query);
                 ps.setString(1, fbid);
                 ps.setString(2, email);
-                ps = c.prepareStatement(query);
+                ps.setTimestamp(3, ts);
+                ps.setTimestamp(4, ts);
+                
                 rs = ps.executeQuery();
                 
                 rs.next();
                 userid = rs.getInt("userid");
             }
+            System.out.println(userid);
             return userid;
             
         } catch (SQLException ex) {

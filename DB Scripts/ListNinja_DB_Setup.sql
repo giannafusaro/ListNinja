@@ -4,24 +4,24 @@ CREATE TABLE users(
 userid		SERIAL 	PRIMARY KEY NOT NULL,
 fbid		VARCHAR(255),
 email		VARCHAR(255),
-lastlogin	DATE,
-created		DATE
+lastlogin	TIMESTAMP,
+created		TIMESTAMP
 );
 
 CREATE TABLE lists(
 listid		SERIAL PRIMARY KEY NOT NULL,
 name		VARCHAR(255),
-created		DATE,
-updated		DATE
+created		TIMESTAMP,
+updated		TIMESTAMP
 );
 
 CREATE TABLE items(
 itemid		SERIAL PRIMARY KEY NOT NULL,
 listid		INT REFERENCES lists(listid),
 name		VARCHAR(255),
-created		DATE,
+created		TIMESTAMP,
 price		INT,
-updated		DATE
+updated		TIMESTAMP
 );
 
 CREATE TABLE list_users(
