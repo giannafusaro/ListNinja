@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,12 +36,14 @@ public class CreateNewList extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            String userid = request.getParameter("userid");
+            
+            HttpSession session = request.getSession(true);
+            int userid = (Integer) session.getAttribute("userid");
+
             String itemname = request.getParameter("name");
-            int id = Integer.parseInt(userid);
             //Need Price
             ServerAccess sa = new ServerAccess();
-            out.println(sa.createNewList(1, itemname));
+            out.println(sa.createNewList(userid, itemname));
         } finally {
             out.close();
         }
