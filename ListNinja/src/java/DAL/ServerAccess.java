@@ -47,6 +47,15 @@ public class ServerAccess {
         return null;
     }
     
+    public int getUserID(String fbid, String email) {
+        try {
+            return get.getUserID(fbid, email, getConnection());
+        } catch (SQLException ex) {
+            Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    
     public JSONArray getAllUsers() {
         try {
             return get.getAllUsers(getConnection());

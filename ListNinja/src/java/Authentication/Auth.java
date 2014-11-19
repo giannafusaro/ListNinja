@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Getters;
+package Authentication;
 
 import DAL.ServerAccess;
 import java.io.IOException;
@@ -14,14 +14,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.json.simple.JSONArray;
 
 /**
  *
- * @author Buser
+ * @author sheff
  */
-@WebServlet(name = "GetListsForUser", urlPatterns = {"/GetListsForUser"})
-public class GetListsForUser extends HttpServlet {
+@WebServlet(name = "Auth", urlPatterns = {"/Auth"})
+public class Auth extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,14 +36,17 @@ public class GetListsForUser extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
+            /* TODO output your page here. You may use following sample code. */
+            HttpSession session = request.getSession();
             
-            HttpSession session = request.getSession(true);
-            int userid = (Integer) session.getAttribute("userid");
-            
+            String fbid = request.getParameter("fbid");
+            String email = request.getParameter("email");
             ServerAccess sa = new ServerAccess();
-            JSONArray lists = sa.getListsForUser(userid);
             
-            out.println(lists);
+            int userid = sa.getUserID(fbid, email);
+            
+            session.setAttribute("userid", userid);
+            
         } finally {
             out.close();
         }

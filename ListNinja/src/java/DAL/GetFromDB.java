@@ -162,5 +162,33 @@ public class GetFromDB {
         return users;
     }
     
+    public int getUserID (String fbid, String email, Connection c) {
+        int userid = 0;
+        try {
+            String query = "SELECT userid FROM users WHERE fbid = ?";
+            PreparedStatement ps = c.prepareStatement(query);
+            ps.setString(1, fbid);
+            ResultSet rs = ps.executeQuery();
+            
+            rs.next();
+            userid = rs.getInt("userid");
+            
+            if (userid == 0) {
+                query = "INSERT INTO users(fbid, email) VALUES(?, ?) RETURNING userid";
+                ps.setString(1, fbid);
+                ps.setString(2, email);
+                ps = c.prepareStatement(query);
+                rs = ps.executeQuery();
+                
+                rs.next();
+                userid = rs.getInt("userid");
+            }
+            return userid;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
     
 }

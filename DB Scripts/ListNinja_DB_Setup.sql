@@ -2,7 +2,7 @@
 
 CREATE TABLE users(
 userid		SERIAL 	PRIMARY KEY NOT NULL,
-fbid		NUMERIC,
+fbid		VARCHAR(255),
 email		VARCHAR(255),
 lastlogin	DATE,
 created		DATE
