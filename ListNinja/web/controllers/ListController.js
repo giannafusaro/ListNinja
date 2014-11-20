@@ -30,8 +30,8 @@ ListController.prototype.updateListName = function(listid, name) {
 
 ListController.prototype.removeList = function(listid) {
     var ral = new RemoteAccessLayer();
+    this.lists.removeList(listid);
     ral.removeList(listid, function(data) {
-        listCon.removeList(listid);
         this.populateLists();
     });
 };

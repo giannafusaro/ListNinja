@@ -38,6 +38,10 @@ Lists.prototype.getLists = function() {
     return this.lists;
 };
 
+Lists.prototype.getFirstList = function() {
+    return this.lists[0];
+};
+
 Lists.prototype.searchListsByName = function(string) {
     var lists = [];
     for (var x in this.lists) {

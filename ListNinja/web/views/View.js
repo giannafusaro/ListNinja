@@ -6,18 +6,20 @@
 
 
 var View = function() {
-             
-}
+};
+
+function selectedList() {
+    $(".display-list-title").html("");
+    var list = model.getFirstList();
+    $(".display-list-title").append(list.name);
+};
          
 View.prototype.repaint = function() {
-    $("#test").html("");
+    $(".lists-panel").html("");
     var lists = model.getLists();
     for (var x in lists) {
-        $("#test").append("[" + lists[x].listid+ ": " +lists[x].name);
-        var items = lists[x].items;
-        for (var y in items) {
-            $("#test").append("(" + items[y].itemid + ": " + items[y].name + ")");
-        }
-        $("#test").append("]");
+        $(".lists-panel").append(lists[x].listid+ ": " + lists[x].name);
+        $(".lists-panel").append("<br>");
     }
+    selectedList();
 };

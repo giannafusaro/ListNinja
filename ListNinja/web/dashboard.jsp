@@ -23,6 +23,15 @@
     <script src="assets/javascripts/facebook.js"></script>
     <script src="assets/javascripts/list.js"></script>
     
+    <!--Added by Sheff to get the dashboard working-->
+    <script type="text/javascript" src="models/Ninja.js"></script>
+    <script type="text/javascript" src="models/List.js"></script>
+    <script type="text/javascript" src="models/Item.js"></script>
+    <script type="text/javascript" src="models/Lists.js"></script>
+    <script type="text/javascript" src="controllers/RemoteAccessLayer.js"></script>
+    <script type="text/javascript" src="controllers/ListController.js"></script>
+    <script type="text/javascript" src="views/View.js"></script>
+    
     <link rel="stylesheet" href="assets/stylesheets/list.css">
     <link rel="stylesheet" href="assets/stylesheets/dashboard.css">
     <script src="assets/javascripts/dashboard.js"></script>
@@ -40,7 +49,7 @@
           <div class="panel-heading">
             <h1 class="col-title">My Lists</h1>
           </div>
-          <div class="panel-body">
+          <div class="panel-body lists-panel">
             Panel content
             <!--
               [JSP] list all the lists
@@ -111,6 +120,14 @@
     </div>
     
   </body>
+    <!--Added by sheff-->
+    <script type="text/javascript">
+      
+        var view = new View();    
+        var model = new Lists(view);
+        var listCon = new ListController(model);
+        
+    </script>
 </html>
 
 

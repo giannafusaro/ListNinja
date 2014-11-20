@@ -47,6 +47,8 @@ public class Auth extends HttpServlet {
             
             session.setAttribute("userid", userid);
             
+            getServletConfig().getServletContext().getRequestDispatcher("/dashboard.jsp").forward(request,response);
+            
         } finally {
             out.close();
         }
