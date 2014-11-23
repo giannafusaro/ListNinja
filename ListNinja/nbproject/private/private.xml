@@ -2,20 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group name="AviProjects">
-            <file>file:/Users/Avi/Documents/SJSU/Fall2014/CS160/ListNinja/ListNinja/src/java/DAL/UpdateTheDB.java</file>
-            <file>file:/Users/Avi/Documents/SJSU/Fall2014/CS160/ListNinja/ListNinja/src/java/UPDATERS/AddUserToList.java</file>
-            <file>file:/Users/Avi/Documents/SJSU/Fall2014/CS160/ListNinja/ListNinja/web/index.jsp</file>
-            <file>file:/Users/Avi/Documents/SJSU/Fall2014/CS160/ListNinja/ListNinja/web/test.jsp</file>
-            <file>file:/Users/Avi/Documents/SJSU/Fall2014/CS160/ListNinja/ListNinja/src/java/CREATORS/CreateNewItem.java</file>
-            <file>file:/Users/Avi/Documents/SJSU/Fall2014/CS160/ListNinja/ListNinja/src/java/UPDATERS/UpdateListName.java</file>
-            <file>file:/Users/Avi/Documents/SJSU/Fall2014/CS160/ListNinja/ListNinja/web/WEB-INF/web.xml</file>
-            <file>file:/Users/Avi/Documents/SJSU/Fall2014/CS160/ListNinja/ListNinja/src/java/DAL/InsertIntoDB.java</file>
-            <file>file:/Users/Avi/Documents/SJSU/Fall2014/CS160/ListNinja/ListNinja/src/java/CREATORS/CreateNewUser.java</file>
-            <file>file:/Users/Avi/Documents/SJSU/Fall2014/CS160/ListNinja/ListNinja/src/java/CREATORS/CreateNewList.java</file>
-            <file>file:/Users/Avi/Documents/SJSU/Fall2014/CS160/ListNinja/ListNinja/setup/glassfish-resources.xml</file>
-            <file>file:/Users/Avi/Documents/SJSU/Fall2014/CS160/ListNinja/ListNinja/src/java/DAL/ServerAccess.java</file>
-        </group>
         <group>
             <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/web/views/_list.html</file>
             <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/test/ServerAccessTests.java</file>
@@ -50,5 +36,6 @@
             <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/web/controllers/RemoteAccessLayer.js</file>
             <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/web/index.jsp</file>
         </group>
+        <group name="AviProjects"/>
     </open-files>
 </project-private>
