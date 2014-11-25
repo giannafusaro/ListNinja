@@ -30,13 +30,25 @@ public class InsertIntoDB {
             java.util.Date utilDate = cal.getTime();
             Timestamp ts = new Timestamp(utilDate.getTime());
             
-            PreparedStatement ps = c.prepareStatement("INSERT INTO items(listid, name, created, updated) VALUES (?, ?, ?, ?)");
+            PreparedStatement ps = c.prepareStatement(""
+                    + "INSERT INTO items(listid, name, created, updated) "
+                    + "VALUES (?, ?, ?, ?) RETURNING itemid");
             ps.setInt(1, listid);
             ps.setString(2, name);
             ps.setTimestamp(3, ts);
             ps.setTimestamp(4, ts);
             
-            int result = ps.executeUpdate();
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int itemid = rs.getInt("itemid");
+            
+            String query = "INSERT INTO list_items (listid, itemid) VALUES (?,?)";
+            PreparedStatement ps1 = c.prepareStatement(query);
+            ps1.setInt(1, listid);
+            ps1.setInt(2, itemid);
+            
+            int result = ps1.executeUpdate();
+            
             c.close();
             return result == 1;
             
@@ -53,7 +65,8 @@ public class InsertIntoDB {
             java.util.Date utilDate = cal.getTime();
             Timestamp ts = new Timestamp(utilDate.getTime());
             
-            PreparedStatement ps = c.prepareStatement("INSERT INTO lists(name, created, updated) VALUES (?,?,?) RETURNING listid");
+            PreparedStatement ps = c.prepareStatement("INSERT INTO lists(name, created, updated) "
+                    + "VALUES (?,?,?) RETURNING listid");
             ps.setString(1, name);
             ps.setTimestamp(2, ts);
             ps.setTimestamp(3, ts);

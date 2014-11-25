@@ -18,11 +18,44 @@ import org.json.simple.JSONObject;
  */
 public class GetFromDB {
     
+    public JSONArray getListsForUser(int userid, Connection c) {
+        JSONArray lists = new JSONArray();
+        try {
+            
+            String query = "SELECT lists.listid, name, created, updated, creator "
+                    + "FROM lists "
+                    + "JOIN list_users ON lists.listid = list_users.listid "
+                    + "WHERE list_users.userid = ?";
+            PreparedStatement ps = c.prepareStatement(query);
+            ps.setInt(1, userid);
+            ResultSet rs = ps.executeQuery();
+            
+            c.close();
+            
+            while (rs.next()) {
+                JSONObject list = new JSONObject();
+                
+                list.put("listid", rs.getInt("listid"));
+                list.put("name", rs.getString("name"));
+                list.put("created", rs.getTimestamp("created").toString());
+                list.put("updated", rs.getTimestamp("updated").toString());
+                
+                lists.add(list);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lists;
+    }
+    
     public JSONArray getListItems(int listid, Connection c) {
         JSONArray items = new JSONArray();
         
         try {
-            PreparedStatement ps = c.prepareStatement("SELECT * FROM items WHERE listid = ?");
+            PreparedStatement ps = c.prepareStatement("SELECT items.itemid, name, price, created, updated "
+                    + "FROM items "
+                    + "JOIN list_items ON items.listid = list_items.listid "
+                    + "WHERE list_items.listid = ?");
             ps.setInt(1, listid);
             
             ResultSet rs = ps.executeQuery();
@@ -73,33 +106,6 @@ public class GetFromDB {
             Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return user;
-    }
-    
-    public JSONArray getListsForUser(int userid, Connection c) {
-        JSONArray lists = new JSONArray();
-        try {
-            
-            String query = "SELECT lists.listid, name, created, updated, creator FROM lists JOIN list_users ON lists.listid = list_users.listid WHERE list_users.userid = ?";
-            PreparedStatement ps = c.prepareStatement(query);
-            ps.setInt(1, userid);
-            ResultSet rs = ps.executeQuery();
-            
-            c.close();
-            
-            while (rs.next()) {
-                JSONObject list = new JSONObject();
-                
-                list.put("listid", rs.getInt("listid"));
-                list.put("name", rs.getString("name"));
-                list.put("created", rs.getTimestamp("created").toString());
-                list.put("updated", rs.getTimestamp("updated").toString());
-                
-                lists.add(list);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(GetFromDB.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return lists;
     }
     
     public JSONArray getUsersForList(int listid, Connection c) {

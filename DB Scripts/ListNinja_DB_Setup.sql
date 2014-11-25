@@ -30,4 +30,9 @@ listid INT REFERENCES lists(listid) NOT NULL,
 creator BOOLEAN
 );
 
+CREATE TABLE list_items(
+listid INT REFERENCES lists(listid) NOT NULL,
+itemid INT REFERENCES items(itemid) NOT NULL
+);
+
 commit;

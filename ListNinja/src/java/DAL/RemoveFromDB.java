@@ -20,7 +20,7 @@ public class RemoveFromDB {
     public boolean removeItem(int itemid, Connection c) {
         try {
             
-            PreparedStatement ps = c.prepareStatement("DELETE FROM items WHERE itemid = ?");
+            PreparedStatement ps = c.prepareStatement("DELETE FROM list_items WHERE itemid = ?");
             ps.setInt(1, itemid);
             
             int result = ps.executeUpdate();
