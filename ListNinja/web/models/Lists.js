@@ -109,15 +109,16 @@ Lists.prototype.addUserToList = function(listid, ninja) {
     this.view.repaint();
 };
 
-Lists.prototype.getUserByID = function(userid) {
+Lists.prototype.getUserByID = function(fbid) {
     for (var x in this.lists) {
         var list = this.lists[x];
         for (var y in list.users) {
-            if (list.users[y].userid === userid) {
+            if (list.users[y].fbid === fbid) {
                 return list.user[y];
             }
         }
     }
+    return null;
 };
 
 Lists.prototype.removeUserFromList = function(listid, userid) {

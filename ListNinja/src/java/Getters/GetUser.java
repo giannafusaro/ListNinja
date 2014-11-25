@@ -40,6 +40,7 @@ public class GetUser extends HttpServlet {
             ServerAccess sa = new ServerAccess();
 
             JSONObject user = sa.getUser(fbid);
+            user.remove("userid");
             out.println(user);
         } finally {
             out.close();

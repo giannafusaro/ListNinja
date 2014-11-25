@@ -8,13 +8,13 @@ var RemoteAccessLayer = function() {
     
 };
 
-RemoteAccessLayer.prototype.getListItems = function (listid, callback) {
+RemoteAccessLayer.prototype.getListItems = function (listid, lists, callback) {
     $.ajax({
         type: "GET",
         url: "/GetListItems?listid=" + listid,
         dataType: "JSON",
         success : function(data) {
-            callback(data);
+            callback(data, lists);
         }
     });
 };
@@ -42,18 +42,18 @@ RemoteAccessLayer.prototype.getListsForUser = function(lists, callback) {
             callback(data, lists);
         },
         error : function(msg) {
-            //console.log(msg);
+            console.log("failed to properly get lists for user");
         }
     });
 };
 
-RemoteAccessLayer.prototype.getUsersForList = function(listid, callback) {
+RemoteAccessLayer.prototype.getUsersForList = function(listid, lists, callback) {
     $.ajax({
         type: "GET",
         url: "/GetUsersForList?listid=" + listid,
         dataType: "JSON",
         success : function(data) {
-            callback(data);
+            callback(data, lists, listid);
         }
     });
 };

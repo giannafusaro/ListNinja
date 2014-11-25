@@ -111,9 +111,9 @@ public class ServerAccess {
         return false;
     }
     
-    public boolean addUserToList(int listid, int fbid) {
+    public boolean addUserToList(int listid, int userid) {
         try {
-            return insert.addUserToList(listid, fbid, getConnection());
+            return insert.addUserToList(listid, userid, getConnection());
         } catch (SQLException ex) {
             Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
         }
