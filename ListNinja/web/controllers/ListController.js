@@ -6,12 +6,8 @@
 
 var ListController = function(listsModel) {
     this.listsModel = listsModel;
-    populateLists();
-    setInterval(function(){
-        populateLists();
-        populateItems();
-        populateUsers();
-    }, 3000);
+    this.populateLists();
+    setInterval(this.populateLists(), 3000);
 };
 
 ListController.prototype.createNewList = function(name) {
@@ -70,26 +66,28 @@ ListController.prototype.addUserToList = function(listid, ninja) {
 
 ListController.prototype.removeUserFromList = function(listid, ninja) {
     var ral = new RemoteAccessLayer();
-    this.listsModel.removeUserFromList(listis, ninja);
+    this.listsModel.removeUserFromList(listid, ninja);
     ral.removeUserFromList(listid, ninja.fbid, function(data) {
         this.populateUsers();
     });
 };
 
-var populateLists = function() {
+
+////////POPULATION FROM REMOTE DATA LAYER///////////////////
+ListController.prototype.populateLists = function() {
     var ral = new RemoteAccessLayer();
-    ral.getListsForUser(function(data) {
+    var lists = this.listsModel;
+    ral.getListsForUser(lists, function(data, lists) {
         var i = 0;
         for (i = 0; i < data.length; i++) {
-            if (con.getListCon().lists.getListByID(data[i].listid) === null) {
-                con.getListCon().lists.addList(new List(data[i].listid, data[i].name, data[i].created, data[i].updated));
+            if (lists.getListByID(data[i].listid) === null) {
+                lists.addList(new List(data[i].listid, data[i].name, data[i].created, data[i].updated));
             }
-            
         }
     });
 };
 
-var populateItems = function() {
+ListController.prototype.populateItems = function() {
     var ral = new RemoteAccessLayer();
     var lists = this.listsModel.lists;
     for (var i = 0; i < lists.length; i++) {

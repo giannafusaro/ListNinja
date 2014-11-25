@@ -15,7 +15,7 @@ View.prototype.addModel = function(model) {
     this.ninjasModel = model.getNinjasModel();
 };
 
-function selectedList() {
+View.prototype.selectedList = function() {
     $(".display-list-title").html("");
     var list = this.listsModel.getFirstList();
     $(".display-list-title").append(list.name);
@@ -28,5 +28,5 @@ View.prototype.repaint = function() {
         $(".lists-panel").append(lists[x].listid+ ": " + lists[x].name);
         $(".lists-panel").append("<br>");
     }
-    selectedList();
+    this.selectedList();
 };

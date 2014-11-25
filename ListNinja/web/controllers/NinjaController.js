@@ -7,10 +7,10 @@
 
 var NinjaController = function(ninjas) {
     this.ninjas = ninjas;
-    populateUsers([4321,1234]);
+    this.populateUsers([4321,1234]);
 };
 
-var populateUsers = function(fbidArray) {
+NinjaController.prototype.populateUsers = function(fbidArray) {
     var ral = new RemoteAccessLayer();
     for (var i = 0; i < fbidArray.length; i++) {
         ral.getUser(fbidArray[i], this.ninjas, function(data, ninjas) {

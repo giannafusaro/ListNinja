@@ -6,7 +6,7 @@
 
 
 var Controller = function(model) {
-    //this.listCon = new ListController(model.getListsModel());
+    this.listCon = new ListController(model.getListsModel());
     this.ninjaCon = new NinjaController(model.getNinjasModel());
 };
 

@@ -33,13 +33,13 @@ RemoteAccessLayer.prototype.getUser = function(fbid, ninjas, callback) {
     });
 };
 
-RemoteAccessLayer.prototype.getListsForUser = function(callback) {
+RemoteAccessLayer.prototype.getListsForUser = function(lists, callback) {
     $.ajax({
         type: "GET",
         url: "/GetListsForUser",
         dataType: "JSON",
         success : function(data) {
-            callback(data);
+            callback(data, lists);
         },
         error : function(msg) {
             //console.log(msg);
