@@ -27,8 +27,12 @@
     <script type="text/javascript" src="models/List.js"></script>
     <script type="text/javascript" src="models/Item.js"></script>
     <script type="text/javascript" src="models/Lists.js"></script>
+    <script type="text/javascript" src="models/Ninjas.js"></script>
+    <script type="text/javascript" src="models/Model.js"></script>
     <script type="text/javascript" src="controllers/RemoteAccessLayer.js"></script>
     <script type="text/javascript" src="controllers/ListController.js"></script>
+    <script type="text/javascript" src="controllers/Controller.js"></script>
+    <script type="text/javascript" src="controllers/NinjaController.js"></script>
     <script type="text/javascript" src="views/View.js"></script>
     
     <link rel="stylesheet" href="assets/stylesheets/list.css">
@@ -123,8 +127,9 @@
     <script type="text/javascript">
       
         var view = new View();    
-        var model = new Lists(view);
-        var listCon = new ListController(model);
+        var model = new Model(view);
+        var con = new Controller(model);
+        view.addModel(model);
         
     </script>
 </html>

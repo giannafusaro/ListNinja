@@ -38,9 +38,9 @@ public class ServerAccess {
     }
 
     //--------GET COMMANDS-------//
-    public JSONObject getUser(int userid) {
+    public JSONObject getUser(String fbid) {
         try {
-            return get.getUser(userid, getConnection());
+            return get.getUser(fbid, getConnection());
         } catch (SQLException ex) {
             Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -111,9 +111,9 @@ public class ServerAccess {
         return false;
     }
     
-    public boolean addUserToList(int listid, int userid) {
+    public boolean addUserToList(int listid, int fbid) {
         try {
-            return insert.addUserToList(listid, userid, getConnection());
+            return insert.addUserToList(listid, fbid, getConnection());
         } catch (SQLException ex) {
             Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
         }

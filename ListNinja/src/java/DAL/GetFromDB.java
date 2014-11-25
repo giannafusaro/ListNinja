@@ -82,24 +82,22 @@ public class GetFromDB {
         return items;
     }
     
-    public JSONObject getUser(int userid, Connection c) {
+    public JSONObject getUser(String fbid, Connection c) {
         JSONObject user = new JSONObject();
         try {
 
-            String query = "SELECT * FROM users WHERE userid=?";
+            String query = "SELECT * FROM users WHERE fbid=?";
             PreparedStatement ps = c.prepareStatement(query);
-            ps.setInt(1, userid);
+            ps.setString(1, fbid);
             ResultSet rs = ps.executeQuery();
             
             c.close();
             
             while (rs.next()) {
-                user.put("userid", rs.getInt("userid"));
-                user.put("fbid", rs.getInt("fbid"));
-                user.put("fname", rs.getString("fname"));
-                user.put("lname", rs.getString("lname"));
-                user.put("lastlogin", rs.getTimestamp("lastlogin"));
-                user.put("created", rs.getTimestamp("created"));
+                user.put("fbid", rs.getString("fbid"));
+                user.put("email", rs.getString("email"));
+                user.put("lastlogin", rs.getTimestamp("lastlogin").toString());
+                user.put("created", rs.getTimestamp("created").toString());
             }
             
             

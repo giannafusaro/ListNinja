@@ -19,21 +19,24 @@ RemoteAccessLayer.prototype.getListItems = function (listid, callback) {
     });
 };
 
-RemoteAccessLayer.prototype.getUser = function(userid, callback) {
+RemoteAccessLayer.prototype.getUser = function(fbid, ninjas, callback) {
     $.ajax({
         type: "GET",
-        url: "/GetUser?userid=" + userid,
+        url: "/GetUser?fbid=" + fbid,
         dataType: "JSON",
         success : function(data) {
-                callback(data);
+                callback(data, ninjas);
+          },
+          error : function(data) {
+              console.log("fail");
           }
     });
 };
 
-RemoteAccessLayer.prototype.getListsForUser = function(userid, callback) {
+RemoteAccessLayer.prototype.getListsForUser = function(callback) {
     $.ajax({
         type: "GET",
-        url: "/GetListsForUser?userid=" + userid,
+        url: "/GetListsForUser",
         dataType: "JSON",
         success : function(data) {
             callback(data);
@@ -88,10 +91,10 @@ RemoteAccessLayer.prototype.createNewList = function(userid, name, callback) {
     });
 };
 
-RemoteAccessLayer.prototype.addUserToList = function(listid, userid, callback) {
+RemoteAccessLayer.prototype.addUserToList = function(listid, fbid, callback) {
     $.ajax({
         type: "GET",
-        url: "/AddUserToList?listid=" + listid + "&userid=" + userid,
+        url: "/AddUserToList?listid=" + listid + "&fbid=" + fbid,
         dataType: "JSON",
         success : function(data) {
             callback(data);

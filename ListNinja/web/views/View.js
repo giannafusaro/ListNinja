@@ -6,17 +6,24 @@
 
 
 var View = function() {
+    this.listsModel = null;
+    this.ninjasModel = null;
+};
+
+View.prototype.addModel = function(model) {
+    this.listsModel = model.getListsModel();
+    this.ninjasModel = model.getNinjasModel();
 };
 
 function selectedList() {
     $(".display-list-title").html("");
-    var list = model.getFirstList();
+    var list = this.listsModel.getFirstList();
     $(".display-list-title").append(list.name);
 };
          
 View.prototype.repaint = function() {
     $(".lists-panel").html("");
-    var lists = model.getLists();
+    var lists = this.listsModel.getLists();
     for (var x in lists) {
         $(".lists-panel").append(lists[x].listid+ ": " + lists[x].name);
         $(".lists-panel").append("<br>");

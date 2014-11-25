@@ -4,12 +4,13 @@
  * and open the template in the editor.
  */
 
-var ListController = function(model) {
-    this.lists = model;
+var ListController = function(listsModel) {
+    this.listsModel = listsModel;
     populateLists();
     setInterval(function(){
         populateLists();
         populateItems();
+        populateUsers();
     }, 3000);
 };
 
@@ -22,7 +23,7 @@ ListController.prototype.createNewList = function(name) {
 
 ListController.prototype.updateListName = function(listid, name) {
     var ral = new RemoteAccessLayer();
-    this.lists.updateListName(listid, name);
+    this.listsModel.updateListName(listid, name);
     ral.updateListName(listid, name, function(data) {
         this.populateLists();
     });
@@ -30,7 +31,7 @@ ListController.prototype.updateListName = function(listid, name) {
 
 ListController.prototype.removeList = function(listid) {
     var ral = new RemoteAccessLayer();
-    this.lists.removeList(listid);
+    this.listsModel.removeList(listid);
     ral.removeList(listid, function(data) {
         this.populateLists();
     });
@@ -45,7 +46,7 @@ ListController.prototype.createNewItem = function(listid, name) {
 
 ListController.prototype.updateItemName = function(itemid, name) {
     var ral = new RemoteAccessLayer();
-    this.lists.updateItemName(itemid, name);
+    this.listsModel.updateItemName(itemid, name);
     ral.updateItemName(itemid, name, function(data) {
         this.populateItems();
     });
@@ -53,38 +54,35 @@ ListController.prototype.updateItemName = function(itemid, name) {
 
 ListController.prototype.removeItem = function(itemid) {
     var ral = new RemoteAccessLayer();
-    this.lists.removeItem(itemid);
+    this.listsModel.removeItem(itemid);
     ral.removeItem(itemid, function() {
         this.populateItems();
     });
 };
 
-ListController.prototype.addUserToList = function(listid, userid) {
+ListController.prototype.addUserToList = function(listid, ninja) {
     var ral = new RemoteAccessLayer();
-    ral.addUserToList(listid, userid, function(data) {
-        var ninja = listCon.getUserByID(userid);
-        listCon.addUserToList(listid, ninja);
-        console.log(data);
+    this.listsModel.addUserToList(listid, ninja);
+    ral.addUserToList(listid, ninja.fbid, function(data) {
         this.populateUsers();
     });
 };
 
-ListController.prototype.removeUserFromList = function(listid, userid) {
+ListController.prototype.removeUserFromList = function(listid, ninja) {
     var ral = new RemoteAccessLayer();
-    ral.removeUserFromList(userid, listid, function(data) {
-        listCon.removeUserFromList(listid, userid);
-        console.log(data);
+    this.listsModel.removeUserFromList(listis, ninja);
+    ral.removeUserFromList(listid, ninja.fbid, function(data) {
         this.populateUsers();
     });
 };
 
 var populateLists = function() {
     var ral = new RemoteAccessLayer();
-    ral.getListsForUser(1, function(data) {
+    ral.getListsForUser(function(data) {
         var i = 0;
         for (i = 0; i < data.length; i++) {
-            if (listCon.lists.getListByID(data[i].listid) === null) {
-                listCon.lists.addList(new List(data[i].listid, data[i].name, data[i].created, data[i].updated));
+            if (con.getListCon().lists.getListByID(data[i].listid) === null) {
+                con.getListCon().lists.addList(new List(data[i].listid, data[i].name, data[i].created, data[i].updated));
             }
             
         }
@@ -93,15 +91,15 @@ var populateLists = function() {
 
 var populateItems = function() {
     var ral = new RemoteAccessLayer();
-    var lists = this.model.getLists();
+    var lists = this.listsModel.lists;
     for (var i = 0; i < lists.length; i++) {
         ral.getListItems(lists[i].listid, function(data) {
             var items = data;
             var i = 0;
             for (i = 0; i < items.length; i++) {
                 var item = new Item(items[i].itemid, items[i].listid, items[i].name, items[i].created, items[i].updated);
-                if (listCon.lists.getItemByID(item.itemid) === null) {
-                    listCon.lists.addItem(item);
+                if (this.lists.getItemByID(item.itemid) === null) {
+                    this.lists.addItem(item);
                 }
             }
         });
@@ -109,5 +107,18 @@ var populateItems = function() {
 };
 
 var populateUsers = function() {
-    
+    var ral = new RemoteAccessLayer();
+    var lists = this.model.getLists();
+    for (var i = 0; i < lists.length; i++) {
+        ral.getUsersForList(lists[i].listid, function(data) {
+            var users = data;
+            var i = 0;
+            for (i = 0; i < users.length; i++) {
+                var user = new Ninja(users[i].fbid, users[i].fName, users[i].lName, "", users[i].lastlogin, users[i].created);
+                if (this.lists.getUserByID(user.fbid) === null) {
+                    this.lists.addUserToList(listid, user);
+                }
+            }
+        });
+    }
 };

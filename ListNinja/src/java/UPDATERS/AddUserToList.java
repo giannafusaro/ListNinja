@@ -34,10 +34,12 @@ public class AddUserToList extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            String userid = request.getParameter("userid");
+            String fbid = request.getParameter("fbid");
             String listid = request.getParameter("listid");
-            int sid = Integer.parseInt(userid);
+            
+            int sid = Integer.parseInt(fbid);
             int lid = Integer.parseInt(listid);
+            
             ServerAccess sa = new ServerAccess();
             out.println(sa.addUserToList(lid, sid));
         } finally {

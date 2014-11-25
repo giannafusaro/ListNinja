@@ -36,10 +36,10 @@ public class GetUser extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            String userid = request.getParameter("userid");
+            String fbid = request.getParameter("fbid");
             ServerAccess sa = new ServerAccess();
-            int id = Integer.parseInt(userid);
-            JSONObject user = sa.getUser(id);
+
+            JSONObject user = sa.getUser(fbid);
             out.println(user);
         } finally {
             out.close();
