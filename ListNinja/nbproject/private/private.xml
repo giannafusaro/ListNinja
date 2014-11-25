@@ -4,38 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="AviProjects"/>
         <group>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/web/views/_list.html</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/test/ServerAccessTests.java</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/web/dashboard.jsp</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/web/assets/javascripts/facebook.js</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/DAL/ServerAccess.java</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/web/assets/javascripts/dashboard.js</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/DAL/RemoveFromDB.java</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/Getters/GetAllUsers.java</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/web/models/List.js</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/web/views/View.js</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/Authentication/Auth.java</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/REMOVERS/RemoveItem.java</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/CREATORS/CreateNewList.java</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/web/assets/javascripts/connect.js</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/DAL/InsertIntoDB.java</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/web/models/Item.js</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/web/assets/javascripts/list.js</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/DAL/UpdateTheDB.java</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/Getters/GetListsForUser.java</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/web/assets/javascripts/global.js</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/web/test.jsp</file>
+            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/CREATORS/CreateNewItem.java</file>
             <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/DAL/GetFromDB.java</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/web/models/Lists.js</file>
+            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/DAL/ServerAccess.java</file>
             <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/web/controllers/ListController.js</file>
+            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/DAL/InsertIntoDB.java</file>
             <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/Getters/GetListItems.java</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/Getters/GetUser.java</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/web/models/Ninja.js</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/test/INSERTTEST.java</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/web/assets/javascripts/index.js</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/CREATORS/CreateNewUser.java</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/web/controllers/RemoteAccessLayer.js</file>
-            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/web/index.jsp</file>
         </group>
     </open-files>
 </project-private>
