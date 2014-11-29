@@ -27,7 +27,7 @@ Lists.prototype.updateItemName = function(itemid, name) {
 
 Lists.prototype.getListByID = function(listid) {
     for (var x in this.lists) {
-        if (this.lists[x].listid === listid) {
+        if (this.lists[x].listid == listid) {
             return this.lists[x];
         }
     }
@@ -114,7 +114,7 @@ Lists.prototype.getUserByID = function(fbid) {
         var list = this.lists[x];
         for (var y in list.users) {
             if (list.users[y].fbid === fbid) {
-                return list.user[y];
+                return list.users[y];
             }
         }
     }

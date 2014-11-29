@@ -74,3 +74,13 @@ li.collaborator {
 ul.friends-list {
   padding-left: 0px;
 }
+
+.list-name {
+    width: 100%;
+    cursor: pointer;
+}
+
+.list-name-selected {
+    background-color: black;
+    color: white;
+}

@@ -71,9 +71,11 @@ $(document).ready(function() {
     // validate user input to make sure fields are not empty and price is valid
     if(validateFields(form.find('input'))) {
       var name = form.find('input.item-name');
-      var price = form.find('input.item-price');
+      var price = 0;//form.find('input.item-price');
 
       $('ul#list-items').append($("#list-item-template").html());
+      
+      con.listCon.createNewItem(view.selectedList, name.val());
 
       var item = $('ul#list-items li:last');
       item.find("span.item-name").text(name.val());

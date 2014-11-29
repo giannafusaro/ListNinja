@@ -52,7 +52,12 @@
           <div class="panel-heading">
             <h1 class="col-title">My Lists</h1>
           </div>
+            
+            <input id="new-list-name" type="text" value="name" />
+            <button id="add-new-list-button">Add</button>
+              
           <div class="panel-body lists-panel">
+              
             Panel content
             <!--
               [JSP] list all the lists
@@ -130,6 +135,19 @@
         var model = new Model(view);
         var con = new Controller(model);
         view.addModel(model);
+{
+    
+}
+        $(document).ready(function() {
+                $('#add-new-list-button').click(function() {
+                    var listName = $('#new-list-name').val();
+                    con.listCon.createNewList(listName);
+                });
+                $(".lists-panel").on('click', ".list-name", function() {
+                    var listid = $(this).attr('id');
+                    view.setSelected(listid);                    
+                });
+        });
         
     </script>
 </html>
