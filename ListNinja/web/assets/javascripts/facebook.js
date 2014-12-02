@@ -13,7 +13,7 @@ window.fbAsyncInit = function() {
     status     : true
   });
   
-  checkLoginState();
+  //checkLoginState();
 };
 
 function checkLoginState() {
@@ -23,7 +23,7 @@ function checkLoginState() {
         id: response.authResponse.userID,
         accessToken: response.authResponse.accessToken
       }
-      redirectTo("/dashboard.jsp");
+      redirectTo("/Auth?fbid=" + response.authResponse.userID + "&email=place@holder.com");
     } else {
       console.log("not connected");
       redirectTo("/");

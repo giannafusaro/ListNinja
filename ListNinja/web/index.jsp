@@ -20,7 +20,10 @@
     <script src="assets/javascripts/facebook.js"></script>
     
     <link rel="stylesheet" href="assets/stylesheets/index.css">
-    <script src="assets/javascripts/index.js"></script>
+    <script src="assets/javascripts/index.js">
+        
+            checkLoginState();
+    </script>
   </head>
   
   <body>
