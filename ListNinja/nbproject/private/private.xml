@@ -3,6 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="AviProjects"/>
+<<<<<<< HEAD
         <group/>
+=======
+        <group>
+            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/CREATORS/CreateNewItem.java</file>
+            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/DAL/GetFromDB.java</file>
+            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/DAL/ServerAccess.java</file>
+            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/web/controllers/ListController.js</file>
+            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/DAL/InsertIntoDB.java</file>
+            <file>file:/Users/sheff/Desktop/ListNinja/ListNinja/src/java/Getters/GetListItems.java</file>
+        </group>
+>>>>>>> e6319b9cdfc610f17cc9592878779fb003ed4df6
     </open-files>
 </project-private>

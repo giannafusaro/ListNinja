@@ -52,10 +52,11 @@ public class GetFromDB {
         JSONArray items = new JSONArray();
         
         try {
-            PreparedStatement ps = c.prepareStatement("SELECT items.itemid, name, price, created, updated "
+            String query = "SELECT items.itemid, items.listid, name, created, updated "
                     + "FROM items "
-                    + "JOIN list_items ON items.listid = list_items.listid "
-                    + "WHERE list_items.listid = ?");
+                    + "JOIN list_items ON items.itemid = list_items.itemid "
+                    + "WHERE list_items.listid = ?";
+            PreparedStatement ps = c.prepareStatement(query);
             ps.setInt(1, listid);
             
             ResultSet rs = ps.executeQuery();
