@@ -22,8 +22,21 @@ function checkLoginState() {
       window.facebook = {
         id: response.authResponse.userID,
         accessToken: response.authResponse.accessToken
-      }
-      redirectTo("/Auth?fbid=" + response.authResponse.userID + "&email=place@holder.com");
+      };
+      // TODO:
+      //   Make an AJAX call to some endpoint that finds or creates a user, adds
+      //   the fbid & ListNinja ID the session variable, then finally redirects
+      //   the user to their dashboard.
+      $.ajax({
+        url: "/authenticate",
+        method: 'POST',
+        data: { fbid: response.authResponse.userID },
+        success: function(data, textStatus, jqXHR) {
+          console.log("[ ajax success ] data: ", data);
+        }
+      });
+        
+//      redirectTo("/Auth?fbid=" + response.authResponse.userID + "&email=place@holder.com");
     } else {
       console.log("not connected");
       redirectTo("/");
