@@ -53,15 +53,34 @@
             <h1 class="col-title">My Lists</h1>
           </div>
             
-            <input id="new-list-name" type="text" value="name" />
-            <button id="add-new-list-button">Add</button>
+            <div class="panel-new-list">
+                
+            </div>
+
               
-          <div class="panel-body lists-panel">
-              
-            Panel content
-            <!--
-              [JSP] list all the lists
+          <div class="panel-body">
+            <input id="new-list-title" type="text" value="name" />
+            <button class="btn btn-info btn-lg" id="add-list">
+                <span class="glyphicon glyphicon-plus"></span>
+                New List
+            </button>
+            
+                        <!--
+              HERE!!!!!!!!!!!!
             -->
+            
+            
+            <div class="list-group" id="lists-list">
+<!--                <a href="#" class="list-group-item list active">
+                  <h4 class="list-group-item-heading list-title"> </h4>
+                  <p class="list-group-item-text list-content"> </p>
+                </a>-->
+            </div>
+              
+                        <!--
+              HERE!!!!!!!!!!!!
+            -->
+
           </div>
         </div>
       </div>
@@ -140,10 +159,12 @@
 }
         $(document).ready(function() {
                 $('#add-new-list-button').click(function() {
-                    var listName = $('#new-list-name').val();
+                    var listName = $('#new-list-title').val();
                     con.listCon.createNewList(listName);
-                });
-                $(".lists-panel").on('click', ".list-name", function() {
+                }); 
+                $("#lists-list").on('click', ".list-group-item.list", function() {
+                    console.log("clicked!");
+                    console.log("id of clicked: ", $(this).attr('id'));
                     var listid = $(this).attr('id');
                     view.setSelected(listid);                    
                 });

@@ -44,20 +44,19 @@ View.prototype.paintItems = function() {
 };
          
 View.prototype.repaint = function() {
-    $(".lists-panel").html("");
+    $("#lists-list").html("");
     var lists = this.listsModel.getLists();
+    console.log("lists:", lists)
     for (var x in lists) {
         var selectedString = "";
         if (lists[x].listid == this.selectedList) {
-            selectedString = "list-name-selected";
+            console.log("hit true for", this.selectedList);
+            selectedString = " active";
         }
-        $(".lists-panel").append("<div id='" + lists[x].listid + "' class='list-name " + selectedString + "' >" + lists[x].name);
-        $(".lists-panel").append("</div><br>");
-        /*var items = lists[x].items;
-        for (var y in items) {
-            $(".lists-panel").append("--" + items[y].itemid +": " + items[y].name);
-            $(".lists-panel").append("<br>");
-        }*/
+        $("#lists-list").append("<a href='#' id='" + lists[x].listid + "' class='list-group-item list " + selectedString + "'> <h4 class='list-group-item-heading.list-title'"  + "' >" + lists[x].name + "</h4>");
+        $("#lists-list").append("</a>");
+ 
+
     }
     if (this.selectedList == 0) {
         this.setSelected(this.getFirstList());
