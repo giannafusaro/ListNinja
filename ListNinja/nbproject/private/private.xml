@@ -3,7 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/Buser/Desktop/ListNinja/ListNinja/setup/glassfish-resources.xml</file>
+            <file>file:/Users/Buser/Desktop/ListNinja/ListNinja/test/ServerAccessTests.java</file>
+            <file>file:/Users/Buser/Desktop/ListNinja/ListNinja/src/java/DAL/UpdateTheDB.java</file>
+            <file>file:/Users/Buser/Desktop/ListNinja/ListNinja/src/java/Getters/GetAllUsers.java</file>
+            <file>file:/Users/Buser/Desktop/ListNinja/ListNinja/src/java/DAL/ServerAccess.java</file>
+            <file>file:/Users/Buser/Desktop/ListNinja/ListNinja/src/java/REMOVERS/RemoveItem.java</file>
+            <file>file:/Users/Buser/Desktop/ListNinja/ListNinja/src/java/Getters/GetListItems.java</file>
         </group>
     </open-files>
 </project-private>

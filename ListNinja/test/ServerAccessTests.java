@@ -45,7 +45,7 @@ public class ServerAccessTests {
     public void testInsertItemIntoDB() {
         ServerAccess sa = new ServerAccess();
         for (int i = 0; i< 10; i++) {
-            boolean bool = sa.createNewItem(1, "Test"+i);
+            boolean bool = sa.createNewItem(1, "Test"+i, 399);
             assertEquals(true, bool);
         }
     }

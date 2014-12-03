@@ -93,9 +93,9 @@ public class ServerAccess {
     }
     
     //--------INSERT COMMANDS------//
-    public boolean createNewItem(int listid, String name) {
+    public boolean createNewItem(int listid, String name, int price) {
         try {
-            return insert.createNewItem(listid, name, getConnection());
+            return insert.createNewItem(listid, name, price, getConnection());
         } catch (SQLException ex) {
             Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
         }

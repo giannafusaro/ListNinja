@@ -22,21 +22,24 @@ import java.util.logging.Logger;
 public class InsertIntoDB {
     
     //-----INSERTS NEW ITEM INTO DB-----//
-    public boolean createNewItem(int listid, String name, Connection c) {
+    public boolean createNewItem(int listid, String name, int price, Connection c) {
         try {
             Statement stmt = c.createStatement();
             
             Calendar cal = Calendar.getInstance();
             java.util.Date utilDate = cal.getTime();
             Timestamp ts = new Timestamp(utilDate.getTime());
+            boolean purchased = false;
             
             PreparedStatement ps = c.prepareStatement(""
-                    + "INSERT INTO items(listid, name, created, updated) "
-                    + "VALUES (?, ?, ?, ?) RETURNING itemid");
+                    + "INSERT INTO items(listid, name, price, purchased, created, updated) "
+                    + "VALUES (?, ?, ?, ?, ?, ?) RETURNING itemid");
             ps.setInt(1, listid);
             ps.setString(2, name);
-            ps.setTimestamp(3, ts);
-            ps.setTimestamp(4, ts);
+            ps.setInt(3, price);
+            ps.setBoolean(4, purchased);
+            ps.setTimestamp(5, ts);
+            ps.setTimestamp(6, ts);
             
             ResultSet rs = ps.executeQuery();
             rs.next();
