@@ -1,4 +1,24 @@
 $(document).ready(function() {
+    
+       
+    var view = new View();    
+        var model = new Model(view);
+        var con = new Controller(model);
+        view.addModel(model);
+
+    $('#add-list').click(function() {
+        console.log("clicked!");
+        // load empty list template
+        $("#current-list").find(".display-list-title").html("untitled list");
+        $("#current-list").find("#list-items").html("");
+    }); 
+    $("#lists-list").on('click', ".list-group-item.list", function() {
+        console.log("clicked!");
+        console.log("id of clicked: ", $(this).attr('id'));
+        var listid = $(this).attr('id');
+        view.setSelected(listid);                    
+    });
+
 
   ///////////////////////////////////////////////////////////
   // Click on List Display (Inline Form)
@@ -6,12 +26,17 @@ $(document).ready(function() {
 
   $(document).on('click', ".inline-form-display", function(){
     var container = $(this).closest('.inline-form');
+    
     var spans = container.find('span[name]');
+    console.log("spans: ", spans);
 
     spans.each(function(){
       var value = $(this).text();
+      
       var name = $(this).attr('name');
+      
       var input = container.find('input[name=' + name +']');
+      
 
       // remove the dollar sign
       if(name=="price") {
@@ -42,6 +67,10 @@ $(document).ready(function() {
       inputs.each(function(){
         value = $(this).val();
         name=$(this).prop('name');
+        if(name == "title") {
+            console.log(con);
+            con.getListCon().updateListName(view.selectedList, value);
+        }
 
         // Add the dollar sign
         if(name=="price" && (value.indexOf('$') == -1)) {

@@ -53,7 +53,8 @@ View.prototype.repaint = function() {
             console.log("hit true for", this.selectedList);
             selectedString = " active";
         }
-        $("#lists-list").append("<a href='#' id='" + lists[x].listid + "' class='list-group-item list " + selectedString + "'> <h4 class='list-group-item-heading.list-title'"  + "' >" + lists[x].name + "</h4>");
+        $("#lists-list").append("<a href='#' id='" + lists[x].listid + "' class='list-group-item list " + selectedString + "'> <h4 class='list-group-item-heading.list-title'"  + "' >" + lists[x].name + "<button type='button' class='close'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button></h4>");
+        $("#lists-list").append();
         $("#lists-list").append("</a>");
  
 

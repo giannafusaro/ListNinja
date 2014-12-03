@@ -150,25 +150,7 @@
     <!--Added by sheff-->
     <script type="text/javascript">
       
-        var view = new View();    
-        var model = new Model(view);
-        var con = new Controller(model);
-        view.addModel(model);
-{
-    
-}
-        $(document).ready(function() {
-                $('#add-new-list-button').click(function() {
-                    var listName = $('#new-list-title').val();
-                    con.listCon.createNewList(listName);
-                }); 
-                $("#lists-list").on('click', ".list-group-item.list", function() {
-                    console.log("clicked!");
-                    console.log("id of clicked: ", $(this).attr('id'));
-                    var listid = $(this).attr('id');
-                    view.setSelected(listid);                    
-                });
-        });
+        
         
     </script>
 </html>

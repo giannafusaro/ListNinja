@@ -9,7 +9,8 @@ div.templates {
   display: none;
 }
 
-.active {
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+    color: black;
     background-color: #F7F2F4;
     border-color: #9B9D9B;
 }
