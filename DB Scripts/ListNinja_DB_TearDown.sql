@@ -9,6 +9,8 @@
 DROP TABLE User;\
 DROP TABLE List;\
 DROP TABLE Item;\
-DROP TABLE Lists_Users;\
+DROP TABLE List_Users;\
+DROP TABLE List_Items;\
+DROP TABLE Feed_Back;\
 \
 commit;}

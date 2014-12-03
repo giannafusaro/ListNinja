@@ -26,14 +26,22 @@ updated		TIMESTAMP
 );
 
 CREATE TABLE list_users(
-userid INT REFERENCES users(userid) NOT NULL,
-listid INT REFERENCES lists(listid) NOT NULL,
+userid  INT REFERENCES users(userid) NOT NULL,
+listid  INT REFERENCES lists(listid) NOT NULL,
 creator BOOLEAN
 );
 
 CREATE TABLE list_items(
 listid INT REFERENCES lists(listid) NOT NULL,
 itemid INT REFERENCES items(itemid) NOT NULL
+);
+
+CREATE TABLE feed_back(
+userid      INT REFERENCES users(userid) NOT NULL,
+type		VARCHAR(25),
+subject		VARCHAR(255),
+body		VARCHAR(500),
+created		TIMESTAMP
 );
 
 commit;
