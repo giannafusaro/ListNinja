@@ -19,8 +19,9 @@ CREATE TABLE items(
 itemid		SERIAL PRIMARY KEY NOT NULL,
 listid		INT REFERENCES lists(listid),
 name		VARCHAR(255),
-created		TIMESTAMP,
+purchased   BOOLEAN,
 price		INT,
+created		TIMESTAMP,
 updated		TIMESTAMP
 );
 
