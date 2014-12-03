@@ -19,24 +19,27 @@ window.fbAsyncInit = function() {
 function checkLoginState() {
   FB.getLoginStatus(function(response) {
     if (response.status === 'connected') {
-      window.facebook = {
-        id: response.authResponse.userID,
-        accessToken: response.authResponse.accessToken
-      };
-      // TODO:
-      //   Make an AJAX call to some endpoint that finds or creates a user, adds
-      //   the fbid & ListNinja ID the session variable, then finally redirects
-      //   the user to their dashboard.
+      // Add Facebook info to cookie
+      $.cookie('fbid', response.authResponse.userID);
+      $.cookie('accessToken', response.authResponse.accessToken);
+
+      // Find or create user then and redirect
       $.ajax({
         url: "/authenticate",
         method: 'POST',
         data: { fbid: response.authResponse.userID },
         success: function(data, textStatus, jqXHR) {
           console.log("[ ajax success ] data: ", data);
+          
+           if(parseInt(data['userid']) > 0) {
+               $.cookie('listNinjaId', data['userid']);
+               redirectTo('/dashboard.jsp');
+           } else {
+               console.log("Well, that didn't work.");
+               console.log("data: ", data);
+           }
         }
       });
-        
-//      redirectTo("/Auth?fbid=" + response.authResponse.userID + "&email=place@holder.com");
     } else {
       console.log("not connected");
       redirectTo("/");
