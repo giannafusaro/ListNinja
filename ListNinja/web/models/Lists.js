@@ -8,6 +8,11 @@ var Lists = function(view) {
     this.lists = [];
 };
 
+Lists.prototype.updateList = function(listid, list) {
+    console.log("updateList: ", list);
+    var list = this.getListByID(listid);
+};
+
 Lists.prototype.addList = function(list) {
     this.lists.push(list);
     this.view.repaint();

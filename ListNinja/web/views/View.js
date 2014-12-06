@@ -75,7 +75,7 @@ View.prototype.paintList = function(list) {
    
     // Find Templates
     listTemplate = $('.templates [data-template="list"]');
-    listItemTemplate = listTemplate.find('[data-template="list-item"]');
+    listItemTemplate = $('.templates [data-template="list-item"]');
 
     // Build current list from template
     listHTML = listTemplate.clone();

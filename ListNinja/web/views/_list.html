@@ -20,6 +20,7 @@
     <ul id="list-items" class="list-group"></ul>
     <ul id="add-items" class="list-group">
       <li class="list-group-item add-item inline-form">
+        <a id="save-list" class="btn btn-primary pull-right" href="#"><span class="glyphicon glyphicon-edit"></span> Save List</a>
         <form id="add-item" class="form-inline" role="form">
           <div class="form-group">
             <input id="add-item-name" type="text" name="item[name]" class="form-control item-name" />
@@ -44,30 +45,3 @@
      <span></span><a href="#" data-dismiss="alert" class="close"> x</a>
   </div>
 </div>
-
-<li data-template="list-item" id="list-item-template" class="list-group-item inline-form">
-  <div class="inline-form-display display-item">
-    <!-- <span name="price" class="badge item-price"></span> -->
-    <i class="glyphicon glyphicon-pushpin"></i>
-    <span name="name" class="item-name"></span>
-  </div>
-  <div class="inline-form-edit edit-item">
-    <form id="edit-item" class="form-inline inline-switch" role="form">
-      <div class="form-group">
-        <input type="text" name="name" class="form-control item-name" />
-      </div>
-      <!--
-      <div class="form-group">
-        <div class="input-group">
-          <span class="input-group-addon">$</span>
-          <input type="text" name="price" class="form-control item-price" />
-        </div>
-      </div>
-      -->
-      <button class="btn btn-primary submit-edit-item" type="submit">
-        <span class="glyphicon glyphicon-edit"></span>
-        Edit Item
-      </button>
-    </form>
-  </div>
-</li>

@@ -1,16 +1,18 @@
 $(document).ready(function() {
     
-       
+    // Inititalize Andrew's Framework
     var view = new View();    
-        var model = new Model(view);
-        var con = new Controller(model);
-        view.addModel(model);
+    var model = new Model(view);
+    var con = new Controller(model);
+    view.addModel(model);
 
+    // "Add List" button
     $('#add-list').click(function() {
         console.log("clicked!");
         view.setSelected('new');
     }); 
     
+    // List of Lists
     $("#lists-list").on('click', ".list-group-item.list", function() {
         console.log("clicked!", $(this).attr('id'));
         var listid = $(this).attr('id');
@@ -63,16 +65,17 @@ $(document).ready(function() {
       // Switch out input values with span text
       inputs.each(function(){
         value = $(this).val();
-        name=$(this).prop('name');
-        if(name == "title") {
-            console.log(con);
-            con.getListCon().updateListName(view.selectedList, value);
-        }
+        name = $(this).prop('name');
+        
+        //if(name == "title") {
+        //    console.log(con);
+        //    con.getListCon().updateListName(view.selectedList, value);
+        //}
 
         // Add the dollar sign
-        if(name=="price" && (value.indexOf('$') == -1)) {
-          value = '$'+value;
-        }
+        //if(name=="price" && (value.indexOf('$') == -1)) {
+        //    value = '$'+value;
+        //}
 
         container.find('span[name=' + name +']').text(value);
       });
@@ -92,29 +95,40 @@ $(document).ready(function() {
 
   $(document).on('submit',"form#add-item",function(event){
     event.preventDefault();
-    var form = $(this)
+    var form = $(this);
 
     // validate user input to make sure fields are not empty and price is valid
     if(validateFields(form.find('input'))) {
       var name = form.find('input.item-name');
       //var price = form.find('input.item-price');
 
-      $('ul#list-items').append($("#list-item-template").html());
-      
-      con.listCon.createNewItem(view.selectedList, name.val());
-
-      var item = $('ul#list-items li:last');
-      item.find("span.item-name").text(name.val());
-      //item.find("span.price").text("$" + price.val());
-
-      name.val('');
-      //price.val('');
+      var html = $('[data-template="list-item"]').clone();
+      html.removeAttr('data-template');
+      html.attr('id', 'new');
+      html.find('input.item-name').val(name.val());
+      html.find('span.item-name').text(name.val());
+      $('#current-list ul#list-items').append(html);      
 
       //place focus on right most form field
       $("#add-item-name").focus();
     } else {
       flashMessage(form, 'One or more required fields were left blank');
     }
+  });
+  
+  ///////////////////////////////////////////////////////////
+  // Save List
+  ///////////////////////////////////////////////////////////
+
+  $(document).on('click','#save-list', function(event) {
+     event.preventDefault();
+     // TODO: Save the title and all items for the list.
+     
+     
+//     var inputs = $('#current-list input[type=text]').map(function(){
+//         return $(this).val();
+//     });    
+//     console.log("inputs: ", inputs);
   });
 
   ///////////////////////////////////////////////////////////
