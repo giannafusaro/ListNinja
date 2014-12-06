@@ -59,7 +59,6 @@
 
               
           <div class="panel-body">
-            <input id="new-list-title" type="text" value="name" />
             <button class="btn btn-info btn-lg" id="add-list">
                 <span class="glyphicon glyphicon-plus"></span>
                 New List
@@ -86,9 +85,7 @@
       </div>
       
       <!-- Current List -->
-      <div id="current-list" data-list="<!-- [JSP] insert last modifed list id here -->" class="col-md-6">
-        <%@include file="views/_list.html" %>
-      </div>
+      <div id="current-list" data-list="<!-- [JSP] insert last modifed list id here -->" class="col-md-6"></div>
 
       <!-- Collaborators -->
       <div class ="col-md-3">
@@ -137,6 +134,16 @@
     </div>
   
     <div class="templates">
+      <a href="#" data-template="list-of-lists-item" id="" class="list-group-item list"> 
+        <h4 class="list-group-item-heading list-title">
+          <span class="list-title"></span>
+          <button type='button' class='close'>
+            <span aria-hidden='true'>&times;</span>
+            <span class='sr-only'>Close</span>
+          </button>
+        </h4>
+      </a>
+        
       <li data-template="collaborator" class="collaborator">
         <input class="collaborator-id" type="hidden" />
         <input class="collaborator-checkbox" type="checkbox" />
@@ -144,6 +151,10 @@
         <span class="collaborator-name"></span>
         <a class="glyphicon glyphicon-remove collaborator-delete"></a>    
       </li>
+      
+      <div data-template="list" id="">
+        <%@include file="views/_list.html" %>
+      </div>
     </div>
     
   </body>

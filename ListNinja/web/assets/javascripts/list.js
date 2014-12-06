@@ -8,17 +8,14 @@ $(document).ready(function() {
 
     $('#add-list').click(function() {
         console.log("clicked!");
-        // load empty list template
-        $("#current-list").find(".display-list-title").html("untitled list");
-        $("#current-list").find("#list-items").html("");
+        view.setSelected('new');
     }); 
+    
     $("#lists-list").on('click', ".list-group-item.list", function() {
-        console.log("clicked!");
-        console.log("id of clicked: ", $(this).attr('id'));
+        console.log("clicked!", $(this).attr('id'));
         var listid = $(this).attr('id');
         view.setSelected(listid);                    
     });
-
 
   ///////////////////////////////////////////////////////////
   // Click on List Display (Inline Form)

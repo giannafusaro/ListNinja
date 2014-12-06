@@ -42,26 +42,75 @@ View.prototype.paintItems = function() {
         $('#list-items').append('<br>');
     }
 };
-         
-View.prototype.repaint = function() {
-    $("#lists-list").html("");
-    var lists = this.listsModel.getLists();
-    console.log("lists:", lists)
-    for (var x in lists) {
-        var selectedString = "";
-        if (lists[x].listid == this.selectedList) {
-            console.log("hit true for", this.selectedList);
-            selectedString = " active";
-        }
-        $("#lists-list").append("<a href='#' id='" + lists[x].listid + "' class='list-group-item list " + selectedString + "'> <h4 class='list-group-item-heading.list-title'"  + "' >" + lists[x].name + "<button type='button' class='close'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button></h4>");
-        $("#lists-list").append();
-        $("#lists-list").append("</a>");
- 
 
+// Build the list of lists from template
+View.prototype.paintListOfLists = function(lists) {
+    var template = $('.templates [data-template="list-of-lists-item"]');
+    
+    $("#lists-list").html("");
+    for (var x in lists) {
+        var html = template.clone();
+        html.removeAttr('data-template');
+        html.attr('id', lists[x].listid);
+        html.find('.list-title').text(lists[x].name);
+        if (lists[x].listid == this.selectedList) {
+            html.addClass('active');
+        }   
+        $("#lists-list").append(html);
     }
+    
+    // Default to the first list if a list isn't selected
     if (this.selectedList == 0) {
         this.setSelected(this.getFirstList());
     }
-    this.setItemsTitle();
-    this.paintItems();
+};
+    
+View.prototype.paintList = function(list) {
+    console.log('list: ', list);
+    
+    // New List
+    if(list==null) {
+        list = { name: 'Untitled List', items: [] }
+    }
+   
+    // Find Templates
+    listTemplate = $('.templates [data-template="list"]');
+    listItemTemplate = listTemplate.find('[data-template="list-item"]');
+
+    // Build current list from template
+    listHTML = listTemplate.clone();
+    listHTML.removeAttr('data-template');
+    listHTML.find('input.list-title').val(list.name);
+    listHTML.find('span.display-list-title').text(list.name);
+  
+    // Add each list item to the list
+    $.each(list.items, function(){
+        listItemHTML = listItemTemplate.clone();
+        listItemHTML.removeAttr('data-template');
+        listItemHTML.attr('id', this.itemid);
+        listItemHTML.find('input.item-name').val(this.name);
+        listItemHTML.find('span.item-name').text(this.name);
+        listHTML.find('#list-items').append(listItemHTML);
+    });
+    
+    // Insert list into the DOM
+    $('#current-list').html(listHTML);
+    $('#current-list').data('list', list.listid);
+};
+         
+View.prototype.repaint = function() {
+    console.log("Repaint called. Probably needlessly.");
+    
+    // Get list of lists and the current list
+    var lists = this.listsModel.getLists();
+    var currentList = null;
+    for (var x in lists) {
+        if (lists[x].listid == this.selectedList) {
+            currentList = lists[x];
+        }   
+    }
+
+    // Paint
+    this.paintListOfLists(lists);
+    this.paintList(currentList);
 };
