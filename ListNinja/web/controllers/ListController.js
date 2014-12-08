@@ -16,9 +16,13 @@ var ListController = function(listsModel) {
 };
 
 ListController.prototype.createNewList = function(name) {
-    var ral = new RemoteAccessLayer();
-    ral.createNewList(1, name, function(data) {
-        console.log(data);
+    $.ajax({
+        url: "/CreateNewList",
+        type: "POST",
+        data: { userid: $.cookie('listNinjaId'), name: name },
+        success: function(data) {
+            console.log("new list! data: ", data);
+        }
     });
 };
 

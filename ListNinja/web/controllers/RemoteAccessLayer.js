@@ -80,12 +80,23 @@ RemoteAccessLayer.prototype.createNewItem = function(listid, name, callback) {
     });
 };
 
+//RemoteAccessLayer.prototype.createNewList = function(userid, name, callback) {
+//    $.ajax({
+//        type: "GET",
+//        url: "/CreateNewList?userid=" + userid + "&name=" + name,
+//        dataType: "JSON",
+//        success : function(data) {
+//            callback(data);
+//        }
+//    });
+//};
+
 RemoteAccessLayer.prototype.createNewList = function(userid, name, callback) {
     $.ajax({
-        type: "GET",
-        url: "/CreateNewList?userid=" + userid + "&name=" + name,
-        dataType: "JSON",
-        success : function(data) {
+        url: "/CreateNewList",
+        type: "POST",
+        data: { userid: userid, name: name },
+        success: function(data) {
             callback(data);
         }
     });

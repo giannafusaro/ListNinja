@@ -103,13 +103,13 @@ public class ServerAccess {
         return false;
     }
     
-    public boolean createNewList(int userid, String name) {
+    public int createNewList(int userid, String name) {
         try {
             return insert.createNewList(userid, name, getConnection());
         } catch (SQLException ex) {
             Logger.getLogger(ServerAccess.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+        return 0;
     }
     
     public boolean addUserToList(int listid, int userid) {

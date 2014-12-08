@@ -36,14 +36,12 @@ public class CreateNewList extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            
             HttpSession session = request.getSession(true);
             int userid = (Integer) session.getAttribute("userid");
-
-            String itemname = request.getParameter("name");
-            //Need Price
+            String name = request.getParameter("name");
+      
             ServerAccess sa = new ServerAccess();
-            out.println(sa.createNewList(userid, itemname));
+            out.println(sa.createNewList(userid, name));
         } finally {
             out.close();
         }
