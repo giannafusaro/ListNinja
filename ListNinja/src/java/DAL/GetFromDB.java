@@ -22,10 +22,10 @@ public class GetFromDB {
         JSONArray lists = new JSONArray();
         try {
             
-            String query = "SELECT lists.listid, name, created, updated, creator "
+            String query = "SELECT lists.listid, lists.name, lists.created, lists.updated, list_users.creator "
                     + "FROM lists "
                     + "JOIN list_users ON lists.listid = list_users.listid "
-                    + "WHERE list_users.userid = ?";
+                    + "WHERE list_users.userid = ? ORDER BY lists.updated DESC";
             PreparedStatement ps = c.prepareStatement(query);
             ps.setInt(1, userid);
             ResultSet rs = ps.executeQuery();
