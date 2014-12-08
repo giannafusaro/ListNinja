@@ -5,11 +5,29 @@ $(document).ready(function() {
     var model = new Model(view);
     var con = new Controller(model);
     view.addModel(model);
+    
+    console.log("CON: ", con);  
 
     // "Add List" button
     $('#add-list').click(function() {
-        console.log("clicked!");
-        view.setSelected('new');
+      console.log("clicked!");
+    
+      // Create a new list and then sit it as the selected list
+      //con.getListCon().createNewList('Untitled List');
+      
+      $.ajax({
+        url: "/CreateNewList",
+        type: "POST",
+        data: { userid: $.cookie('listNinjaId'), name: 'Untitled List' },
+        beforeSend: function() {
+          console.log("createList beforeSend");
+          $('#current-list').html('Loading...');
+        },
+        success: function(newListId) {
+          console.log("new list!: ", newListId);
+           view.setSelected(newListId);
+        }
+      });
     }); 
     
     // List of Lists
@@ -17,6 +35,16 @@ $(document).ready(function() {
         console.log("clicked!", $(this).attr('id'));
         var listid = $(this).attr('id');
         view.setSelected(listid);                    
+    });
+
+    // Destroy List
+    $(document).on('click', 'button.close', function() {
+       console.log("destroy button clicked!");
+       if(confirm('Are you sure?')) {
+           console.log("kill!");
+       } else {
+           console.log("do not kill!");
+       }
     });
 
   ///////////////////////////////////////////////////////////

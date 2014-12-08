@@ -135,7 +135,7 @@
   
     <div class="templates">
       <a href="#" data-template="list-of-lists-item" id="" class="list-group-item list"> 
-        <h4 class="list-group-item-heading list-title">
+        <h4 class="list-group-item-heading">
           <span class="list-title"></span>
           <button type='button' class='close'>
             <span aria-hidden='true'>&times;</span>

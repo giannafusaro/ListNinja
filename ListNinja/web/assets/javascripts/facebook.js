@@ -15,11 +15,8 @@ window.fbAsyncInit = function() {
 };
 
 function checkLoginState() {
-  console.log("check login state. yeah.");
   FB.getLoginStatus(function(response) {
-    console.log("response: ", response);
     if (response.status === 'connected') {
-       
       var fbid = response.authResponse.userID;
       var accessToken = response.authResponse.accessToken;
       

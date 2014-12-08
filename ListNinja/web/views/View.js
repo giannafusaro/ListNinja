@@ -66,13 +66,12 @@ View.prototype.paintListOfLists = function(lists) {
 };
     
 View.prototype.paintList = function(list) {
-    console.log('list: ', list);
-    
-    // New List
+//    console.log('list: ', list);
     if(list==null) {
-        list = { name: 'Untitled List', items: [] }
+        $('#current-list').html('');
+        return;
     }
-   
+
     // Find Templates
     listTemplate = $('.templates [data-template="list"]');
     listItemTemplate = $('.templates [data-template="list-item"]');
