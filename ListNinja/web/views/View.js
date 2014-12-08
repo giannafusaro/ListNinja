@@ -99,7 +99,7 @@ View.prototype.paintList = function(list) {
 };
          
 View.prototype.repaint = function() {
-    console.log("Repaint called. Probably needlessly.");
+    console.log("Repaint called.");
     
     // Get list of lists and the current list
     var lists = this.listsModel.getLists();
