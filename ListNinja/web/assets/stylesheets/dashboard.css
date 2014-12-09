@@ -9,6 +9,12 @@ div.templates {
   display: none;
 }
 
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+    color: black;
+    background-color: #F7F2F4;
+    border-color: #9B9D9B;
+}
+
 .row.no-margins {
   margin-left: 0px;
   margin-right: 0px;
@@ -58,7 +64,7 @@ h1.col-title {
   text-align: center;
 }
 
-#add-collaborator {
+#add-collaborator, #add-list {
   margin-bottom: 15px;
   background-color: #00556E;
   color: #fff;
@@ -75,12 +81,14 @@ ul.friends-list {
   padding-left: 0px;
 }
 
-.list-name {
+.list {
+    font-family: lato;
     width: 100%;
     cursor: pointer;
 }
 
-.list-name-selected {
-    background-color: black;
-    color: white;
+#lists-list {
+    padding:0px;
+    list-style-type: none;
+    margin: 0px;
 }

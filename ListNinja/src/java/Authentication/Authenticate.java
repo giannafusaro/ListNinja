@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CREATORS;
+package Authentication;
 
 import DAL.ServerAccess;
 import java.io.IOException;
@@ -17,10 +17,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Buser
+ * @author gianna
  */
-@WebServlet(name = "CreateNewList", urlPatterns = {"/CreateNewList"})
-public class CreateNewList extends HttpServlet {
+@WebServlet(name = "authenticate", urlPatterns = {"/authenticate"})
+public class Authenticate extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,15 +33,24 @@ public class CreateNewList extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("application/json");
         PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
+
         try {
-            HttpSession session = request.getSession(true);
-            int userid = (Integer) session.getAttribute("userid");
-            String name = request.getParameter("name");
-      
+            String fbid = request.getParameter("fbid");    
             ServerAccess sa = new ServerAccess();
-            out.println(sa.createNewList(userid, name));
+            int userid = sa.find_or_create_user_by_fbid(fbid);
+            
+            // Set Session Variables
+            session.setAttribute("userid", userid);
+            session.setAttribute("fbid", fbid);
+
+            // Return some JSON
+            out.println("{");
+            out.println("\"userid\": \"" + userid + "\",");
+            out.println("\"fbid\": \"" + fbid + "\"");
+            out.println("}");
         } finally {
             out.close();
         }

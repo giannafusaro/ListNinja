@@ -18,12 +18,7 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script src="assets/javascripts/global.js"></script>
     <script src="assets/javascripts/facebook.js"></script>
-    
-    <link rel="stylesheet" href="assets/stylesheets/index.css">
-    <script src="assets/javascripts/index.js">
-        
-            checkLoginState();
-    </script>
+    <link rel="stylesheet" href="assets/stylesheets/index.css" />
   </head>
   
   <body>

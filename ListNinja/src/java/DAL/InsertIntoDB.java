@@ -58,7 +58,7 @@ public class InsertIntoDB {
         return false;
     }
     
-    public boolean createNewList(int userid, String name, Connection c) {
+    public int createNewList(int userid, String name, Connection c) {
         
         try {
             Calendar cal = Calendar.getInstance();
@@ -85,12 +85,12 @@ public class InsertIntoDB {
             int result = ps1.executeUpdate();
             
             c.close();
-            
-            return result == 1;
+          
+            return listid;
         } catch (SQLException ex) {
             Logger.getLogger(InsertIntoDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+        return 0;
     }
     
     public boolean addUserToList(int listid, int userid, Connection c) {
