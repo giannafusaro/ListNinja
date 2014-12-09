@@ -34,12 +34,14 @@ View.prototype.setSelected = function(listid) {
 
 View.prototype.paintItems = function() {
     var list = this.listsModel.getListByID(this.selectedList);
-    var items = list.items;
-    $('#list-items').html("");
-    for (var x in items) {
-        var item = items[x];
-        $('#list-items').append(item.name);
-        $('#list-items').append('<br>');
+    if(list != null) {
+        var items = list.items;
+        $('#list-items').html("");
+        for (var x in items) {
+            var item = items[x];
+            $('#list-items').append(item.name);
+            $('#list-items').append('<br>');
+        }
     }
 };
 

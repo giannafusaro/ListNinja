@@ -38,14 +38,26 @@ $(document).ready(function() {
     });
 
     // Destroy List
-    $(document).on('click', 'button.close', function() {
-       console.log("destroy button clicked!");
-       if(confirm('Are you sure?')) {
-           console.log("kill!");
-       } else {
-           console.log("do not kill!");
-       }
-    });
+    $(document).on('click', 'button.close', function() {
+       console.log("destroy button clicked!");
+       var listLink = $(this).closest('a.list');
+       var listid = listLink.attr('id'); 
+       if(confirm('Are you sure?')) {
+          $.ajax({
+            url: "/RemoveList",
+            type: "POST",
+            data: { listid: listid, name: 'Untitled List' },
+            success: function(data) {
+              console.log("destroyed!: ", data);
+              $('a#'+listid).remove();
+              con.getListCon().removeList(listid);
+              view.paintItems();
+            }
+          });
+       } else {
+           console.log("do not kill!");
+       }
+    });
 
   ///////////////////////////////////////////////////////////
   // Click on List Display (Inline Form)
