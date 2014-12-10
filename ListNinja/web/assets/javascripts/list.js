@@ -93,12 +93,20 @@ $(document).ready(function() {
       inputs.each(function(){
         value = $(this).val();
         name = $(this).prop('name');
+        list_item_id = $(this).parents('li').attr('id');
+        
+        list_id = $(this).attr('id');
         
         //edit title
         if(name == "title") {
             console.log("listid: ", view.selectedList);
             console.log("value: ", value);
             con.listCon.updateListName(view.selectedList, value);
+        }
+        else if(name == "name") {
+            console.log("listid: ", view.selectedList);
+            console.log("value: ", value);
+            console.log("list_item_id: ", list_item_id);
         }
         
         console.log("value: ", value);

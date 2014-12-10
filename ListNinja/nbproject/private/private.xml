@@ -3,7 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/Buser/Desktop/ListNinja/ListNinja/src/java/DAL/ServerAccess.java</file>
+            <file>file:/Users/giannafusaro/Dev/ListNinja/ListNinja/src/java/CREATORS/CreateNewList.java</file>
+            <file>file:/Users/giannafusaro/Dev/ListNinja/ListNinja/src/java/REMOVERS/RemoveList.java</file>
+            <file>file:/Users/giannafusaro/Dev/ListNinja/ListNinja/web/dashboard.jsp</file>
+            <file>file:/Users/giannafusaro/Dev/ListNinja/ListNinja/web/controllers/ListController.js</file>
+            <file>file:/Users/giannafusaro/Dev/ListNinja/ListNinja/web/assets/javascripts/list.js</file>
+            <file>file:/Users/giannafusaro/Dev/ListNinja/ListNinja/web/views/View.js</file>
+            <file>file:/Users/giannafusaro/Dev/ListNinja/ListNinja/web/controllers/Controller.js</file>
+            <file>file:/Users/giannafusaro/Dev/ListNinja/ListNinja/web/models/Lists.js</file>
+            <file>file:/Users/giannafusaro/Dev/ListNinja/ListNinja/src/java/CREATORS/CreateNewItem.java</file>
+            <file>file:/Users/giannafusaro/Dev/ListNinja/ListNinja/web/models/List.js</file>
+            <file>file:/Users/giannafusaro/Dev/ListNinja/ListNinja/nbproject/build-impl.xml</file>
         </group>
     </open-files>
 </project-private>
