@@ -29,8 +29,9 @@ ListController.prototype.createNewList = function(name) {
 ListController.prototype.updateListName = function(listid, name) {
     var ral = new RemoteAccessLayer();
     this.listsModel.updateListName(listid, name);
+    var me = this;
     ral.updateListName(listid, name, function(data) {
-        this.populateLists();
+        me.populateLists();
     });
 };
 
