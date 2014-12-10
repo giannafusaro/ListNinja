@@ -29,15 +29,15 @@ public class InsertIntoDB {
             Calendar cal = Calendar.getInstance();
             java.util.Date utilDate = cal.getTime();
             Timestamp ts = new Timestamp(utilDate.getTime());
-            boolean purchased = false;
+            boolean completed = false;
             
             PreparedStatement ps = c.prepareStatement(""
-                    + "INSERT INTO items(listid, name, price, purchased, created, updated) "
+                    + "INSERT INTO items(listid, name, price, completed, created, updated) "
                     + "VALUES (?, ?, ?, ?, ?, ?) RETURNING itemid");
             ps.setInt(1, listid);
             ps.setString(2, name);
             ps.setInt(3, price);
-            ps.setBoolean(4, purchased);
+            ps.setBoolean(4, completed);
             ps.setTimestamp(5, ts);
             ps.setTimestamp(6, ts);
             

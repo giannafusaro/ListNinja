@@ -52,7 +52,7 @@ public class GetFromDB {
         JSONArray items = new JSONArray();
         
         try {
-            String query = "SELECT items.itemid, items.listid, name, price, purchased, created, updated "
+            String query = "SELECT items.itemid, items.listid, name, price, completed, created, updated "
                     + "FROM items "
                     + "JOIN list_items ON items.itemid = list_items.itemid "
                     + "WHERE list_items.listid = ?";
@@ -70,7 +70,7 @@ public class GetFromDB {
                 item.put("listid", rs.getInt("listid"));
                 item.put("name", rs.getString("name"));
                 item.put("price", rs.getInt("price"));
-                item.put("purchased", rs.getBoolean("purchased"));
+                item.put("completed", rs.getBoolean("completed"));
                 item.put("created", rs.getTimestamp("created").toString());
                 item.put("updated", rs.getTimestamp("updated").toString());
                 
