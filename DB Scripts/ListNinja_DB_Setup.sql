@@ -44,4 +44,9 @@ body		VARCHAR(500),
 created		TIMESTAMP
 );
 
+CREATE TABLE price_splitter(
+percent INT
+itemid INT REFERENCES list_items(itemid)
+);
+
 commit;
