@@ -186,6 +186,7 @@ public class GetFromDB {
             
             ResultSet rs = ps.executeQuery();
             
+            
             if (rs.next()) {
                 userid = rs.getInt("userid");
             } else {
@@ -202,6 +203,7 @@ public class GetFromDB {
                 rs.next();
                 userid = rs.getInt("userid");
             }
+            c.close();
             System.out.println(userid);
             return userid;
             

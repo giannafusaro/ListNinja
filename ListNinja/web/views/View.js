@@ -115,3 +115,14 @@ View.prototype.repaint = function() {
     this.paintListOfLists(lists);
     this.paintList(currentList);
 };
+
+
+
+// "Add List" button
+    $('#add-list').click(function() {
+      console.log("clicked!");
+    
+      // Create a new list and then sit it as the selected list
+      //con.getListCon().createNewList('Untitled List');
+      
+    }); 

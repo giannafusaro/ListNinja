@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.simple.JSONObject;
 
 /**
  *
@@ -40,17 +41,17 @@ public class Authenticate extends HttpServlet {
         try {
             String fbid = request.getParameter("fbid");    
             ServerAccess sa = new ServerAccess();
-            int userid = sa.find_or_create_user_by_fbid(fbid);
+            int userid = sa.getUserID(fbid, "place@holder.com");
             
             // Set Session Variables
             session.setAttribute("userid", userid);
             session.setAttribute("fbid", fbid);
+            
+            JSONObject user = new JSONObject();
+            user.put("userid", userid);
 
             // Return some JSON
-            out.println("{");
-            out.println("\"userid\": \"" + userid + "\",");
-            out.println("\"fbid\": \"" + fbid + "\"");
-            out.println("}");
+            out.println(user);
         } finally {
             out.close();
         }

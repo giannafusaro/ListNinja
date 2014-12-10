@@ -41,6 +41,9 @@ function checkLoginState() {
                console.log("data: ", data);
                redirectTo("/");
              }
+          },
+          error: function(data) {
+              console.log("This ajax call is not working");
           }
         });
       } 

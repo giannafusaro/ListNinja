@@ -188,7 +188,10 @@
     <!--Added by sheff-->
     <script type="text/javascript">
       
-        
+        var view = new View();    
+        var model = new Model(view);
+        var con = new Controller(model);
+        view.addModel(model);
         
     </script>
 </html>

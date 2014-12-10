@@ -8,27 +8,7 @@ $(document).ready(function() {
     
     console.log("CON: ", con);  
 
-    // "Add List" button
-    $('#add-list').click(function() {
-      console.log("clicked!");
     
-      // Create a new list and then sit it as the selected list
-      //con.getListCon().createNewList('Untitled List');
-      
-      $.ajax({
-        url: "/CreateNewList",
-        type: "POST",
-        data: { userid: $.cookie('listNinjaId'), name: 'Untitled List' },
-        beforeSend: function() {
-          console.log("createList beforeSend");
-          $('#current-list').html('Loading...');
-        },
-        success: function(newListId) {
-          console.log("new list!: ", newListId);
-           view.setSelected(newListId);
-        }
-      });
-    }); 
     
     // List of Lists
     $("#lists-list").on('click', ".list-group-item.list", function() {
