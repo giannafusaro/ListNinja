@@ -94,6 +94,16 @@ $(document).ready(function() {
         value = $(this).val();
         name = $(this).prop('name');
         
+        //edit title
+        if(name == "title") {
+            console.log("listid: ", view.selectedList);
+            console.log("value: ", value);
+            con.listCon.updateListName(view.selectedList, value);
+        }
+        
+        console.log("value: ", value);
+        console.log("name: ", name);
+        
         //if(name == "title") {
         //    console.log(con);
         //    con.getListCon().updateListName(view.selectedList, value);
