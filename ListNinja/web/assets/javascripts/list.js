@@ -8,7 +8,14 @@ $(document).ready(function() {
     
     console.log("CON: ", con);  
 
+    // "Add List" button
+    $('#add-list').click(function() {
+      console.log("clicked!");
     
+      // Create a new list and then sit it as the selected list
+      //con.getListCon().createNewList('Untitled List');
+      con.listCon.createNewList("Rename Me!");
+    }); 
     
     // List of Lists
     $("#lists-list").on('click', ".list-group-item.list", function() {

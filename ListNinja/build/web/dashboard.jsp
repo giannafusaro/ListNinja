@@ -192,6 +192,7 @@
         var model = new Model(view);
         var con = new Controller(model);
         view.addModel(model);
+        view.addCon(con);
         
     </script>
 </html>

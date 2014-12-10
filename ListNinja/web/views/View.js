@@ -8,12 +8,17 @@
 var View = function() {
     this.listsModel = null;
     this.ninjasModel = null;
+    this.con = null;
     this.selectedList = 0;
 };
 
 View.prototype.addModel = function(model) {
     this.listsModel = model.getListsModel();
     this.ninjasModel = model.getNinjasModel();
+};
+
+View.prototype.addCon = function(con) {
+    this.con = con;
 };
 
 View.prototype.getFirstList = function() {
