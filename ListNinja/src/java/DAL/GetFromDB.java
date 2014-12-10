@@ -22,10 +22,10 @@ public class GetFromDB {
         JSONArray lists = new JSONArray();
         try {
             
-            String query = "SELECT lists.listid, name, created, updated, creator "
+            String query = "SELECT lists.listid, lists.name, lists.created, lists.updated, list_users.creator "
                     + "FROM lists "
                     + "JOIN list_users ON lists.listid = list_users.listid "
-                    + "WHERE list_users.userid = ?";
+                    + "WHERE list_users.userid = ? ORDER BY lists.updated DESC";
             PreparedStatement ps = c.prepareStatement(query);
             ps.setInt(1, userid);
             ResultSet rs = ps.executeQuery();
@@ -84,24 +84,23 @@ public class GetFromDB {
         return items;
     }
     
-    public JSONObject getUser(int userid, Connection c) {
+    public JSONObject getUser(String fbid, Connection c) {
         JSONObject user = new JSONObject();
         try {
 
-            String query = "SELECT * FROM users WHERE userid=?";
+            String query = "SELECT * FROM users WHERE fbid=?";
             PreparedStatement ps = c.prepareStatement(query);
-            ps.setInt(1, userid);
+            ps.setString(1, fbid);
             ResultSet rs = ps.executeQuery();
             
             c.close();
             
             while (rs.next()) {
                 user.put("userid", rs.getInt("userid"));
-                user.put("fbid", rs.getInt("fbid"));
-                user.put("fname", rs.getString("fname"));
-                user.put("lname", rs.getString("lname"));
-                user.put("lastlogin", rs.getTimestamp("lastlogin"));
-                user.put("created", rs.getTimestamp("created"));
+                user.put("fbid", rs.getString("fbid"));
+                user.put("email", rs.getString("email"));
+                user.put("lastlogin", rs.getTimestamp("lastlogin").toString());
+                user.put("created", rs.getTimestamp("created").toString());
             }
             
             
@@ -115,7 +114,7 @@ public class GetFromDB {
         JSONArray users = new JSONArray();
 
         try {
-            String query = "SELECT DISTINCT users.userid, fname, lname, lastlogin, created FROM users JOIN list_users ON users.userid = list_users.userid WHERE list_users.userid = ?";
+            String query = "SELECT DISTINCT users.userid, fbid, email, lastlogin, created FROM users JOIN list_users ON users.userid = list_users.userid WHERE list_users.listid = ?";
             PreparedStatement ps = c.prepareStatement(query);
             ps.setInt(1, listid);
             
@@ -126,12 +125,10 @@ public class GetFromDB {
             while (rs.next()) {
                 JSONObject user = new JSONObject();
                 
-                user.put("userid", rs.getInt("userid"));
-                //user.put("fbid", rs.getInt("fbid"));
-                user.put("fname", rs.getString("fname"));
-                user.put("lname", rs.getString("lname"));
-                user.put("lastlogin", rs.getTimestamp("lastlogin"));
-                user.put("created", rs.getTimestamp("created"));
+                user.put("fbid", rs.getString("fbid"));
+                user.put("email", rs.getString("email"));
+                user.put("lastlogin", rs.getTimestamp("lastlogin").toString());
+                user.put("created", rs.getTimestamp("created").toString());
                 
                 users.add(user);
             }

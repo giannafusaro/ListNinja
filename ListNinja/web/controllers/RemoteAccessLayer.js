@@ -8,49 +8,52 @@ var RemoteAccessLayer = function() {
     
 };
 
-RemoteAccessLayer.prototype.getListItems = function (listid, callback) {
+RemoteAccessLayer.prototype.getListItems = function (listid, lists, callback) {
     $.ajax({
         type: "GET",
         url: "/GetListItems?listid=" + listid,
         dataType: "JSON",
         success : function(data) {
-            callback(data);
+            callback(data, lists);
         }
     });
 };
 
-RemoteAccessLayer.prototype.getUser = function(userid, callback) {
+RemoteAccessLayer.prototype.getUser = function(fbid, ninjas, callback) {
     $.ajax({
         type: "GET",
-        url: "/GetUser?userid=" + userid,
+        url: "/GetUser?fbid=" + fbid,
         dataType: "JSON",
         success : function(data) {
-                callback(data);
+                callback(data, ninjas);
+          },
+          error : function(data) {
+              console.log("fail");
           }
     });
 };
 
-RemoteAccessLayer.prototype.getListsForUser = function(userid, callback) {
+RemoteAccessLayer.prototype.getListsForUser = function(lists, callback) {
     $.ajax({
         type: "GET",
-        url: "/GetListsForUser?userid=" + userid,
+        url: "/GetListsForUser",
         dataType: "JSON",
         success : function(data) {
-            callback(data);
+            callback(data, lists);
         },
         error : function(msg) {
-            //console.log(msg);
+            console.log("failed to properly get lists for user");
         }
     });
 };
 
-RemoteAccessLayer.prototype.getUsersForList = function(listid, callback) {
+RemoteAccessLayer.prototype.getUsersForList = function(listid, lists, callback) {
     $.ajax({
         type: "GET",
         url: "/GetUsersForList?listid=" + listid,
         dataType: "JSON",
         success : function(data) {
-            callback(data);
+            callback(data, lists, listid);
         }
     });
 };
@@ -77,21 +80,32 @@ RemoteAccessLayer.prototype.createNewItem = function(listid, name, callback) {
     });
 };
 
+//RemoteAccessLayer.prototype.createNewList = function(userid, name, callback) {
+//    $.ajax({
+//        type: "GET",
+//        url: "/CreateNewList?userid=" + userid + "&name=" + name,
+//        dataType: "JSON",
+//        success : function(data) {
+//            callback(data);
+//        }
+//    });
+//};
+
 RemoteAccessLayer.prototype.createNewList = function(userid, name, callback) {
     $.ajax({
-        type: "GET",
-        url: "/CreateNewList?userid=" + userid + "&name=" + name,
-        dataType: "JSON",
-        success : function(data) {
+        url: "/CreateNewList",
+        type: "POST",
+        data: { userid: userid, name: name },
+        success: function(data) {
             callback(data);
         }
     });
 };
 
-RemoteAccessLayer.prototype.addUserToList = function(listid, userid, callback) {
+RemoteAccessLayer.prototype.addUserToList = function(listid, fbid, callback) {
     $.ajax({
         type: "GET",
-        url: "/AddUserToList?listid=" + listid + "&userid=" + userid,
+        url: "/AddUserToList?listid=" + listid + "&fbid=" + fbid,
         dataType: "JSON",
         success : function(data) {
             callback(data);

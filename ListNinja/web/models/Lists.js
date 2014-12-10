@@ -8,6 +8,11 @@ var Lists = function(view) {
     this.lists = [];
 };
 
+Lists.prototype.updateList = function(listid, list) {
+    console.log("updateList: ", list);
+    var list = this.getListByID(listid);
+};
+
 Lists.prototype.addList = function(list) {
     this.lists.push(list);
     this.view.repaint();
@@ -27,7 +32,7 @@ Lists.prototype.updateItemName = function(itemid, name) {
 
 Lists.prototype.getListByID = function(listid) {
     for (var x in this.lists) {
-        if (this.lists[x].listid === listid) {
+        if (this.lists[x].listid == listid) {
             return this.lists[x];
         }
     }
@@ -109,15 +114,16 @@ Lists.prototype.addUserToList = function(listid, ninja) {
     this.view.repaint();
 };
 
-Lists.prototype.getUserByID = function(userid) {
+Lists.prototype.getUserByID = function(fbid) {
     for (var x in this.lists) {
         var list = this.lists[x];
         for (var y in list.users) {
-            if (list.users[y].userid === userid) {
-                return list.user[y];
+            if (list.users[y].fbid === fbid) {
+                return list.users[y];
             }
         }
     }
+    return null;
 };
 
 Lists.prototype.removeUserFromList = function(listid, userid) {

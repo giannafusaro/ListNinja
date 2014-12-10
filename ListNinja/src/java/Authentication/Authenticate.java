@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package List;
+package Authentication;
 
 import DAL.ServerAccess;
 import java.io.IOException;
@@ -13,13 +13,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author sheff
+ * @author gianna
  */
-@WebServlet(name = "CreateList", urlPatterns = {"/CreateList"})
-public class CreateList extends HttpServlet {
+@WebServlet(name = "authenticate", urlPatterns = {"/authenticate"})
+public class Authenticate extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,16 +33,24 @@ public class CreateList extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("application/json");
         PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
+
         try {
-            
-            String name = request.getParameter("name");
-            String userid = request.getParameter("userid");
-            
+            String fbid = request.getParameter("fbid");    
             ServerAccess sa = new ServerAccess();
-            sa.createNewList(Integer.parseInt(userid), name);
+            int userid = sa.find_or_create_user_by_fbid(fbid);
             
+            // Set Session Variables
+            session.setAttribute("userid", userid);
+            session.setAttribute("fbid", fbid);
+
+            // Return some JSON
+            out.println("{");
+            out.println("\"userid\": \"" + userid + "\",");
+            out.println("\"fbid\": \"" + fbid + "\"");
+            out.println("}");
         } finally {
             out.close();
         }

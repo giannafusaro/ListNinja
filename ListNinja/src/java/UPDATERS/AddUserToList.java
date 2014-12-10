@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.simple.JSONObject;
 
 /**
  *
@@ -34,12 +35,18 @@ public class AddUserToList extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            String userid = request.getParameter("userid");
-            String listid = request.getParameter("listid");
-            int sid = Integer.parseInt(userid);
-            int lid = Integer.parseInt(listid);
+            String fbid = request.getParameter("fbid");
+            String listidString = request.getParameter("listid");
+            int listid = Integer.parseInt(listidString);
+            
             ServerAccess sa = new ServerAccess();
-            out.println(sa.addUserToList(lid, sid));
+            
+            JSONObject user = sa.getUser(fbid);
+            
+            int userid = (Integer) user.get("userid");
+            System.out.println(userid);
+            
+            out.println(sa.addUserToList(listid, userid));
         } finally {
             out.close();
         }

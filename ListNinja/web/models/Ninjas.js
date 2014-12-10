@@ -19,7 +19,11 @@ Ninjas.prototype.removeNinja = function(ninja) {
     }
 };
 
-Ninjas.proto.getNinja = function(fbid) {
+Ninjas.prototype.getNinjas = function() {
+    return this.ninjas;
+}
+
+Ninjas.prototype.getNinja = function(fbid) {
     for (var i = 0; i < this.ninjas.length; i++) {
         var ninja = this.ninjas[i];
         if (ninja.fbid === fbid) {
