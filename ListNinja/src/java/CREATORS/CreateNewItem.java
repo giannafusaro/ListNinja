@@ -37,12 +37,12 @@ public class CreateNewItem extends HttpServlet {
         try {
             String listid = request.getParameter("listid");
             String itemname = request.getParameter("name");
-            String priceR = request.getParameter("price").toString();
+            //String priceR = request.getParameter("price").toString();
             int id = Integer.parseInt(listid);
             //Need Price
             ServerAccess sa = new ServerAccess();
-            int price = Integer.parseInt(priceR);
-            out.println(sa.createNewItem(id, itemname, price));
+            //int price = Integer.parseInt(priceR);
+            out.println(sa.createNewItem(id, itemname, 0));
         } finally {
             out.close();
         }

@@ -12,7 +12,7 @@ var ListController = function(listsModel) {
         t.populateLists();
         t.populateItems();
         t.populateUsers();
-    }, 500);
+    }, 3000);
 };
 
 ListController.prototype.createNewList = function(name) {
