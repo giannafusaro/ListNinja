@@ -137,6 +137,9 @@ $(document).ready(function() {
     // validate user input to make sure fields are not empty and price is valid
     if(validateFields(form.find('input'))) {
       var name = form.find('input.item-name');
+      console.log("item name: ", name.val());
+      
+      con.listCon.createNewItem(view.selectedList, name.val());
       //var price = form.find('input.item-price');
 
       var html = $('[data-template="list-item"]').clone();
