@@ -124,5 +124,5 @@ View.prototype.repaint = function() {
     
       // Create a new list and then sit it as the selected list
       //con.getListCon().createNewList('Untitled List');
-      
+      con.listCon.createNewList("Rename Me!");
     }); 
