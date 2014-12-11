@@ -28,6 +28,7 @@ $(document).on('click', 'button#add-collaborator', function() {
           html.find('.collaborator-id').val(value.id);
           html.find('.collaborator-name').text(value.name);     
           html.find('.collaborator-picture').attr("src", pictureSrc);
+          $('#modal-collaborator-list').append(html);
         }
       });
     } else {

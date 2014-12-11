@@ -39,7 +39,9 @@ View.prototype.setSelected = function(listid) {
 
 View.prototype.paintCollaborators = function() {
     var collaborators = this.listsModel.getUsersForList(this.selectedList);
+    
     $("#collaborator-list").html("");
+    
     $.each(collaborators, function( index, value ) { 
         
         console.log("index: ",index);
@@ -55,6 +57,7 @@ View.prototype.paintCollaborators = function() {
                 html.find('.collaborator-name').text(response.first_name + " " + response.last_name);     
                 html.find('.collaborator-picture').attr("src", pictureSrc);
                 $("#collaborator-list").append(html);  
+                console.log("hit!!!");
             });
       }
     });
