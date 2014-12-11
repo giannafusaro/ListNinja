@@ -130,6 +130,11 @@ Lists.prototype.getUserByID = function(fbid) {
     return null;
 };
 
+Lists.prototype.getUsersForList = function(listid) {
+    var list = this.getListByID(listid);
+    return list.users;
+};
+
 Lists.prototype.removeUserFromList = function(listid, userid) {
     var list = this.getListByID(listid);
     var ninja = this.getUserByID(userid);

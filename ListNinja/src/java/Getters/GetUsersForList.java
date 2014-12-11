@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -41,6 +42,17 @@ public class GetUsersForList extends HttpServlet {
             ServerAccess sa = new ServerAccess();
             int id = Integer.parseInt(listid);
             JSONArray users = sa.getUsersForList(id);
+            
+            HttpSession session = request.getSession(true);
+            String currentUserFBID = (String) session.getAttribute("fbid");
+            
+            for (int i = 0; i < users.size(); i++) {
+                JSONObject user = (JSONObject) users.get(i);
+                if ((String)user.get("fbid") == currentUserFBID) {
+                    users.remove(i);
+                    System.out.println(users);
+                }
+            }
             out.println(users);
         } finally {
             out.close();
