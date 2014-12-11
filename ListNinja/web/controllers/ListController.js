@@ -15,6 +15,11 @@ var ListController = function(listsModel) {
     }, 3000);
 };
 
+ListController.prototyp.getCollaborators = function() {
+    
+};
+
+
 ListController.prototype.createNewList = function(name) {
     $.ajax({
         url: "/CreateNewList",

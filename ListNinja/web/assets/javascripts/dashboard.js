@@ -38,9 +38,13 @@ $(document).on('click', 'button#add-collaborator', function() {
 });
 
 $(document).on('click','#add-friend-submit', function() {
+    console.log("add-friend-submit clicked!");
   //for each checked item, append to friends
   $('#add-collaborators :checked').each(function() {
     var collaborator = $(this).closest('li');
+    var collaborator_id = collaborator.find(".collaborator-id");
+    console.log("collaborator_id html: ", collaborator_id.val());
+    con.listCon.addUserToList(view.selectedList, collaborator_id.val());
     $("#collaborator-list").append(collaborator);
     
     // TODO: an ajax call to associate collaborator with the list
@@ -64,6 +68,8 @@ $(document).on('click','.collaborator-delete', function () {
 
   if(result==true) {
     $(this).closest('li').remove();
+    var collaborator_id = collaborator.find(".collaborator-id");
+    con.listCon.removeUserFromList(view.selectedList, collaborator_id);
     
     // TODO: an ajax call to disassociate collaborator with the list
     // something like:

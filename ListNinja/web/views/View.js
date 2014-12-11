@@ -37,6 +37,11 @@ View.prototype.setSelected = function(listid) {
     this.repaint();
 };
 
+View.prototype.paintCollaborators = function() {
+    
+  
+};
+
 View.prototype.paintItems = function() {
     var list = this.listsModel.getListByID(this.selectedList);
     if(list != null) {
