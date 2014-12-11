@@ -43,7 +43,8 @@ View.prototype.paintCollaborators = function() {
     console.log("paint collaboratos hit!!!");
     $("#collaborator-list").html("");
     
-    $.each(collaborators, function( index, value ) { 
+    if (collaborators != null) {
+    $.each(collaborators, function(index, value ) { 
         
         console.log("index: ",index);
         console.log("value: ",value);
@@ -63,6 +64,7 @@ View.prototype.paintCollaborators = function() {
             });
       }
     });
+}
     
   
 };

@@ -40,7 +40,6 @@ ListController.prototype.removeList = function(listid) {
     var ral = new RemoteAccessLayer();
     this.listsModel.removeList(listid);
     ral.removeList(listid, function(data) {
-        console.log(data);
     });
 };
 
