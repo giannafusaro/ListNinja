@@ -28,7 +28,6 @@ $(document).on('click', 'button#add-collaborator', function() {
           html.find('.collaborator-id').val(value.id);
           html.find('.collaborator-name').text(value.name);     
           html.find('.collaborator-picture').attr("src", pictureSrc);
-          $('#modal-collaborator-list').append(html);
         }
       });
     } else {
@@ -43,9 +42,9 @@ $(document).on('click','#add-friend-submit', function() {
   $('#add-collaborators :checked').each(function() {
     var collaborator = $(this).closest('li');
     var collaborator_id = collaborator.find(".collaborator-id");
-    console.log("collaborator_id html: ", collaborator_id.val());
+    
+    //add to database
     con.listCon.addUserToList(view.selectedList, collaborator_id.val());
-    $("#collaborator-list").append(collaborator);
     
     // TODO: an ajax call to associate collaborator with the list
     // something like:

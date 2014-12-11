@@ -38,6 +38,26 @@ View.prototype.setSelected = function(listid) {
 };
 
 View.prototype.paintCollaborators = function() {
+    var collaborators = this.listsModel.getUsersForList(this.selectedList);
+    $("#collaborator-list").html("");
+    $.each(collaborators, function( index, value ) { 
+        
+        console.log("index: ",index);
+        console.log("value: ",value);
+        var urlstring = "/" + value.fbid; 
+        if(value.fbid != $.cookie('fbid')) {
+            FB.api(urlstring, function(response){
+                console.log("response: ", response);
+                var pictureSrc = "http://graph.facebook.com/" + value.fbid + "/picture?type=square&width=50&height=50";
+                var html = $('[data-template="collaborator"]').clone();
+                html.removeAttr('data-template');
+                html.find('.collaborator-id').val(value.fbid);
+                html.find('.collaborator-name').text(response.first_name + " " + response.last_name);     
+                html.find('.collaborator-picture').attr("src", pictureSrc);
+                $("#collaborator-list").append(html);  
+            });
+      }
+    });
     
   
 };
@@ -124,6 +144,7 @@ View.prototype.repaint = function() {
     // Paint
     this.paintListOfLists(lists);
     this.paintList(currentList);
+    this.paintCollaborators();
 };
 
 
