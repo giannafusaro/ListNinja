@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.simple.JSONObject;
 
 /**
  *
@@ -35,12 +36,18 @@ public class RemoveUserFromList extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            String ssId = request.getParameter("userid");
-            int sId = Integer.parseInt(ssId);
-            String slId = request.getParameter("listid");
-            int lid = Integer.parseInt(slId);
+            String fbid = request.getParameter("fbid");
+            String listidString = request.getParameter("listid");
+            int listid = Integer.parseInt(listidString);
+            
             ServerAccess sa = new ServerAccess();
-            out.println(sa.removeUserFromList(sId, lid));
+            
+            JSONObject user = sa.getUser(fbid);
+            
+            int userid = (Integer) user.get("userid");
+            System.out.println(userid);
+            
+            out.println(sa.removeUserFromList(userid, listid));
         } finally {
             out.close();
         }

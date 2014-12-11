@@ -135,10 +135,10 @@ RemoteAccessLayer.prototype.removeList = function(listid, callback) {
     });
 };
 
-RemoteAccessLayer.prototype.removeUserFromList = function(userid, listid, callback) {
+RemoteAccessLayer.prototype.removeUserFromList = function(listid, fbid, callback) {
     $.ajax({
         type: "GET",
-        url: "/RemoveUserFromList?userid=" + userid + "&listid=" + listid,
+        url: "/RemoveUserFromList?fbid=" + fbid + "&listid=" + listid,
         dataType: "JSON",
         success : function(data) {
             callback(data);

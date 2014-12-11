@@ -123,11 +123,3 @@ View.prototype.repaint = function() {
 
 
 
-// "Add List" button
-    $('#add-list').click(function() {
-      console.log("clicked!");
-    
-      // Create a new list and then sit it as the selected list
-      //con.getListCon().createNewList('Untitled List');
-      con.listCon.createNewList("Rename Me!");
-    }); 
