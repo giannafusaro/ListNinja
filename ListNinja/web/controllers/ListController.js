@@ -94,7 +94,11 @@ ListController.prototype.populateLists = function() {
             for (i = 0; i < data.length; i++) {
                 if (lists.getListByID(data[i].listid) === null) {
                     lists.addList(new List(data[i].listid, data[i].name, data[i].created, data[i].updated));
-                } else {
+                } 
+                else if (lists.getListByID(data[i].listid) !== null && lists.getListByID(data[i].listid).name !== data[i].name) {
+                    lists.getListByID(data[i].listid).name = data[i].name;
+                }
+                else {
                     var deleteThisID = data[i].listid;
                     var j = 0;
                     for (j = 0; j < listsArrayClone.length; j++) {
@@ -127,7 +131,11 @@ ListController.prototype.populateItems = function() {
                     
                     if (lists.getItemByID(item.itemid) === null) {
                         lists.addItem(item);
-                    } else {
+                    } 
+                    else if (lists.getItemByID(item.itemid) !== null && items[i].name !== lists.getItemByID(item.itemid).name) {
+                        lists.getItemByID(item.itemid).name = items[i].name;
+                    }
+                    else {
                         var deleteThisID = items[i].itemid;
                         var j = 0;
                         for (j = 0; j < itemsArrayClone.length; j++) {
