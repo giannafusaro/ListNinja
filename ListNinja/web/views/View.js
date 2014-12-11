@@ -39,17 +39,19 @@ View.prototype.setSelected = function(listid) {
 
 View.prototype.paintCollaborators = function() {
     var collaborators = this.listsModel.getUsersForList(this.selectedList);
-    
+    console.log("collaborators: ", collaborators)
+    console.log("paint collaboratos hit!!!");
     $("#collaborator-list").html("");
     
     $.each(collaborators, function( index, value ) { 
         
         console.log("index: ",index);
         console.log("value: ",value);
-        var urlstring = "/" + value.fbid; 
+        var urlstring = "/" + value.fbid;
+        results=$("#collaborator-list").find(".collaborator-id");
         if(value.fbid != $.cookie('fbid')) {
             FB.api(urlstring, function(response){
-                console.log("response: ", response);
+                //console.log("response: ", response);
                 var pictureSrc = "http://graph.facebook.com/" + value.fbid + "/picture?type=square&width=50&height=50";
                 var html = $('[data-template="collaborator"]').clone();
                 html.removeAttr('data-template');
@@ -57,7 +59,7 @@ View.prototype.paintCollaborators = function() {
                 html.find('.collaborator-name').text(response.first_name + " " + response.last_name);     
                 html.find('.collaborator-picture').attr("src", pictureSrc);
                 $("#collaborator-list").append(html);  
-                console.log("hit!!!");
+                
             });
       }
     });
