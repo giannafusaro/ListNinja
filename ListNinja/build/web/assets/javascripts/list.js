@@ -14,7 +14,7 @@ $(document).ready(function() {
     
       // Create a new list and then sit it as the selected list
       //con.getListCon().createNewList('Untitled List');
-      con.listCon.createNewList("Rename Me!");
+      con.listCon.createNewList("Your New List!");
     }); 
     
     // List of Lists
@@ -29,21 +29,7 @@ $(document).ready(function() {
        console.log("destroy button clicked!");
        var listLink = $(this).closest('a.list');
        var listid = listLink.attr('id'); 
-       if(confirm('Are you sure?')) {
-          $.ajax({
-            url: "/RemoveList",
-            type: "POST",
-            data: { listid: listid, name: 'Untitled List' },
-            success: function(data) {
-              console.log("destroyed!: ", data);
-              $('a#'+listid).remove();
-              con.getListCon().removeList(listid);
-              view.paintItems();
-            }
-          });
-       } else {
-           console.log("do not kill!");
-       }
+       con.listCon.removeList(listid);
     });
 
   ///////////////////////////////////////////////////////////
@@ -83,6 +69,12 @@ $(document).ready(function() {
   // Submit Inline Form
   ///////////////////////////////////////////////////////////
 
+  $(document).on('click', '.submit-delete-item', function() {
+      var itemID = $(this).parents('li').attr('id');
+      console.log("Attempting to remove item: " + itemID);
+      con.getListCon().removeItem(itemID);
+  });
+
   $(document).on('submit', 'form.inline-switch', function(event) {
     event.preventDefault();
     var container = $(this).closest('.inline-form');
@@ -91,14 +83,25 @@ $(document).ready(function() {
     if(validateFields(inputs)) {
       // Switch out input values with span text
       inputs.each(function(){
-        value = $(this).val();
-        name = $(this).prop('name');
+        var value = $(this).val();
+        var name = $(this).prop('name');
+        
+        
+        list_id = $(this).attr('id');
         
         //edit title
         if(name == "title") {
             console.log("listid: ", view.selectedList);
             console.log("value: ", value);
             con.listCon.updateListName(view.selectedList, value);
+        }
+        else if(name == "name") {
+            var list_item_id = $(this).parents('li').attr('id');
+            
+            console.log("listid: ", view.selectedList);
+            console.log("value: ", value);
+            console.log("list_item_id: ", list_item_id);
+            con.listCon.updateItemName(list_item_id, value);
         }
         
         console.log("value: ", value);

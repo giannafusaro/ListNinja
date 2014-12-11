@@ -52,8 +52,9 @@ ListController.prototype.createNewItem = function(listid, name) {
 ListController.prototype.updateItemName = function(itemid, name) {
     var ral = new RemoteAccessLayer();
     this.listsModel.updateItemName(itemid, name);
+    var me = this;
     ral.updateItemName(itemid, name, function(data) {
-        this.populateItems();
+        me.populateItems();
     });
 };
 
@@ -61,23 +62,23 @@ ListController.prototype.removeItem = function(itemid) {
     var ral = new RemoteAccessLayer();
     this.listsModel.removeItem(itemid);
     ral.removeItem(itemid, function() {
+    });
+};
+
+ListController.prototype.addUserToList = function(listid, fbid) {
+    var ral = new RemoteAccessLayer();
+    //this.listsModel.addUserToList(listid, ninja);
+    ral.addUserToList(listid, fbid, function(data) {
         console.log(data);
     });
 };
 
-ListController.prototype.addUserToList = function(listid, ninja) {
+ListController.prototype.removeUserFromList = function(listid, fbid) {
     var ral = new RemoteAccessLayer();
-    this.listsModel.addUserToList(listid, ninja);
-    ral.addUserToList(listid, ninja.fbid, function(data) {
-        console.log(data);
-    });
-};
-
-ListController.prototype.removeUserFromList = function(listid, ninja) {
-    var ral = new RemoteAccessLayer();
-    this.listsModel.removeUserFromList(listid, ninja);
-    ral.removeUserFromList(listid, ninja.fbid, function(data) {
-        this.populateUsers();
+    //this.listsModel.removeUserFromList(listid, ninja);
+    var me = this;
+    ral.removeUserFromList(listid, fbid, function(data) {
+        me.populateUsers();
     });
 };
 
@@ -87,10 +88,25 @@ ListController.prototype.populateLists = function() {
     var ral = new RemoteAccessLayer();
     var lists = this.listsModel;
     ral.getListsForUser(lists, function(data, lists) {
-        var i = 0;
-        for (i = 0; i < data.length; i++) {
-            if (lists.getListByID(data[i].listid) === null) {
-                lists.addList(new List(data[i].listid, data[i].name, data[i].created, data[i].updated));
+        if (data.length !== 0) {
+            var i = 0;
+            var listsArrayClone = lists.getArrayOfLists().slice(0);
+            for (i = 0; i < data.length; i++) {
+                if (lists.getListByID(data[i].listid) === null) {
+                    lists.addList(new List(data[i].listid, data[i].name, data[i].created, data[i].updated));
+                } else {
+                    var deleteThisID = data[i].listid;
+                    var j = 0;
+                    for (j = 0; j < listsArrayClone.length; j++) {
+                        var cloneID = listsArrayClone[j].listid;
+                        if (cloneID === deleteThisID) {
+                            listsArrayClone.splice(j, 1);
+                        }
+                    }
+                }
+            }
+            for (i = 0; i < listsArrayClone.length; i++) {
+                lists.removeList(listsArrayClone[i].listid);
             }
         }
     });
@@ -101,13 +117,32 @@ ListController.prototype.populateItems = function() {
     var lists = this.listsModel.getLists();
     for (var i = 0; i < lists.length; i++) {
         ral.getListItems(lists[i].listid, this.listsModel, function(data, lists) {
-            var items = data;
-            var i = 0;
-            for (i = 0; i < items.length; i++) {
-                var item = new Item(items[i].itemid, items[i].listid, items[i].name, items[i].created, items[i].updated);
-                if (lists.getItemByID(item.itemid) === null) {
-                    lists.addItem(item);
+            if (data.length !== 0) {
+                
+                var items = data;
+                var itemsArrayClone = lists.getListByID(items[0].listid).items.slice(0);
+                var i = 0;
+                for (i = 0; i < items.length; i++) {
+                    var item = new Item(items[i].itemid, items[i].listid, items[i].name, items[i].created, items[i].updated);
+                    
+                    if (lists.getItemByID(item.itemid) === null) {
+                        lists.addItem(item);
+                    } else {
+                        var deleteThisID = items[i].itemid;
+                        var j = 0;
+                        for (j = 0; j < itemsArrayClone.length; j++) {
+                            var cloneID = itemsArrayClone[j].itemid;
+                            if (cloneID === deleteThisID) {
+                                itemsArrayClone.splice(j, 1);
+                            }
+                        }
+                    }
                 }
+                var k = 0;
+                for (k = 0; k < itemsArrayClone.length; k++) {
+                    lists.removeItem(itemsArrayClone[k].itemid);
+                }
+                
             }
         });
     }
@@ -118,14 +153,19 @@ ListController.prototype.populateUsers = function() {
     var lists = this.listsModel.getLists();
     for (var i = 0; i < lists.length; i++) {
         ral.getUsersForList(lists[i].listid, this.listsModel, function(data, lists, listid) {
-            var users = data;
-            var i = 0;
-            for (i = 0; i < users.length; i++) {
-                var user = new Ninja(users[i].fbid, "fName", "lName" , "picurl", users[i].lastlogin, users[i].created);
-                if (lists.getUserByID(user.fbid) === null) {
-                    lists.addUserToList(listid, user);
+            
+            if (data.length !== 0) {
+                var users = data;
+                var i = 0;
+                for (i = 0; i < users.length; i++) {
+                    var user = new Ninja(users[i].fbid, "fName", "lName" , "picurl", users[i].lastlogin, users[i].created);
+                    if (lists.getUserByID(user.fbid) === null) {
+                        lists.addUserToList(listid, user);
+                    }
                 }
             }
+            
         });
+        
     }
 };

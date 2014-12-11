@@ -8,6 +8,10 @@ var Lists = function(view) {
     this.lists = [];
 };
 
+Lists.prototype.getArrayOfLists = function() {
+    return this.lists;
+};
+
 Lists.prototype.updateList = function(listid, list) {
     console.log("updateList: ", list);
     var list = this.getListByID(listid);
@@ -79,7 +83,7 @@ Lists.prototype.getItemByID = function(itemid) {
     for (var x in this.lists) {
             var list = this.lists[x];
             for (var y in list.items) {
-                if (list.items[y].itemid === itemid) {
+                if (list.items[y].itemid == itemid) {
                     return list.items[y];
                 }
             }
@@ -124,6 +128,11 @@ Lists.prototype.getUserByID = function(fbid) {
         }
     }
     return null;
+};
+
+Lists.prototype.getUsersForList = function(listid) {
+    var list = this.getListByID(listid);
+    return list.users;
 };
 
 Lists.prototype.removeUserFromList = function(listid, userid) {

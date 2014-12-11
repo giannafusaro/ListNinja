@@ -179,6 +179,11 @@
               <span class="glyphicon glyphicon-edit"></span>
               Edit Item
             </button>
+            <button class="btn btn-primary submit-delete-item" type="button">
+                <span class="glyphicon glyphicon-remove"></span>
+                Delete
+            </button>
+            
           </form>
         </div>
       </li>
